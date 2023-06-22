@@ -10,6 +10,8 @@ class User {
     private $isAdmin;
     private $name;
     private $lastname;
+    private $birthday;
+    private $penalty;
 
     public function __construct() {}
     function __get( $prop ) { return $this->$prop; }
