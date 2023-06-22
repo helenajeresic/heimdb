@@ -64,7 +64,7 @@ try
         'password_hash varchar(255) NOT NULL,' .
         'email varchar(255) NOT NULL,'. 
         'registration_sequence varchar(50) NOT NULL,' . 
-        'has_registred int NOT NULL,' . 
+        'has_registered int NOT NULL,' . 
         'is_admin int NOT NULL,' .
 		'name varchar(50) NOT NULL,' .
 		'surname varchar(50) NOT NULL,' .
@@ -193,3 +193,5 @@ try
 catch( PDOException $e ) { exit( "PDO error [create person]: " . $e->getMessage() ); }
 
 echo "Napravio tablicu comments.<br />";
+
+?>
