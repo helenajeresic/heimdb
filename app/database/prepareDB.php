@@ -86,7 +86,6 @@ try
 		'title varchar(100) NOT NULL,' .
         'year int NOT NULL,' .
         'genre varchar(50) NOT NULL,' .
-        'director varchar(50) NOT NULL,' .
         'description varchar(255) NOT NULL,' .
         'image varchar(255) NOT NULL, ' .
 		'duration int NOT NULL )'
