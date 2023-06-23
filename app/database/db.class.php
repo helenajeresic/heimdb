@@ -14,7 +14,7 @@ class DB
 			$database = require_once __SITE_PATH .  '/app/database/db.settings.php';
 	    	try
 	    	{
-		    	DB::$db = new PDO( $database['rp2']['db_base'], $database['rp2']['db_user'], $$database['rp2']['db_pass'] );
+		    	DB::$db = new PDO( $database['rp2']['db_name'], $database['rp2']['db_user'], $database['rp2']['db_pass'] );
 		    	DB::$db-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		    }
 		    catch( PDOException $e ) { exit( 'PDO Error: ' . $e->getMessage() ); }

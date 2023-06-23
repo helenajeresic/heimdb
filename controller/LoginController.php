@@ -42,7 +42,7 @@ class LoginController extends BaseController
 				$_SESSION['admin'] = $user -> is_admin;
 
 
-				$this->registry->template->show( 'movies' );
+				header( 'Location: ' . __SITE_URL . '/index.php?rt=movies' );
 			}
 		}
 	}

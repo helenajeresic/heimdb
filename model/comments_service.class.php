@@ -1,5 +1,6 @@
 <?php
 
+require_once __SITE_PATH .  '/app/database/db.class.php';
 require_once __SITE_PATH .  '/model/comments.class.php';
 
 class CommentService
