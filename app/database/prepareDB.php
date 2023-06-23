@@ -183,7 +183,7 @@ try
 		'id_comment int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
 		'id_user int NOT NULL, ' . 
         'id_movie int NOT NULL, ' .
-        'content varchar(255) NOT NULL, ' . 
+        'content varchar(20000) NOT NULL, ' . 
         'date date NOT NULL )'
 	);
 
