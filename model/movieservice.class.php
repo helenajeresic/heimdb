@@ -101,7 +101,17 @@ class MovieService
 		return $arr;
 	}
 
-    
+	function addMovie( $id_movie, $title, $year, $genre, $description, $image, $duration )
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare('INSERT INTO movies (id_movie, title, year, genre, description, image, duration) 
+								VALUES(:id_movie, :title, :year, :genre, :description, :image, :duration)');
+			$st->execute( array( 'year' =>  $year ) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+	}
 
 }
 
