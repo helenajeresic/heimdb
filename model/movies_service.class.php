@@ -1,6 +1,6 @@
 <?php
 
-require_once 'movies.class.php';
+require_once __SITE_PATH .  '/model/movies.class.php';
 
 class MovieService 
 {
