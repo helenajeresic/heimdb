@@ -1,6 +1,7 @@
 <?php
 
-class Movie {
+class Movie 
+{
     private $id_movie, $title, $year, $genre, $description;
     private $image, $duration;
 
