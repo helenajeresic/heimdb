@@ -1,6 +1,6 @@
 <?php
 
-require_once 'db.class.php';
+require_once __SITE_PATH .  '/app/database/db.class.php';
 
 $db = DB::getConnection();
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/db.class.php';
+require_once __SITE_PATH .  '/app/database/db.class.php';
 
 seed_table_users();
 
