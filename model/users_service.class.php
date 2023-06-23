@@ -1,7 +1,7 @@
 <?php
 
 require_once __SITE_PATH .  '/app/database/db.class.php';
-require_once __SITE_PATH .  '/model/user.class.php';
+require_once __SITE_PATH .  '/model/users.class.php';
 
 class UserService {
 
@@ -33,10 +33,10 @@ class UserService {
 			$db = DB::getConnection();
 			$st = $db->prepare( 'INSERT INTO users(username, password_hash, email, registration_sequence, has_registered, is_admin, name, surname, date_of_birth, penalty) VALUES ' .
 								'(:username, :password_hash, :email, :registrationSequence, 0, 0, :name, :surname, :date_of_birth , 0)' );
-			
-			$st->execute( array( 'username' => $username, 
-								'password_hash' => password_hash( $password, PASSWORD_DEFAULT ), 
-								'email' => $email, 
+
+			$st->execute( array( 'username' => $username,
+								'password_hash' => password_hash( $password, PASSWORD_DEFAULT ),
+								'email' => $email,
 								'registrationSequence'  => $reg_seq,
 								'name' => $name,
 								'surname' => $surname,

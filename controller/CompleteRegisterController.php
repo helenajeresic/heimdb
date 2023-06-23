@@ -1,13 +1,13 @@
-<?php 
+<?php
 
-require_once __SITE_PATH .  '/model/userService.class.php';
+require_once __SITE_PATH .  '/model/users_service.class.php';
 
 class completeregisterController extends BaseController
 {
-	public function index() 
+	public function index()
 	{
         $us = new UserService();
-        
+
         if( !isset( $_GET['niz'] ) || !preg_match( '/^[a-z]{20}$/', $_GET['niz'] ) )
             exit( 'Nešto ne valja s nizom.' );
         else

@@ -1,6 +1,6 @@
 <?php
 
-require_once 'persons.class.php'
+require_once __SITE_PATH .  '/model/persons.class.php';
 
 class PersonService
 {

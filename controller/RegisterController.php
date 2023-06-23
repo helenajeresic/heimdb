@@ -1,10 +1,10 @@
-<?php 
+<?php
 
-require_once __SITE_PATH .  '/model/userService.class.php';
+require_once __SITE_PATH .  '/model/users_service.class.php';
 
 class RegisterController extends BaseController
 {
-	public function index() 
+	public function index()
 	{
 		$us = new UserService();
         if( !isset( $_POST['username'] ) || !isset( $_POST['password'] ) || !isset( $_POST['email']) )
@@ -20,7 +20,7 @@ class RegisterController extends BaseController
         else
         {
             $user = $us->getUserByUsername( $_POST['username'] );
-            
+
             if( $user !== null )
             {
                 $this->registry->template->title = 'User with that username already exists.';
@@ -30,7 +30,7 @@ class RegisterController extends BaseController
             {
                 $reg_seq = '';
                 for( $i = 0; $i < 20; ++$i )
-                    $reg_seq .= chr( rand(0, 25) + ord( 'a' ) ); 
+                    $reg_seq .= chr( rand(0, 25) + ord( 'a' ) );
 
                 $us->makeNewUser( $_POST['username'], $_POST['password'], $_POST['email'], $reg_seq, $_POST['name'], $_POST['surname']);
 

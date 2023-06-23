@@ -1,6 +1,6 @@
 <?php
 
-require_once 'comments.class.php'
+require_once __SITE_PATH .  '/model/comments.class.php';
 
 class CommentService
 {

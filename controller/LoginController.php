@@ -1,14 +1,14 @@
-<?php 
+<?php
 
-require_once __SITE_PATH .  '/model/userService.class.php';
+require_once __SITE_PATH .  '/model/users_service.class.php';
 
 class LoginController extends BaseController
 {
-	public function index() 
+	public function index()
 	{
 
 		$us = new UserService();
-		
+
 		if( !isset( $_POST['username'] ) || !isset( $_POST['password'] ) )
 		{
 			$this->registry->template->title = 'Enter your username and password.';
@@ -17,7 +17,7 @@ class LoginController extends BaseController
 		else
 		{
 			$user = $us->getUserByUsername( $_POST['username'] );
-	
+
 			if( $user === null )
 			{
 				$this->registry->template->title = 'User with this username does not exist.';
@@ -26,7 +26,7 @@ class LoginController extends BaseController
 			else if( $user->has_registered === '0' )
 			{
 				$this->registry->template->title = 'The user with this e-mail is not registered. Check your email.';
-				$this->registry->template->show( 'login' );	
+				$this->registry->template->show( 'login' );
 			}
 			else if( !password_verify( $_POST['password'], $user->password_hash ) )
 			{
@@ -46,6 +46,6 @@ class LoginController extends BaseController
 		}
 	}
 
-}; 
+};
 
 ?>
