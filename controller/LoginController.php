@@ -36,6 +36,7 @@ class LoginController extends BaseController
 			else
 			{
 				$_SESSION['username'] = $_POST['username'];
+				$_SESSION['id_user'] = $user -> id_user;
 				$_SESSION['name'] = $user -> name;
 				$_SESSION['surname'] = $user -> surname;
 				$_SESSION['admin'] = $user -> is_admin;

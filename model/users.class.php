@@ -2,7 +2,7 @@
 <?php
 
 class User {
-    private $id;
+    private $id_user;
     private $username;
     private $password_hash;
     private $email;
@@ -14,9 +14,9 @@ class User {
     private $date_of_birth;
     private $penalty;
 
-    public function __construct($id, $username, $password_hash, $email, $registration_sequence, $has_registered, $is_admin, $name, $surname, $date_of_birth, $penalty) 
+    public function __construct($id_user, $username, $password_hash, $email, $registration_sequence, $has_registered, $is_admin, $name, $surname, $date_of_birth, $penalty) 
     {
-        $this->id = $id;
+        $this->id_user = $id_user;
         $this->username = $username;
         $this->password_hash = $password_hash;
         $this->email = $email;
