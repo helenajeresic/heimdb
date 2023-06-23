@@ -16,7 +16,7 @@ class DB
             global $db_base, $db_user, $db_pass;
 	    	try
 	    	{
-		    	DB::$db = new PDO( $db_base, $db_user, $db_pass );
+		    	DB::$db = new PDO( "mysql:host=rp2.studenti.math.hr;dbname=jeresic;charset=utf8", 'student', 'pass.mysql' );
 		    	DB::$db-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		    }
 		    catch( PDOException $e ) { exit( 'PDO Error: ' . $e->getMessage() ); }
