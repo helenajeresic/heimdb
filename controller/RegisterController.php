@@ -37,7 +37,7 @@ class RegisterController extends BaseController
                 $to       = $_POST['email'];
                 $subject  = 'Registracijski mail';
                 $message  = 'Poštovani ' . $_POST['username'] . "!\nZa dovršetak registracije kliknite na sljedeći link: ";
-                $message .= 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/index.php?rt=completeregister&niz=' . $reg_seq . "\n";
+                $message .= 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/index.php?rt=CompleteRegister&niz=' . $reg_seq . "\n";
                 $headers  = 'From: rp2@studenti.math.hr' . "\r\n" .
                             'Reply-To: rp2@studenti.math.hr' . "\r\n" .
                             'X-Mailer: PHP/' . phpversion();
@@ -48,7 +48,7 @@ class RegisterController extends BaseController
                     exit( 'Greška: ne mogu poslati mail. (Pokrenite na rp2 serveru.)' );
 
                 $this->registry->template->title = 'Thank you for your application.';
-                $this->registry->template->show( 'login_thanks' );
+                $this->registry->template->show( 'application_thanks' );
             }
         }
     }

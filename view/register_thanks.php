@@ -10,7 +10,7 @@
             <br>
             <div class="float-end">
             <br>
-            <input class="btn btn-secondary" type="submit" name="register" value="Vrati se na prijavu"/>
+            <input class="btn btn-secondary" type="submit" name="register" value="Log in"/>
         </div>
 </div>
 

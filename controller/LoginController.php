@@ -8,6 +8,7 @@ class LoginController extends BaseController
 	{
 
 		$us = new UserService();
+		
 		if( !isset( $_POST['username'] ) || !isset( $_POST['password'] ) )
 		{
 			$this->registry->template->title = 'Enter your username and password.';
