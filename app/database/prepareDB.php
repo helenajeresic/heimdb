@@ -86,7 +86,7 @@ try
 		'title varchar(100) NOT NULL,' .
         'year int NOT NULL,' .
         'genre varchar(50) NOT NULL,' .
-        'description varchar(255) NOT NULL,' .
+        'description varchar(500) NOT NULL,' .
         'image varchar(255) NOT NULL, ' .
 		'duration int NOT NULL )'
 	);
@@ -183,7 +183,7 @@ try
 		'id_comment int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
 		'id_user int NOT NULL, ' . 
         'id_movie int NOT NULL, ' .
-        'content varchar(255) NOT NULL, ' . 
+        'content varchar(20000) NOT NULL, ' . 
         'date date NOT NULL )'
 	);
 
