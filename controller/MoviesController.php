@@ -213,5 +213,34 @@ class moviesController extends BaseController {
         }  
     }
 
+    public function showMovie() {
+        if(!isset($_SESSION['username'])) {
+            $this->registry->template->title = 'Login';
+            $this->registry->template->error = false;
+            $this->registry->template->show('login');
+        }
+        else {
+            $ms = new MovieService();
+            if( isset( $_GET['id_movie'] )) {
+                $id_movie = $_GET['id_movie'];
+                $movie = $ms->getMovieById($id_movie);
+                if($movie == false)
+                    exit( 'Krivi id filma.' );
+                else
+                {
+                    $comments = $ms->getMovieCommentsById($id_movie);
+                    $recommendations = $ms->getMovieRecommendations();
+                    $this->registry->template->show_movie = $movie;
+                    $this->registry->template->show_comments = $comments;
+                    $this->registry->template->show_recommendations = $recommendations;
+                    $this->registry->template->show('movie');
+                }
+            }
+            else {
+                exit( 'Nesto ne valja sa id-em.' );
+            }
+        } 
+    }
+
 }
 ?>
