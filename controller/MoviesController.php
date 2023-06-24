@@ -4,7 +4,8 @@ require_once __SITE_PATH . '/model/movies_service.class.php';
 require_once __SITE_PATH . '/model/watchlist_service.class.php';
 
 class moviesController extends BaseController {
-    public function index() {
+    public function index() 
+    {
         if(!isset($_SESSION['username'])) {
             $this->registry->template->title = 'Login';
             $this->registry->template->error = false;
