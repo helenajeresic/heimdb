@@ -28,7 +28,7 @@
                   </div>
                 <a href="index.php?rt=watchlist"><i class="fas fa-film"></i>Watchlist</a>
                 <div class="dropdown">
-                    <button class="dropbtn active"><i class="fas fa-user"></i>My Profile
+                    <button class="dropbtn active"><i class="fas fa-user"></i><?php echo $_SESSION['username']; ?>
                     </button>
                     <div class="dropdown-content">
                       <a href="index.php?rt=comments/myComments">My Comments</a>
