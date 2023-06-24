@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <div class = "sticky">
+    <div class = "fixed">
         <div style="display: inline-block;">
             <img src=<?php echo __SITE_URL . '/images/heimdb.png';?> class = "icon_heimdb" alt="heimdb">
         </div>
