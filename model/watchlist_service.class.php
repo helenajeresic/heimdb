@@ -11,8 +11,8 @@ class WatchlistService
         try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare('SELECT m.title, m.year, m.genre, m.description, m.image, m.duration
-                                FROM movie m
+			$st = $db->prepare('SELECT m.id_movie, m.title, m.year, m.genre, m.description, m.image, m.duration
+                                FROM movies m
                                 JOIN watchlist w ON m.id_movie = w.id_movie
                                 WHERE w.id_user = :id AND w.status = 0; ');
 			$st->execute( array( 'id' => $id ));
@@ -33,8 +33,8 @@ class WatchlistService
         try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare('SELECT m.title, m.year, m.genre, m.description, m.image, m.duration
-                                FROM movie m
+			$st = $db->prepare('SELECT m.id_movie, m.title, m.year, m.genre, m.description, m.image, m.duration
+                                FROM movies m
                                 JOIN watchlist w ON m.id_movie = w.id_movie
                                 JOIN user u ON w.id_user = u.id_user
                                 WHERE u.name = :name AND w.status = 0;');
@@ -80,8 +80,8 @@ class WatchlistService
         try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare('SELECT m.title, m.year, m.genre, m.description, m.image, m.duration
-                                FROM movie m
+			$st = $db->prepare('SELECT m.id_movie, m.title, m.year, m.genre, m.description, m.image, m.duration
+                                FROM movies m
                                 JOIN watchlist w ON m.id_movie = w.id_movie
                                 WHERE w.id_user = :id AND w.status = 1; ');
 			$st->execute( array( 'id' => $id ));
@@ -102,8 +102,8 @@ class WatchlistService
         try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare('SELECT m.title, m.year, m.genre, m.description, m.image, m.duration
-                                FROM movie m
+			$st = $db->prepare('SELECT m.id_movie, m.title, m.year, m.genre, m.description, m.image, m.duration
+                                FROM movies m
                                 JOIN watchlist w ON m.id_movie = w.id_movie
                                 JOIN user u ON w.id_user = u.id_user
                                 WHERE u.name = :name AND w.status = 1;');
