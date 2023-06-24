@@ -9,7 +9,10 @@
     <div class='info-first'><?php echo $show_movie->__get('title'); ?></div>
     <div class='info-second'><p><?php echo $show_movie->__get('year'); ?> | <?php echo $show_movie->__get('duration'); ?> min</p></div>
     <div class='info-third'><?php echo $show_movie->__get('genre'); ?></div><br>
-    <div class='info-forth'><?php echo $show_movie->__get('description'); ?></div>
+    <div class='info-forth'><?php echo $show_movie->__get('description'); ?></div><br>
+    <div class='info-fifth'>DIRECTORS <?php foreach( $show_directors as $index => $d ) { echo ' | ' . $d->__get('name') . ' ' .$d->__get('surname') ;}?></div><br>
+    <div class='info-sixth'>ACTORS <?php foreach( $show_actors as $index => $a ) { echo ' | ' . $a->__get('name') . ' ' .$a->__get('surname');}?></div><br>
+    
 </div>
 </div>
 

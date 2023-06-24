@@ -66,7 +66,10 @@ class PersonService
         try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare('SELECT * FROM directed_in WHERE id_movie = :id_movie ');
+			$st = $db->prepare('SELECT p.id_person, p.name, p.surname
+								FROM persons p 
+								JOIN directed_in d ON p.id_person = d.id_person
+								WHERE d.id_movie = :id_movie ');
 			$st->execute( array( 'id_movie' => $id_movie ) );
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
@@ -74,7 +77,7 @@ class PersonService
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			$arr[] = $row['id_person'];
+			$arr[] = new Person ( $row['id_person'], $row['name'], $row['surname'] );
 		}
 
 		return $arr;
@@ -84,7 +87,10 @@ class PersonService
         try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare('SELECT * FROM acted_in WHERE id_movie = :id_movie ');
+			$st = $db->prepare('SELECT p.id_person, p.name, p.surname
+								FROM persons p 
+								JOIN acted_in a ON p.id_person = a.id_person
+								WHERE a.id_movie = :id_movie ');
 			$st->execute( array( 'id_movie' => $id_movie ) );
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
@@ -92,7 +98,7 @@ class PersonService
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			$arr[] = $row['id_person'];
+			$arr[] = new Person ( $row['id_person'], $row['name'], $row['surname'] );
 		}
 
 		return $arr;

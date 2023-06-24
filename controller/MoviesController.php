@@ -239,6 +239,8 @@ class moviesController extends BaseController {
                         $arr[] = $us->getUserById($comment->__get('id_user'));
                     }
                     $recommendations = $ms->getMovieRecommendations();
+                    $actors = $ps->getActorsForMovie($id_movie);
+                    $directors = $ps->getDirectorsForMovie($id_movie);
                     $this->registry->template->show_actors = $actors;
                     $this->registry->template->show_directors = $directors;
                     $this->registry->template->user_names = $arr;

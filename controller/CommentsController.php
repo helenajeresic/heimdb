@@ -25,7 +25,7 @@ class commentsController extends BaseController {
                 else
                 {   
                     $cs = new CommentService();
-                    $cs->addComment($id_movie, $id_user, $content);
+                    $cs->addComment($id_user, $id_movie, $content);
                     header( 'Location: ' . __SITE_URL . '/index.php?rt=movies/showMovie&id_movie=' . $id_movie);
                 }
             }
