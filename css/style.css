@@ -116,6 +116,46 @@ body {
   display: block;
 }
 
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie-container {
+    width: 50%;
+}
+
+.movie-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movie-box {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.movie-image {
+    width: 100px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.movie-data {
+    flex-grow: 1;
+}
+
+.movie-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+=======
 /*movie site - top part about movie*/
 .img-blur-wrap {
   overflow:hidden;
@@ -345,3 +385,4 @@ div.comments-review{
 }
 
 /* kraj uredenja komenata*/
+
