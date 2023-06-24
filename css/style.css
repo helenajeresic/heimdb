@@ -117,6 +117,18 @@ body {
 }
 
 
+.com h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+}
+.com{
+    margin-top: 100px;
+}
+
+
+
+
+
 .container {
     display: flex;
     justify-content: center;
@@ -320,6 +332,7 @@ div.comments-review{
 }
 /*recommendations-end*/
 
+
 /*za uredenje komentara*/
 
 
@@ -331,6 +344,7 @@ div.comments-review{
   border-radius: 10px;
   padding: 10px;
   font-size: 20px;
+
 }
 
 .all_comments .title_date_name {
@@ -385,4 +399,3 @@ div.comments-review{
 }
 
 /* kraj uredenja komenata*/
-
