@@ -27,7 +27,7 @@ class moviesController extends BaseController {
             $this->registry->template->show('login');
         }
         else {
-            $ms = new WatclistService();
+            $ms = new WatchlistService();
             $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
             $this->registry->template->show_movies = $data;
             $this->registry->template->show('movies');
@@ -42,7 +42,7 @@ class moviesController extends BaseController {
             $this->registry->template->show('login');
         }
         else {
-            $ms = new WatclistService();
+            $ms = new WatchlistService();
             $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
             $this->registry->template->show_movies = $data;
             $this->registry->template->show('movies');
@@ -57,7 +57,7 @@ class moviesController extends BaseController {
             $this->registry->template->show('login');
         }
         else {
-            $ms = new WatclistService();
+            $ms = new WatchlistService();
             if(isset($_POST['id_movie'])) {
                 $ms->addMovieToWatchlist( $_SESSION['id_user'], $_POST['id_movie'] );
                 $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
@@ -65,7 +65,7 @@ class moviesController extends BaseController {
                 $this->registry->template->show('movies');
             } 
             else {
-                $ms = new WatclistService();
+                $ms = new WatchlistService();
                 $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('movies');
@@ -81,7 +81,7 @@ class moviesController extends BaseController {
             $this->registry->template->show('login');
         }
         else {
-            $ms = new WatclistService();
+            $ms = new WatchlistService();
             if(isset($_POST['id_movie'])) {
                 $ms->removeMovieFromWatchlist( $_SESSION['id_user'], $_POST['id_movie'] );
                 $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
@@ -89,7 +89,7 @@ class moviesController extends BaseController {
                 $this->registry->template->show('movies');
             } 
             else {
-                $ms = new WatclistService();
+                $ms = new WatchlistService();
                 $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('movies');
@@ -105,7 +105,7 @@ class moviesController extends BaseController {
             $this->registry->template->show('login');
         }
         else {
-            $ms = new WatclistService();
+            $ms = new WatchlistService();
             if(isset($_POST['id_movie'])) {
                 $ms->addWatchedMovie( $_SESSION['id_user'], $_POST['id_movie'] );
                 $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
@@ -113,7 +113,7 @@ class moviesController extends BaseController {
                 $this->registry->template->show('movies');
             } 
             else {
-                $ms = new WatclistService();
+                $ms = new WatchlistService();
                 $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('movies');
@@ -129,7 +129,7 @@ class moviesController extends BaseController {
             $this->registry->template->show('login');
         }
         else {
-            $ms = new WatclistService();
+            $ms = new WatchlistService();
             if(isset($_POST['id_movie'])) {
                 $ms->removeWatchedMovie( $_SESSION['id_user'], $_POST['id_movie'] );
                 $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
@@ -137,7 +137,7 @@ class moviesController extends BaseController {
                 $this->registry->template->show('movies');
             } 
             else {
-                $ms = new WatclistService();
+                $ms = new WatchlistService();
                 $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('movies');
@@ -153,7 +153,7 @@ class moviesController extends BaseController {
             $this->registry->template->show('login');
         }
         else {
-            $ms = new WatclistService();
+            $ms = new MovieService();
             $data = $ms->getTopRated();
             $this->registry->template->show_movies = $data;
             $this->registry->template->show('movies');
@@ -168,7 +168,7 @@ class moviesController extends BaseController {
             $this->registry->template->show('login');
         }
         else {
-            $ms = new WatclistService();
+            $ms = new MovieService();
             $data = $ms->getMostWatched();
             $this->registry->template->show_movies = $data;
             $this->registry->template->show('movies');
@@ -183,7 +183,7 @@ class moviesController extends BaseController {
             $this->registry->template->show('login');
         }
         else {
-            $ms = new WatclistService();
+            $ms = new MovieService();
             $data = $ms->getMostPopular();
             $this->registry->template->show_movies = $data;
             $this->registry->template->show('movies');

@@ -114,6 +114,81 @@ class MovieService
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 	}
 
+	function getTopRated()
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare('SELECT m.*
+								FROM movies m
+								INNER JOIN (
+									SELECT id_movie, AVG(rate) AS average_rating
+									FROM rates
+									GROUP BY id_movie
+									ORDER BY average_rating DESC
+									LIMIT 10
+								) AS top_movies ON m.id_movie = top_movies.id_movie;');
+			$st->execute();
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$arr = array();
+		while( $row = $st->fetch() )
+		{
+			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'], 
+                                $row['description'],  $row['image'],  $row['duration'] );
+		}
+		return $arr;
+	}
+
+	function getMostWatched()
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare('SELECT m.*, COUNT(w.id_movie) AS views_count
+								FROM movies m
+								INNER JOIN watchlist w ON m.id_movie = w.id_movie
+								WHERE w.status = 1
+								GROUP BY m.id_movie, m.title
+								ORDER BY views_count DESC
+								LIMIT 10;');
+			$st->execute();
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$arr = array();
+		while( $row = $st->fetch() )
+		{
+			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'], 
+                                $row['description'],  $row['image'],  $row['duration'] );
+		}
+		return $arr;
+	}
+
+	function getMostPopular()
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare('SELECT m.*, COUNT(w.id_movie) AS appearance_count
+								FROM movies m
+								INNER JOIN watchlist w ON m.id_movie = w.id_movie
+								GROUP BY m.id_movie, m.title
+								ORDER BY appearance_count DESC
+								LIMIT 10');
+			$st->execute();
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$arr = array();
+		while( $row = $st->fetch() )
+		{
+			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'], 
+                                $row['description'],  $row['image'],  $row['duration'] );
+		}
+		return $arr;
+	}
 }
 
 ?>
