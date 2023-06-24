@@ -72,6 +72,24 @@ class UserService {
         }
     }
 
+	function getUserById( $id_user )
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT * FROM users WHERE id_user=:id_user' );
+			$st->execute( array( 'id_user' => $id_user ) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$row = $st->fetch();
+		if( $row === false )
+			return null;
+		else
+			return new User( $row['id_user'],$row['username'], $row['password_hash'], $row['email'], $row['registration_sequence'], $row['has_registered'],
+             $row['is_admin'], $row['name'], $row['surname'], $row['date_of_birth'], $row['penalty'] );
+	}
+
 
 };
 ?>

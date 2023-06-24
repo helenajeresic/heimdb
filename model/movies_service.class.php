@@ -2,6 +2,7 @@
 
 require_once __SITE_PATH .  '/app/database/db.class.php';
 require_once __SITE_PATH .  '/model/movies.class.php';
+require_once __SITE_PATH .  '/model/comments.class.php';
 
 class MovieService 
 {
@@ -177,6 +178,46 @@ class MovieService
 								GROUP BY m.id_movie, m.title
 								ORDER BY appearance_count DESC
 								LIMIT 10');
+			$st->execute();
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$arr = array();
+		while( $row = $st->fetch() )
+		{
+			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'], 
+                                $row['description'],  $row['image'],  $row['duration'] );
+		}
+		return $arr;
+	}
+
+	function getMovieCommentsById( $id_movie ) 
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare('SELECT * FROM comments
+								WHERE id_movie = :id_movie');
+			$st->execute(array( 'id_movie' => $id_movie ));
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$arr = array();
+		while( $row = $st->fetch() )
+		{
+			$arr[] = new Comment ($row['id_comment'], $row['id_user'], $row['id_movie'],  $row['content'], $row['date'] );
+		}
+		return $arr;
+	}
+
+	function getMovieRecommendations() 
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare('SELECT * FROM movies
+								ORDER BY RAND() 
+								LIMIT 5');
 			$st->execute();
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }

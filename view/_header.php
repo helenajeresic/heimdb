@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HEIMDB</title>
     <link rel="stylesheet" type="text/css" href="<?php echo __SITE_URL . '/css/style.css';?>">
+    <link rel="shortcut icon" href=<?php echo __SITE_URL . '/images/heimdb.ico';?>>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <div class = "sticky">
+    <div class = "fixed">
         <div style="display: inline-block;">
             <img src=<?php echo __SITE_URL . '/images/heimdb.png';?> class = "icon_heimdb" alt="heimdb">
         </div>
