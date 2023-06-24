@@ -14,7 +14,7 @@ class watchlistController extends BaseController
         }
         else {
             $ms = new WatchlistService();
-            $dataWatchlist = $ms -> getUsersWathclistById( $_SESSION['id_user'] );
+            $dataWatchlist = $ms -> getUsersWatchlistById( $_SESSION['id_user'] );
             $dataWatched = $ms -> getWatchedMoviesById( $_SESSION['id_user'] );
             $this->registry->template->show_watchlist = $dataWatchlist;
             $this->registry->template->show_watched = $dataWatched;
