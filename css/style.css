@@ -7,9 +7,14 @@
     left: 0px;
     right: 0px;
     width: 100%;
-    height: auto;
+    height: 65px;
     margin-top: 0;
+    z-index: 100;
+}
 
+body {
+  padding-top: 65px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .icon_heimdb {
@@ -110,3 +115,233 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+/*movie site - top part about movie*/
+.img-blur-wrap {
+  overflow:hidden;
+}
+.img-blur {
+    background: no-repeat;
+    background-size: cover;
+    background-position: center; 
+    filter: none;
+    z-index: 2;
+    position: absolute;
+    width: 300px;
+  	height: 450px;
+    margin-left: 10%;  
+    margin-top: 100px;
+  	box-shadow:0px 10px 20px #000;
+}
+.img-blur-bg {
+  background: no-repeat;
+  background-size: 100% 100%;
+  filter: blur(60px);
+  width: 100%;
+  height: 700px;
+  position: absolute;
+  z-index: 1;
+}
+
+.info {
+  z-index: 2;
+  position: absolute;
+  margin-left: 30%; 
+  margin-right: 10%; 
+  float: right;  
+  margin-top: 100px;
+  color:rgb(255, 255, 255);
+  height: 450px;
+  text-shadow: 1px 1px 1px black;
+}
+
+.info-first {
+  text-align: left;
+  font-size: 60px;
+  font-weight: bold;
+}
+
+.info-second {
+  text-align: left;
+  font-size: 20px;
+}
+
+.info-third {
+  text-align: left;
+  font-size: 25px;
+}
+
+.info-forth {
+  text-align: left;
+  font-size: 20px;
+}
+.info-fifth {
+  text-align: left;
+  font-size: 25px;
+}
+.info-sixth {
+  text-align: left;
+  font-size: 25px;
+}
+/*movie site - top part about movie -end*/
+
+
+/*comments*/
+.comments {
+  width: 60%;
+  margin-top: 760px;
+  float: left;
+}
+.comment-button {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  display: flex;
+  padding : 10px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+div.comments-review{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 600px;
+  padding: 50px;
+  box-shadow: 0 50px 30px rgba(0,0,0,.30);
+  background: #fff;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s;
+  z-index: 5;
+}
+
+.popup.active{
+  top: 50%;
+  visibility: visible;
+  opacity: 1;
+  transition: 0.5s;
+  z-index: 5;
+}
+/*comments-end*/
+
+/*recommendations*/
+.recommendations {
+  width: 40%;
+  margin-top: 760px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recommendation-container {
+  width: 50%;
+}
+
+.recommendation-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.recommendation-box {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.recommendation-image {
+  width: 100px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.recommendation-data {
+  flex-grow: 1;
+}
+
+.recommendation-title {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.recommendation-title a {
+  color: black;
+  text-decoration: none;
+}
+/*recommendations-end*/
+
+/*za uredenje komentara*/
+
+
+.all_comments {
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
+            0 4px 8px rgba(0, 0, 0, 0.1);
+
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.all_comments .title_date_name {
+  display: flex;
+  justify-content: space-between;
+  background-color: #F3CE13;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
+            0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.all_comments .title {
+  flex-basis: 50%;
+  padding: 10px;
+}
+.all_comments .date{
+    flex-basis: 20%;
+    padding: 10px;
+}
+.all_comments .name {
+    flex-basis: 30%;
+    padding: 10px;
+}
+
+.all_comments .content {
+  margin-top: 1em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
+            0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  color: 	#696969;
+}
+.bold_text{
+    font-weight: bold;
+}
+.button_com{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
+              0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    padding:10px;
+
+}
+.but_com {
+  background-color: light grey;
+  color: black;
+  border: 1px solid grey;
+  font-size: 20px;
+  padding:5px;
+  border-radius: 10px;
+}
+
+/* kraj uredenja komenata*/
