@@ -1,6 +1,8 @@
 <?php
 
 require_once __SITE_PATH . '/model/movies_service.class.php';
+require_once __SITE_PATH . '/model/users_service.class.php';
+require_once __SITE_PATH . '/model/persons_service.class.php';
 require_once __SITE_PATH . '/model/watchlist_service.class.php';
 
 class moviesController extends BaseController {
@@ -221,15 +223,25 @@ class moviesController extends BaseController {
         }
         else {
             $ms = new MovieService();
+            $us = new UserService();
+            $ps = new PersonService();
             if( isset( $_GET['id_movie'] )) {
                 $id_movie = $_GET['id_movie'];
                 $movie = $ms->getMovieById($id_movie);
                 if($movie == false)
                     exit( 'Krivi id filma.' );
                 else
-                {
+                {   
                     $comments = $ms->getMovieCommentsById($id_movie);
+                    $arr = [];
+                    foreach($comments as $comment)
+                    {
+                        $arr[] = $us->getUserById($comment->__get('id_user'));
+                    }
                     $recommendations = $ms->getMovieRecommendations();
+                    $this->registry->template->show_actors = $actors;
+                    $this->registry->template->show_directors = $directors;
+                    $this->registry->template->user_names = $arr;
                     $this->registry->template->show_movie = $movie;
                     $this->registry->template->show_comments = $comments;
                     $this->registry->template->show_recommendations = $recommendations;

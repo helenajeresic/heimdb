@@ -6,12 +6,11 @@
   <div class='img-blur-bg' style="background-image: url('<?php echo $src;?>');"></div>
   <div class='img-blur' style="background-image: url('<?php echo $src;?>');"></div>
   <div class='info'>
-    <?php echo $show_movie->__get('title'); ?><br>
-    <?php echo $show_movie->__get('year'); ?><br>
-    <?php echo $show_movie->__get('genre'); ?><br>
-    <?php echo $show_movie->__get('description'); ?><br>
-    <?php echo $show_movie->__get('duration'); ?><br>
-  </div>
+    <div class='info-first'><?php echo $show_movie->__get('title'); ?></div>
+    <div class='info-second'><p><?php echo $show_movie->__get('year'); ?> | <?php echo $show_movie->__get('duration'); ?> min</p></div>
+    <div class='info-third'><?php echo $show_movie->__get('genre'); ?></div><br>
+    <div class='info-forth'><?php echo $show_movie->__get('description'); ?></div>
+</div>
 </div>
 
 <?php require_once __SITE_PATH . '/view/comments.php';?>
