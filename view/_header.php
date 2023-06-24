@@ -37,7 +37,7 @@
                       <?php if($_SESSION['admin'] == 1 )
                       { ?>
                           <a href="index.php?rt=users/deleteUser">Delete User</a>
-                          <a href="index.php?rt=movie/addMovie">Add Movie</a>
+                          <a href="index.php?rt=movies/addMovie">Add Movie</a>
                       <?php } ?>
                     </div>
                   </div>
