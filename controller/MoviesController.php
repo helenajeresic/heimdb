@@ -145,5 +145,50 @@ class moviesController extends BaseController {
         }  
     }
 
+    public function topRated()
+    {
+        if(!isset($_SESSION['username'])) {
+            $this->registry->template->title = 'Login';
+            $this->registry->template->error = false;
+            $this->registry->template->show('login');
+        }
+        else {
+            $ms = new WatclistService();
+            $data = $ms->getTopRated();
+            $this->registry->template->show_movies = $data;
+            $this->registry->template->show('movies');
+        }   
+    }
+
+    public function mostWatched()
+    {
+        if(!isset($_SESSION['username'])) {
+            $this->registry->template->title = 'Login';
+            $this->registry->template->error = false;
+            $this->registry->template->show('login');
+        }
+        else {
+            $ms = new WatclistService();
+            $data = $ms->getMostWatched();
+            $this->registry->template->show_movies = $data;
+            $this->registry->template->show('movies');
+        }  
+    }
+
+    public function mostPopular()
+    {
+        if(!isset($_SESSION['username'])) {
+            $this->registry->template->title = 'Login';
+            $this->registry->template->error = false;
+            $this->registry->template->show('login');
+        }
+        else {
+            $ms = new WatclistService();
+            $data = $ms->getMostPopular();
+            $this->registry->template->show_movies = $data;
+            $this->registry->template->show('movies');
+        }  
+    }
+
 }
 ?>
