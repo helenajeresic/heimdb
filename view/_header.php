@@ -26,8 +26,21 @@
                       <a href="index.php?rt=movies/mostPopular">Most popular</a>
                     </div>
                   </div>
-                <a href="index.php?rt=movies"><i class="fas fa-film"></i>Watchlist</a>
-                <a href="index.php?rt=user"><i class="fas fa-user"></i>My profile</a>
+                <a href="index.php?rt=watchlist"><i class="fas fa-film"></i>Watchlist</a>
+                <div class="dropdown">
+                    <button class="dropbtn active"><i class="fas fa-user"></i>My Profile
+                    </button>
+                    <div class="dropdown-content">
+                      <a href="index.php?rt=comments/myComments">My Comments</a>
+                      <a href="index.php?rt=rates/myRates">My Rates</a>
+                      <a href="index.php?rt=users/updateProfile">Update Profile</a>
+                      <?php if($_SESSION['admin'] == 1 )
+                      { ?>
+                          <a href="index.php?rt=users/deleteUser">Delete User</a>
+                          <a href="index.php?rt=movie/addMovie">Add Movie</a>
+                      <?php } ?>
+                    </div>
+                  </div>
                 <a href="index.php?rt=logout"><i class="fas fa-sign-out-alt"></i>Log out</a>
             </div>
 
