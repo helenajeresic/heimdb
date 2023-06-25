@@ -362,11 +362,11 @@ div.comments-review{
   padding: 10px;
 }
 .all_comments .date{
-    flex-basis: 20%;
+    flex-basis: 25%;
     padding: 10px;
 }
 .all_comments .name {
-    flex-basis: 30%;
+    flex-basis: 25%;
     padding: 10px;
 }
 

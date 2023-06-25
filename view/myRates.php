@@ -27,19 +27,24 @@
                     </div>
                 </div>
                 <div class="content">
-                    <br>
+
                     <style>
                       .star {
                         color: #F3CE13;
                       }
                     </style>
-                    <?php echo $r->__get('rate'). "  "; ?>
                     <?php
                        $n = $r->__get('rate'); // Zamijenite brojem n s vašim određenim brojem
-                       for ($j = 0; $j < $n; $j++) {
-                         echo '<span class="star">&#9733;</span> ';
-                       }
+                       for ($j = 0; $j < 10; $j++) {
+                           if($j < $n){
+                               echo '<span class="star">&#9733;</span> ';
+                           }
+                           else{
+                                echo "&#9733; ";
+                           }}
                      ?>
+                     <?php echo " ". $r->__get('rate'). "  / 10  "; ?>
+                     
                 </div>
 
             </div>

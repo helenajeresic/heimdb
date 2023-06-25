@@ -1,6 +1,6 @@
 <div class='comments'>
     <div class="comment-review"><h1>User comments <button class="comment-button" onclick="toggle('popup')" style="float:right;">Comment</button></h1> </div>
-    <?php 
+    <?php
     $i = 0;
     foreach( $show_comments as $index => $c ) { ?>
         <div class="all_comments">
@@ -25,7 +25,6 @@
                         </div>
                     </div>
                     <div class="content">
-                        <br>
                         <?php echo $c->__get('content'); ?>
                     </div>
                     <?php /*dovrsi dodat action na button da obrise ako je admin taj komentar*/
@@ -37,7 +36,7 @@
                     <?php } ?>
                 </div>
                 <br>
- 
+
     <?php } ?>
 
     <div id="popup" class="popup">

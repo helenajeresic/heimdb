@@ -28,7 +28,6 @@ require_once __SITE_PATH . '/view/_header.php';?>
                         </div>
                     </div>
                     <div class="content">
-                        <br>
                         <?php echo $c->__get('content'); ?>
                     </div>
                     <br>
