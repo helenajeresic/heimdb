@@ -1,12 +1,13 @@
 <?php
 
 require_once __SITE_PATH . '/model/movies_service.class.php';
+require_once __SITE_PATH . '/model/comments_service.class.php';
 require_once __SITE_PATH . '/model/users_service.class.php';
 require_once __SITE_PATH . '/model/persons_service.class.php';
 require_once __SITE_PATH . '/model/watchlist_service.class.php';
 
 class moviesController extends BaseController {
-    public function index() 
+    public function index()
     {
         if(!isset($_SESSION['username'])) {
             $this->registry->template->title = 'Login';
@@ -34,7 +35,7 @@ class moviesController extends BaseController {
             $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
             $this->registry->template->show_movies = $data;
             $this->registry->template->show('movies');
-        }       
+        }
     }
 
     public function showUsersWatched()
@@ -49,7 +50,7 @@ class moviesController extends BaseController {
             $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
             $this->registry->template->show_movies = $data;
             $this->registry->template->show('movies');
-        }    
+        }
     }
 
     public function addToWatchlist()
@@ -66,14 +67,14 @@ class moviesController extends BaseController {
                 $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('movies');
-            } 
+            }
             else {
                 $ms = new WatchlistService();
                 $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('movies');
             }
-        }  
+        }
     }
 
     public function removeFromWatchlist()
@@ -90,14 +91,14 @@ class moviesController extends BaseController {
                 $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('movies');
-            } 
+            }
             else {
                 $ms = new WatchlistService();
                 $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('movies');
             }
-        }  
+        }
     }
 
     public function addToWatched()
@@ -114,14 +115,14 @@ class moviesController extends BaseController {
                 $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('movies');
-            } 
+            }
             else {
                 $ms = new WatchlistService();
                 $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('movies');
             }
-        }  
+        }
     }
 
     public function removeFromWatched()
@@ -138,14 +139,14 @@ class moviesController extends BaseController {
                 $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('movies');
-            } 
+            }
             else {
                 $ms = new WatchlistService();
                 $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('movies');
             }
-        }  
+        }
     }
 
     public function topRated()
@@ -160,7 +161,7 @@ class moviesController extends BaseController {
             $data = $ms->getTopRated();
             $this->registry->template->show_movies = $data;
             $this->registry->template->show('movies');
-        }   
+        }
     }
 
     public function mostWatched()
@@ -175,7 +176,7 @@ class moviesController extends BaseController {
             $data = $ms->getMostWatched();
             $this->registry->template->show_movies = $data;
             $this->registry->template->show('movies');
-        }  
+        }
     }
 
     public function mostPopular()
@@ -190,7 +191,7 @@ class moviesController extends BaseController {
             $data = $ms->getMostPopular();
             $this->registry->template->show_movies = $data;
             $this->registry->template->show('movies');
-        }  
+        }
     }
 
     public function addMovie()
@@ -208,11 +209,11 @@ class moviesController extends BaseController {
 
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('movies');
-            } 
+            }
             else {
 
             }
-        }  
+        }
     }
 
     public function showMovie() {
@@ -225,14 +226,15 @@ class moviesController extends BaseController {
             $ms = new MovieService();
             $us = new UserService();
             $ps = new PersonService();
+            $cs = new CommentService();
             if( isset( $_GET['id_movie'] )) {
                 $id_movie = $_GET['id_movie'];
                 $movie = $ms->getMovieById($id_movie);
                 if($movie == false)
                     exit( 'Krivi id filma.' );
                 else
-                {   
-                    $comments = $ms->getMovieCommentsById($id_movie);
+                {
+                    $comments = $cs->getMovieCommentsById($id_movie);
                     $arr = [];
                     foreach($comments as $comment)
                     {
@@ -253,7 +255,7 @@ class moviesController extends BaseController {
             else {
                 exit( 'Nesto ne valja sa id-em.' );
             }
-        } 
+        }
     }
 
 }
