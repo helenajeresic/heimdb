@@ -175,13 +175,13 @@ body {
 .img-blur {
     background: no-repeat;
     background-size: cover;
-    background-position: center; 
+    background-position: center;
     filter: none;
     z-index: 2;
     position: absolute;
     width: 300px;
   	height: 450px;
-    margin-left: 10%;  
+    margin-left: 10%;
     margin-top: 100px;
   	box-shadow:0px 10px 20px #000;
 }
@@ -198,9 +198,9 @@ body {
 .info {
   z-index: 2;
   position: absolute;
-  margin-left: 30%; 
-  margin-right: 10%; 
-  float: right;  
+  margin-left: 30%;
+  margin-right: 10%;
+  float: right;
   margin-top: 100px;
   color:rgb(255, 255, 255);
   height: 450px;
@@ -399,3 +399,32 @@ div.comments-review{
 }
 
 /* kraj uredenja komenata*/
+.topnav .search-container {
+  float: right;
+  border-radius: 10px;
+}
+
+.topnav input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  border-radius: 10px;
+}
+
+.topnav .search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.topnav .search-container button:hover {
+  background: #ccc;
+  border-radius: 10px;
+}

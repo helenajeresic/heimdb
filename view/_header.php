@@ -18,6 +18,13 @@
         {?>
 
             <div class="topnav">
+                <div class="search-container">
+                    <form action="/action_page.php">
+                      <input type="text" placeholder="Search movies" name="search">
+                      <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                  </div>
+                <a href="index.php?rt=movies"><i class="fas fa-home"></i>Home</a>
                 <div class="dropdown">
                     <button class="dropbtn active"><i class="fas fa-bars"></i>Menu
                     </button>
