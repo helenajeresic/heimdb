@@ -1,73 +1,113 @@
-/* navigacijska traka*/
 .fixed {
-    position:fixed;
-    background: black;
-    border: 5px solid rgb(0, 0, 0);
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    width: 100%;
-    height: 65px;
-    margin-top: 0;
-    z-index: 100;
+  position: fixed;
+  background: black;
+  border: 5px solid rgb(0, 0, 0);
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
 }
 
 body {
-  padding-top: 65px;
+  padding-top: 110px; 
+  margin: 0; 
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .icon_heimdb {
-    float : left;
-    height : 50px;
-    width : auto;
-    padding : 10px;
-    padding-left: 50px;
+  height: 50px;
+  width: auto;
+  padding: 10px;
+  margin-right: 10px;
 }
-    /* Add a black background color to the top navigation */
+
 .topnav {
-    float : right;
-    background-color: black;
-    display: flex;
-    padding : 10px;
-    border-radius: 10px;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
 }
 
-/* Style the links inside the navigation bar */
+.left-section {
+  display: flex;
+  align-items: center;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 1;
+  margin-right: 20px;
+}
+
+.topnav .search-container {
+  float: right;
+  border-radius: 10px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.topnav input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  border-radius: 10px;
+}
+
+.topnav .search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.topnav .search-container button:hover {
+  background: #ccc;
+  border-radius: 10px;
+}
+
 .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    border-radius: 10px;
-    font-family: Arial, Helvetica, sans-serif;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Change the color of links on hover */
 .topnav a:hover {
-    background-color: gray;
-    color: black;
-    border-radius: 10px;
-    font-family: Arial, Helvetica, sans-serif;
+  background-color: gray;
+  color: black;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Add a color to the active/current link */
 .topnav a.active {
-    background-color: #F3CE13;
-    color: white;
-    border-radius: 10px;
-    font-family: Arial, Helvetica, sans-serif;
+  background-color: #F3CE13;
+  color: white;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .topnav i {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .dropdown {
-  float: left;
-  overflow: hidden;
+  position: relative;
+  display: inline-block;
 }
 
 .dropdown .dropbtn {
@@ -82,7 +122,8 @@ body {
   margin: 0;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navbar a:hover,
+.dropdown:hover .dropbtn {
   background-color: #1d1d1d;
 }
 
@@ -116,19 +157,55 @@ body {
   display: block;
 }
 
+@media screen and (max-width: 768px) {
+  .fixed {
+    height: auto;
+  }
+
+  .topnav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+
+  .topnav a {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .dropdown .dropbtn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .dropdown-content {
+    position: static;
+    display: none;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: none;
+  }
+
+  body {
+    padding-top: 150px;
+  }
+}
+
+
 
 .com h2{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
 }
-.com{
-    margin-top: 100px;
-}
 
 
-
-
-
+/*filmovi*/
 .container {
     display: flex;
     justify-content: center;
@@ -167,7 +244,7 @@ body {
     font-size: 18px;
     margin-bottom: 5px;
 }
-=======
+
 /*movie site - top part about movie*/
 .img-blur-wrap {
   overflow:hidden;
@@ -399,32 +476,4 @@ div.comments-review{
 }
 
 /* kraj uredenja komenata*/
-.topnav .search-container {
-  float: right;
-  border-radius: 10px;
-}
 
-.topnav input[type=text] {
-  padding: 6px;
-  margin-top: 8px;
-  font-size: 17px;
-  border: none;
-  border-radius: 10px;
-}
-
-.topnav .search-container button {
-  float: right;
-  padding: 6px 10px;
-  margin-top: 8px;
-  margin-right: 16px;
-  background: #ddd;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
-  border-radius: 10px;
-}
-
-.topnav .search-container button:hover {
-  background: #ccc;
-  border-radius: 10px;
-}
