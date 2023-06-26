@@ -2,7 +2,18 @@
 
 <div class="container">
     <div class="movie-container">
-        <h1>Top rated movies:</h1>
+        <div class="movie-list-name">
+            <h1>Top movies:</h1><br>
+            <div class="select-sort">
+                <label for="selectSort">Sort by:</label>
+                <select name="selectSort" id="selectSort">
+                    <option value="byTitle">title</option>
+                    <option value="byYear">year</option>
+                    <option value="byGenre">genre</option>
+                    <option value="byRating">HEIMDB rating</option>
+                </select>
+            </div>
+        </div>
         <div class="movie-content">
             <?php foreach( $show_movies as $index => $m ) { 
             $src = "https://heimdb.s3.eu-north-1.amazonaws.com/" . $m->__get( 'image' );?>
@@ -19,7 +30,7 @@
                     </div>
                     <div class="movie-atributes">
                         <?php echo $m->__get('year'); ?> | 
-                        <?php echo $m->__get('duration'); ?> | 
+                        <?php echo $m->__get('duration'); ?> min | 
                         <?php echo $m->__get('genre'); ?>
                     </div>
                     <?php echo $m->__get('description'); ?><br>
