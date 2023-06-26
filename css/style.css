@@ -128,7 +128,7 @@ body {
 
 
 
-
+/* movies - top rated and wishlist */
 .container {
     display: flex;
     justify-content: center;
@@ -153,7 +153,7 @@ body {
 }
 
 .movie-image {
-    width: 100px;
+    width: 150px;
     height: auto;
     margin-right: 10px;
 }
@@ -167,7 +167,7 @@ body {
     font-size: 18px;
     margin-bottom: 5px;
 }
-/*-----------------------------------*/
+/*movies - top rated and wishlist - end*/
 /*movie site - top part about movie*/
 .img-blur-wrap {
   overflow:hidden;
