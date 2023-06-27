@@ -28,8 +28,7 @@
                         <?php echo $c->__get('content'); ?>
                     </div>
                     <?php /*dovrsi dodat action na button da obrise ako je admin taj komentar*/
-                        if($_SESSION['admin'] == 1 ) { ?>
-                    <br>
+                        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) { ?>
                     <div class="button_com">
                         <button class="but_com">Delete</button>
                     </div>
@@ -47,10 +46,9 @@
                     </div>
                     <br><br>
                     <div class="float-end">
-                        <input class="comment-button" type="submit" name="comment" value="Comment" style="float: right;"/>
+                        <input class="comment-button" type="submit" name="comment" value="Comment" style="float: right;"/></form>
                         <button class="comment-button" onclick="toggle('popup')" style="float: left;">Close</button>
                     </div>
-            </form>
     </div>
 
     <script>

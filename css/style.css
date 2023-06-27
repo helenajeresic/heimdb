@@ -204,12 +204,7 @@ body {
     font-size: 30px;
 }
 
-<<<<<<< HEAD
-
-/*filmovi*/
-=======
 /* movies - top rated and wishlist */
->>>>>>> c8ee3f5f61d8dc14ef1eb898f8a25af01f5eafbf
 .container {
     display: flex;
     justify-content: center;
