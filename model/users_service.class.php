@@ -96,14 +96,37 @@ class UserService {
 		{
 			$db = DB::getConnection();
 			$users = implode(',', array_fill(0, count($usersToDelete), '?'));
+			
 			$sql = "DELETE FROM users WHERE id_user IN ($users)";
 			$st = $db->prepare($sql);
-	
 			foreach($usersToDelete as $index => $user) 
 			{
 				$st->bindValue(($index + 1), $user);
 			}
-	
+			$st->execute();
+
+			$sql = "DELETE FROM rates WHERE id_user IN ($users)";
+			$st = $db->prepare($sql);
+			foreach($usersToDelete as $index => $user) 
+			{
+				$st->bindValue(($index + 1), $user);
+			}
+			$st->execute();
+
+			$sql = "DELETE FROM comments WHERE id_user IN ($users)";
+			$st = $db->prepare($sql);
+			foreach($usersToDelete as $index => $user) 
+			{
+				$st->bindValue(($index + 1), $user);
+			}
+			$st->execute();
+
+			$sql = "DELETE FROM watchlist WHERE id_user IN ($users)";
+			$st = $db->prepare($sql);
+			foreach($usersToDelete as $index => $user) 
+			{
+				$st->bindValue(($index + 1), $user);
+			}
 			$st->execute();
 		}
 		catch(PDOException $e) { exit('PDO error ' . $e->getMessage()); }

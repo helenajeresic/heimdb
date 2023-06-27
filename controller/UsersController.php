@@ -27,7 +27,7 @@ class usersController extends BaseController {
             $this->registry->template->show('login');
         }
         else {
-            if($_SESSION['admin'] == 1) {
+            if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
                 $us = new UserService();
                 if(isset($_POST['lang'])) {
                     $selectedUsers = array();           

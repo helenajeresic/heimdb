@@ -9,17 +9,10 @@ require_once __SITE_PATH . '/model/watchlist_service.class.php';
 class moviesController extends BaseController {
     public function index()
     {
-        if(!isset($_SESSION['username'])) {
-            $this->registry->template->title = 'Login';
-            $this->registry->template->error = false;
-            $this->registry->template->show('login');
-        }
-        else {
-            $ms = new MovieService();
-            $data = $ms->getAllMovies();
-            $this->registry->template->show_movies = $data;
-            $this->registry->template->show('movies');
-        }
+        $ms = new MovieService();
+        $data = $ms->getAllMovies();
+        $this->registry->template->show_movies = $data;
+        $this->registry->template->show('movies');
     }
 
     public function showUsersWatchlist()
@@ -151,47 +144,26 @@ class moviesController extends BaseController {
 
     public function topRated()
     {
-        if(!isset($_SESSION['username'])) {
-            $this->registry->template->title = 'Login';
-            $this->registry->template->error = false;
-            $this->registry->template->show('login');
-        }
-        else {
-            $ms = new MovieService();
-            $data = $ms->getTopRated();
-            $this->registry->template->show_movies = $data;
-            $this->registry->template->show('movies');
-        }
+        $ms = new MovieService();
+        $data = $ms->getTopRated();
+        $this->registry->template->show_movies = $data;
+        $this->registry->template->show('movies');
     }
 
     public function mostWatched()
     {
-        if(!isset($_SESSION['username'])) {
-            $this->registry->template->title = 'Login';
-            $this->registry->template->error = false;
-            $this->registry->template->show('login');
-        }
-        else {
-            $ms = new MovieService();
-            $data = $ms->getMostWatched();
-            $this->registry->template->show_movies = $data;
-            $this->registry->template->show('movies');
-        }
+        $ms = new MovieService();
+        $data = $ms->getMostWatched();
+        $this->registry->template->show_movies = $data;
+        $this->registry->template->show('movies');
     }
 
     public function mostPopular()
     {
-        if(!isset($_SESSION['username'])) {
-            $this->registry->template->title = 'Login';
-            $this->registry->template->error = false;
-            $this->registry->template->show('login');
-        }
-        else {
-            $ms = new MovieService();
-            $data = $ms->getMostPopular();
-            $this->registry->template->show_movies = $data;
-            $this->registry->template->show('movies');
-        }
+        $ms = new MovieService();
+        $data = $ms->getMostPopular();
+        $this->registry->template->show_movies = $data;
+        $this->registry->template->show('movies');
     }
 
     public function addMovie()
@@ -202,7 +174,7 @@ class moviesController extends BaseController {
             $this->registry->template->show('login');
         }
         else {
-            if($_SESSION['admin'] == 1) {
+            if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
                 $ms = new MovieService();
                 if( isset($_POST['id_movie']) && isset($_POST['title']) && isset($_POST['year']) &&
                 isset($_POST['genre']) && isset($_POST['description']) && isset($_POST['image']) && isset($_POST['duration'])){
@@ -221,44 +193,37 @@ class moviesController extends BaseController {
     }
 
     public function showMovie() {
-        if(!isset($_SESSION['username'])) {
-            $this->registry->template->title = 'Login';
-            $this->registry->template->error = false;
-            $this->registry->template->show('login');
+        $ms = new MovieService();
+        $us = new UserService();
+        $ps = new PersonService();
+        $cs = new CommentService();
+        if( isset( $_GET['id_movie'] )) {
+            $id_movie = $_GET['id_movie'];
+            $movie = $ms->getMovieById($id_movie);
+            if($movie == false)
+                exit( 'Krivi id filma.' );
+            else
+            {
+                $comments = $cs->getMovieCommentsById($id_movie);
+                $arr = [];
+                foreach($comments as $comment)
+                {
+                    $arr[] = $us->getUserById($comment->__get('id_user'));
+                }
+                $recommendations = $ms->getMovieRecommendations();
+                $actors = $ps->getActorsForMovie($id_movie);
+                $directors = $ps->getDirectorsForMovie($id_movie);
+                $this->registry->template->show_actors = $actors;
+                $this->registry->template->show_directors = $directors;
+                $this->registry->template->user_names = $arr;
+                $this->registry->template->show_movie = $movie;
+                $this->registry->template->show_comments = $comments;
+                $this->registry->template->show_recommendations = $recommendations;
+                $this->registry->template->show('movie');
+            }
         }
         else {
-            $ms = new MovieService();
-            $us = new UserService();
-            $ps = new PersonService();
-            $cs = new CommentService();
-            if( isset( $_GET['id_movie'] )) {
-                $id_movie = $_GET['id_movie'];
-                $movie = $ms->getMovieById($id_movie);
-                if($movie == false)
-                    exit( 'Krivi id filma.' );
-                else
-                {
-                    $comments = $cs->getMovieCommentsById($id_movie);
-                    $arr = [];
-                    foreach($comments as $comment)
-                    {
-                        $arr[] = $us->getUserById($comment->__get('id_user'));
-                    }
-                    $recommendations = $ms->getMovieRecommendations();
-                    $actors = $ps->getActorsForMovie($id_movie);
-                    $directors = $ps->getDirectorsForMovie($id_movie);
-                    $this->registry->template->show_actors = $actors;
-                    $this->registry->template->show_directors = $directors;
-                    $this->registry->template->user_names = $arr;
-                    $this->registry->template->show_movie = $movie;
-                    $this->registry->template->show_comments = $comments;
-                    $this->registry->template->show_recommendations = $recommendations;
-                    $this->registry->template->show('movie');
-                }
-            }
-            else {
-                exit( 'Nesto ne valja sa id-em.' );
-            }
+            exit( 'Nesto ne valja sa id-em.' );
         }
     }
     
