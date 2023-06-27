@@ -1,0 +1,487 @@
+.fixed {
+  position: fixed;
+  background: black;
+  border: 5px solid rgb(0, 0, 0);
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+body {
+  padding-top: 110px; 
+  margin: 0; 
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.icon_heimdb {
+  height: 50px;
+  width: auto;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.topnav {
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 1;
+  margin-right: 20px;
+}
+
+.topnav .search-container {
+  float: right;
+  border-radius: 10px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.topnav input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  border-radius: 10px;
+}
+
+.topnav .search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.topnav .search-container button:hover {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.topnav a {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav a:hover {
+  background-color: gray;
+  color: black;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav a.active {
+  background-color: #F3CE13;
+  color: white;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav i {
+  margin-right: 5px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 10px;
+  margin: 0;
+}
+
+.navbar a:hover,
+.dropdown:hover .dropbtn {
+  background-color: #1d1d1d;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  color: white;
+  background-color: black;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgb(0, 0, 0);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.dropdown-content a {
+  float: none;
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 10px;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .fixed {
+    height: auto;
+  }
+
+  .topnav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+
+  .topnav a {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .dropdown .dropbtn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .dropdown-content {
+    position: static;
+    display: none;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: none;
+  }
+
+  body {
+    padding-top: 150px;
+  }
+}
+
+
+
+.com h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+}
+
+<<<<<<< HEAD
+
+/*filmovi*/
+=======
+/* movies - top rated and wishlist */
+>>>>>>> c8ee3f5f61d8dc14ef1eb898f8a25af01f5eafbf
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie-container {
+    width: 50%;
+}
+
+.movie-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movie-box {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.movie-image {
+    width: 150px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.movie-data {
+    flex-grow: 1;
+}
+
+.movie-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+<<<<<<< HEAD
+
+=======
+/*movies - top rated and wishlist - end*/
+>>>>>>> c8ee3f5f61d8dc14ef1eb898f8a25af01f5eafbf
+/*movie site - top part about movie*/
+.img-blur-wrap {
+  overflow:hidden;
+}
+.img-blur {
+    background: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: none;
+    z-index: 2;
+    position: absolute;
+    width: 300px;
+  	height: 450px;
+    margin-left: 10%;
+    margin-top: 100px;
+  	box-shadow:0px 10px 20px #000;
+}
+.img-blur-bg {
+  background: no-repeat;
+  background-size: 100% 100%;
+  filter: blur(60px) brightness(50%);
+  width: 100%;
+  height: 700px;
+  position: absolute;
+  z-index: 1;
+}
+
+.info {
+  z-index: 2;
+  position: absolute;
+  margin-left: calc(10% + 300px + 100px);
+  margin-right: 10%;
+  float: right;
+  margin-top: 100px;
+  color:rgb(255, 255, 255);
+  height: 450px;
+  text-shadow: 1px 1px 1px black;
+}
+
+.info-first {
+  text-align: left;
+  font-size: 60px;
+  font-weight: bold;
+}
+
+.info-second {
+  text-align: left;
+  font-size: 20px;
+}
+
+.info-third {
+  text-align: left;
+  font-size: 25px;
+}
+
+.info-forth {
+  text-align: left;
+  font-size: 20px;
+}
+.info-fifth {
+  text-align: left;
+  font-size: 25px;
+}
+.info-sixth {
+  text-align: left;
+  font-size: 25px;
+}
+/*movie site - top part about movie -end*/
+
+
+/*comments*/
+.comments {
+  width: 60%;
+  margin-top: 760px;
+  float: left;
+}
+.comment-button {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  display: flex;
+  padding : 10px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+div.comments-review{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 600px;
+  padding: 50px;
+  box-shadow: 0 50px 30px rgba(0,0,0,.30);
+  background: #fff;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s;
+  z-index: 5;
+}
+
+.popup.active{
+  top: 50%;
+  visibility: visible;
+  opacity: 1;
+  transition: 0.5s;
+  z-index: 5;
+}
+/*comments-end*/
+
+/*recommendations*/
+.recommendations {
+  width: 40%;
+  margin-top: 760px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recommendation-container {
+  width: 50%;
+}
+
+.recommendation-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.recommendation-box {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.recommendation-image {
+  width: 100px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.recommendation-data {
+  flex-grow: 1;
+}
+
+.recommendation-title {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.recommendation-title a {
+  color: black;
+  text-decoration: none;
+}
+/*recommendations-end*/
+
+
+/*za uredenje komentara*/
+
+
+.all_comments {
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
+            0 4px 8px rgba(0, 0, 0, 0.1);
+
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 20px;
+
+}
+
+.all_comments .title_date_name {
+  display: flex;
+  justify-content: space-between;
+  background-color: #F3CE13;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
+            0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.all_comments .title {
+  flex-basis: 50%;
+  padding: 10px;
+}
+.all_comments .date{
+    flex-basis: 25%;
+    padding: 10px;
+}
+.all_comments .name {
+    flex-basis: 25%;
+    padding: 10px;
+}
+
+.all_comments .content {
+  margin-top: 1em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
+            0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  color: 	#696969;
+}
+.bold_text{
+    font-weight: bold;
+}
+.button_com{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
+              0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    padding:10px;
+
+}
+.but_com {
+  background-color: light grey;
+  color: black;
+  border: 1px solid grey;
+  font-size: 20px;
+  padding:5px;
+  border-radius: 10px;
+}
+
+/* kraj uredenja komenata*/
+

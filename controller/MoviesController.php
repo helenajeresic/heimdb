@@ -202,18 +202,22 @@ class moviesController extends BaseController {
             $this->registry->template->show('login');
         }
         else {
-            $ms = new MovieService();
-            if( isset($_POST['id_movie']) && isset($_POST['title']) && isset($_POST['year']) &&
+            if($_SESSION['admin'] == 1) {
+                $ms = new MovieService();
+                if( isset($_POST['id_movie']) && isset($_POST['title']) && isset($_POST['year']) &&
                 isset($_POST['genre']) && isset($_POST['description']) && isset($_POST['image']) && isset($_POST['duration'])){
-                $data = $ms->getMostPopular();
-
-                $this->registry->template->show_movies = $data;
-                $this->registry->template->show('movies');
-            }
+                    $ms->addMovie($_POST['id_movie'], $_POST['title'], $_POST['year'], $_POST['genre'], $_POST['description'], $_POST['image'], $_POST['duration']);
+                    header( 'Location: ' . __SITE_URL . '/index.php');
+                }
+                $this->registry->template->title = 'Login';
+                $this->registry->template->error = false;
+                $this->registry->template->show('upload_movie');
+            } 
             else {
-
-            }
+                header( 'Location: ' . __SITE_URL . '/index.php');
+            }          
         }
+    
     }
 
     public function showMovie() {
@@ -257,6 +261,7 @@ class moviesController extends BaseController {
             }
         }
     }
+    
 
 }
 ?>

@@ -90,6 +90,48 @@ class UserService {
              $row['is_admin'], $row['name'], $row['surname'], $row['date_of_birth'], $row['penalty'] );
 	}
 
+	function deleteUsers($usersToDelete) 
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$users = implode(',', array_fill(0, count($usersToDelete), '?'));
+			$sql = "DELETE FROM users WHERE id_user IN ($users)";
+			$st = $db->prepare($sql);
+	
+			foreach($usersToDelete as $index => $user) 
+			{
+				$st->bindValue(($index + 1), $user);
+			}
+	
+			$st->execute();
+		}
+		catch(PDOException $e) { exit('PDO error ' . $e->getMessage()); }
+	}
+
+	function getUsersToDelete() 
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT * FROM users WHERE penalty > 3' );
+			$st->execute();
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$rows = $st->fetchAll();
+		$usersToDelete = array();
+		
+		foreach ($rows as $row) {
+			$user = new User( $row['id_user'], $row['username'], $row['password_hash'], $row['email'], $row['registration_sequence'], 
+						$row['has_registered'], $row['is_admin'], $row['name'], $row['surname'], $row['date_of_birth'], $row['penalty']
+			);
+			
+			$usersToDelete[] = $user;
+		}
+		
+		return $usersToDelete;
+	}
 
 };
 ?>
