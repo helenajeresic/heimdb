@@ -15,13 +15,13 @@ class usersController extends BaseController {
         else {
             $us = new UserService();
 
-            if( isset($_POST['name']) && $_POST['name'] !== ''){
+            if( isset($_POST['name']) && $_POST['name'] !== '' && preg_match('/^[A-Za-z]{3,50}$/', $_POST['name'])){
     			$us->updateName($_SESSION['username'], $_POST['name']);
     		}
-    		if( isset($_POST['surname']) && $_POST['surname'] !== ''){
+    		if( isset($_POST['surname']) && $_POST['surname'] !== '' && preg_match('/^[A-Za-z]{3,50}$/', $_POST['surname'])){
     			$us->updateSurname($_SESSION['username'], $_POST['surname']);
     		}
-    		if( isset($_POST['email']) && $_POST['email'] !== ''){
+    		if( isset($_POST['email']) && $_POST['email'] !== '' && filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL)){
     			$us->updateEmail($_SESSION['username'], $_POST['email']);
     		}
     		if( isset($_POST['date']) && $_POST['date'] !== ''){
