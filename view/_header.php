@@ -15,9 +15,16 @@
     <div class="left-section">
       <img src="<?php echo __SITE_URL . '/images/heimdb.png';?>" class="icon_heimdb" alt="heimdb">
       <div class="search-container">
-        <form action="/action_page.php">
+        <form action="index.php?rt=movies/search" method="post" >
           <input type="text" placeholder="Search movies" name="search">
-          <button type="submit"><i class="fa fa-search"></i></button>
+          <div class="custom-select" >
+              <select name="by">
+                <option value="1">Title</option>
+                <option value="2">Year</option>
+                <option value="3">Genre</option>
+              </select>
+            </div>
+          <button type="submit"><i class="fa fa-search"></i>Search</button>
         </form>
       </div>
     </div>
@@ -47,11 +54,9 @@
       </div>
       <a href="index.php?rt=logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
       <?php }
-      else { ?> <a href="index.php?rt=login"><i class="fas fa-sign-out-alt"></i>Login</a>  
+      else { ?> <a href="index.php?rt=login"><i class="fas fa-sign-out-alt"></i>Login</a>
       <?php } ?>
-    
+
     </div>
   </div>
 </div>
-
-
