@@ -25,6 +25,7 @@
                         <h2><?php echo $m->__get( 'title' );?></h2>
                     </div class>
                     <div class = "movie-buttons">
+                        <p>Rating: </p>
                         <button class="remove-watched-button" onclick="removeFromWatched(<?php echo $m->__get('id');?>)">&#x2764;</button>
                         <button class="remove-watchlist-button" onclick="removeFromWatchlist(<?php echo $m->__get('id');?>)">&#x1F4FA;</button>
                     </div>

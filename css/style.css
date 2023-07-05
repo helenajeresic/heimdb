@@ -132,6 +132,8 @@ body {
   justify-content: center;
   align-items: center;
   background-color: rgb(228, 222, 222);
+  padding: 0;
+  margin: 0;
 }
 
 .movie-container {
@@ -164,6 +166,7 @@ body {
   justify-content: space-between;
   box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), 0 4px 6px rgba(0,0,0,0.45);
   border-radius: 10px;
+  width: 100%;
 }
 
 .movie-list-name {
