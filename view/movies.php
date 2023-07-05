@@ -3,7 +3,7 @@
 <div class="container">
     <div class="movie-container">
         <div class="movie-list-name">
-            <h1>Top movies:</h1><br>
+            <h1><?php echo $title;  ?></h1><br>
             <div class="select-sort">
                 <label for="selectSort">Sort by:</label>
                 <select name="selectSort" id="selectSort">
