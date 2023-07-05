@@ -16,7 +16,7 @@
       <img src="<?php echo __SITE_URL . '/images/heimdb.png';?>" class="icon_heimdb" alt="heimdb">
       <div class="search-container">
         <form action="index.php?rt=movies/search" method="post" >
-          <input type="text" placeholder="Search movies" name="search">
+          <input type="text" placeholder="Search movies by..." name="search">
           <div class="custom-select" >
               <select name="by">
                 <option value="1">Title</option>
