@@ -2,20 +2,30 @@
 
 <div class="container">
     <div class="movie-container">
-        <h1>Watchlist</h1>
+        <div class="movie-list-name">
+            <h1>Watchlist</h1><br>
+        </div >
         <div class="movie-content">
-            <?php foreach( $show_watchlist as $index => $m ) {
+            <?php foreach( $show_watchlist as $index => $m ) { 
             $src = "https://heimdb.s3.eu-north-1.amazonaws.com/" . $m->__get( 'image' );
             $mov = 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/index.php?rt=Movies/showMovie&id_movie=' . $m->__get( 'id_movie' );?>
-
             <div class="movie-box">
                 <img src="<?php echo $src;?>" class="movie-image" alt="<?php echo $m->__get( 'title' );?>" >
                 <div class="movie-data">
-                    <div class="movie-title"><a href="<?php echo $mov;?>"><?php echo $m->__get( 'title' );?></a></div>
-                    <div><?php echo $m->__get('year'); ?></div>
-                    <div><?php echo $m->__get('genre'); ?></div>
-                    <div><?php echo $m->__get('description'); ?></div>
-                    <div><?php echo $m->__get('duration'); ?></div>
+                <div class="movie-title">
+                    <a href="<?php echo $mov;?>"><?php echo $m->__get( 'title' );?></a>
+                </div>
+                    <div class = "movie-buttons">
+                        <button class="rating-button">&#9733; 3.5</button>
+                        <button class="remove-watched-button" onclick="removeFromWatched(<?php echo $m->__get('id');?>)">&#x2764;</button>
+                        <button class="remove-watchlist-button" onclick="removeFromWatchlist(<?php echo $m->__get('id');?>)">&#x1F4FA;</button>
+                    </div>
+                    <div class="movie-atributes">
+                        <?php echo $m->__get('year'); ?> | 
+                        <?php echo $m->__get('duration'); ?> min | 
+                        <?php echo $m->__get('genre'); ?>
+                    </div>
+                    <?php echo $m->__get('description'); ?><br>
                 </div>
             </div>
             <?php } ?>
@@ -25,20 +35,30 @@
 
 <div class="container">
     <div class="movie-container">
-        <h1>Watched</h1>
+        <div class="movie-list-name">
+            <h1>Watched</h1><br>
+        </div >
         <div class="movie-content">
-            <?php foreach( $show_watched as $index => $m ) {
+            <?php foreach( $show_watched as $index => $m ) { 
             $src = "https://heimdb.s3.eu-north-1.amazonaws.com/" . $m->__get( 'image' );
             $mov = 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/index.php?rt=Movies/showMovie&id_movie=' . $m->__get( 'id_movie' );?>
-
             <div class="movie-box">
                 <img src="<?php echo $src;?>" class="movie-image" alt="<?php echo $m->__get( 'title' );?>" >
                 <div class="movie-data">
-                    <div class="movie-title"><a href="<?php echo $mov;?>"><?php echo $m->__get( 'title' );?></a></div>
-                    <div><?php echo $m->__get('year'); ?></div>
-                    <div><?php echo $m->__get('genre'); ?></div>
-                    <div><?php echo $m->__get('description'); ?></div>
-                    <div><?php echo $m->__get('duration'); ?></div>
+                <div class="movie-title">
+                    <a href="<?php echo $mov;?>"><?php echo $m->__get( 'title' );?></a>
+                </div>
+                    <div class = "movie-buttons">
+                        <button class="rating-button">&#9733; 3.5</button>
+                        <button class="remove-watched-button" onclick="removeFromWatched(<?php echo $m->__get('id');?>)">&#x2764;</button>
+                        <button class="remove-watchlist-button" onclick="removeFromWatchlist(<?php echo $m->__get('id');?>)">&#x1F4FA;</button>
+                    </div>
+                    <div class="movie-atributes">
+                        <?php echo $m->__get('year'); ?> | 
+                        <?php echo $m->__get('duration'); ?> min | 
+                        <?php echo $m->__get('genre'); ?>
+                    </div>
+                    <?php echo $m->__get('description'); ?><br>
                 </div>
             </div>
             <?php } ?>
