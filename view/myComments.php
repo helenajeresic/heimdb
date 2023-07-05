@@ -2,7 +2,7 @@
 require_once __SITE_PATH . '/view/_header.php';?>
 
 <div class="com">
-    <h2> All my comments </h2>
+    <h2> <?php echo $title; ?> </h2>
         <?php
             $i = 0;
             foreach ($comments as $c) { ?>

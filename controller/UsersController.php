@@ -3,7 +3,7 @@
 require_once __SITE_PATH . '/model/users_service.class.php';
 
 class usersController extends BaseController {
-    public function index() 
+    public function index()
     {}
 
     public function updateProfile() {
@@ -13,13 +13,29 @@ class usersController extends BaseController {
             $this->registry->template->show('login');
         }
         else {
-            //elena napisi
+            $us = new UserService();
+
+            if( isset($_POST['name']) && $_POST['name'] !== ''){
+    			$us->updateName($_SESSION['username'], $_POST['name']);
+    		}
+    		if( isset($_POST['surname']) && $_POST['surname'] !== ''){
+    			$us->updateSurname($_SESSION['username'], $_POST['surname']);
+    		}
+    		if( isset($_POST['email']) && $_POST['email'] !== ''){
+    			$us->updateEmail($_SESSION['username'], $_POST['email']);
+    		}
+    		if( isset($_POST['date']) && $_POST['date'] !== ''){
+    			$us->updateDate($_SESSION['username'], $_POST['date']);
+    		}
+
+            $userData = $us->getUserByUsername($_SESSION['username']);
+            $this->registry->template->data = $userData;
             $this->registry->template->title = 'Update profile';
             $this->registry->template->error = false;
             $this->registry->template->show('update_profile');
         }
     }
-  
+
     public function deleteUser() {
         if(!isset($_SESSION['username'])) {
             $this->registry->template->title = 'Login';
@@ -30,7 +46,7 @@ class usersController extends BaseController {
             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
                 $us = new UserService();
                 if(isset($_POST['lang'])) {
-                    $selectedUsers = array();           
+                    $selectedUsers = array();
                     foreach($_POST['lang'] as $selected) {
                         $selectedUsers[] = $selected;
                     }
@@ -41,10 +57,10 @@ class usersController extends BaseController {
                 $this->registry->template->error = false;
                 $this->registry->template->usersToDelete = $delete;
                 $this->registry->template->show('delete_user');
-            } 
+            }
             else {
                 header( 'Location: ' . __SITE_URL . '/index.php');
-            }          
+            }
         }
     }
 

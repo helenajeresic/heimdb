@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="movie-container">
-        <h2>Watchlist</h2>
+        <h2><?php echo $title; ?></h2>
         <div class="movie-content">
             <?php foreach( $show_watchlist as $index => $m ) {
             $src = "https://heimdb.s3.eu-north-1.amazonaws.com/" . $m->__get( 'image' );

@@ -4,7 +4,7 @@ require_once __SITE_PATH . '/model/comments_service.class.php';
 require_once __SITE_PATH . '/model/movies_service.class.php';
 
 class commentsController extends BaseController {
-    public function index() 
+    public function index()
     {}
 
     public function addNewComment() {
@@ -23,7 +23,7 @@ class commentsController extends BaseController {
                 if($movie == false)
                     exit( 'Krivi id filma.' );
                 else
-                {   
+                {
                     $cs = new CommentService();
                     $cs->addComment($id_user, $id_movie, $content);
                     header( 'Location: ' . __SITE_URL . '/index.php?rt=movies/showMovie&id_movie=' . $id_movie);
@@ -34,7 +34,7 @@ class commentsController extends BaseController {
             }
         }
     }
-  
+
       public function myComments()
     {
         if(!isset($_SESSION['username'])) {
@@ -43,6 +43,7 @@ class commentsController extends BaseController {
             $this->registry->template->show('login');
         }
         else {
+            $this->registry->template->title = 'All my comments';
             $cs = new CommentService();
             $ms = new MovieService();
             $data = $cs->getCommentsByUserId( $_SESSION['id_user'] );

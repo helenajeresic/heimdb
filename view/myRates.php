@@ -1,7 +1,7 @@
 <?php  require_once __SITE_PATH . '/view/_header.php';?>
 
 <div class="com">
-    <h2>All my rates</h2>
+    <h2><?php echo $title; ?></h2>
     <?php
         $i = 0;
         foreach ($rates as $r) {?>
@@ -44,7 +44,7 @@
                            }}
                      ?>
                      <?php echo " ". $r->__get('rate'). "  / 10  "; ?>
-                     
+
                 </div>
 
             </div>
