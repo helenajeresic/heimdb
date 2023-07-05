@@ -21,7 +21,7 @@
                             <div class ="bold_text">
                                 Date:
                             </div>
-                            <?php echo $c->__get('date'); ?> <br>
+                            <?php echo date('d.m.Y.', strtotime($c->__get('date'))); ?> <br>
                         </div>
                     </div>
                     <div class="content">

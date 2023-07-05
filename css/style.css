@@ -62,12 +62,14 @@ body {
 
 .topnav .search-container button {
   float: right;
-  padding: 8px 8px;
+  padding: 4px 8px; 
   margin: 0;
   background: #ddd;
   font-size: 17px;
   border: none;
   cursor: pointer;
+  height: 40px; 
+  box-sizing: border-box; 
 }
 
 .topnav .search-container button:hover {
@@ -210,22 +212,28 @@ body {
   font-size: 16px;
   border: none;
   border-radius: 0px;
+  height: 40px; 
+  box-sizing: border-box; 
 }
 
 .search-container .custom-select {
   position: relative;
   width: 90px;
+  border: none;
   margin-right: 10px;
+  height: 40px; 
+  box-sizing: border-box; 
 }
 
 .search-container .custom-select select {
   width: 100%;
-  padding: 8px;
+  padding: 4px 8px; 
   font-size: 16px;
   border: none;
   background-color: white;
+  height: 40px; 
+  box-sizing: border-box; 
 }
-
 
 .com h2{
     font-family: Arial, Helvetica, sans-serif;
