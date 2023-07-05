@@ -243,11 +243,8 @@ body {
     font-size: 18px;
     margin-bottom: 5px;
 }
-<<<<<<< HEAD
 
-=======
 /*movies - top rated and wishlist - end*/
->>>>>>> c8ee3f5f61d8dc14ef1eb898f8a25af01f5eafbf
 /*movie site - top part about movie*/
 .img-blur-wrap {
   overflow:hidden;
@@ -480,3 +477,50 @@ div.comments-review{
 
 /* kraj uredenja komenata*/
 
+/*pocetak login/register*/
+.center-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  color: black;
+  font-weight: bold;
+}
+
+.form input[type="text"],
+.form input[type="password"],
+.form input[type="email"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 8px;
+  font-size: 16px;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.form .btn {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  font-size: 18px;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.link a {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 10px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+
+/*kraj login/register*/

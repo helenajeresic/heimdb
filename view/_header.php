@@ -45,9 +45,9 @@
           <?php } ?>
         </div>
       </div>
-      <a href="index.php?rt=logout"><i class="fas fa-sign-out-alt"></i>Log out</a>
+      <a href="index.php?rt=logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
       <?php }
-      else { ?> <a href="index.php?rt=login"><i class="fas fa-sign-out-alt"></i>Log in</a>  
+      else { ?> <a href="index.php?rt=login"><i class="fas fa-sign-out-alt"></i>Login</a>  
       <?php } ?>
     
     </div>
