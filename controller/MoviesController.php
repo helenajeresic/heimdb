@@ -188,12 +188,12 @@ class moviesController extends BaseController {
                 $this->registry->template->title = 'Login';
                 $this->registry->template->error = false;
                 $this->registry->template->show('upload_movie');
-            } 
+            }
             else {
                 header( 'Location: ' . __SITE_URL . '/index.php');
-            }          
+            }
         }
-    
+
     }
 
     public function showMovie() {
@@ -230,7 +230,40 @@ class moviesController extends BaseController {
             exit( 'Nesto ne valja sa id-em.' );
         }
     }
-    
+
+    public function search()
+    {
+        if( isset($_POST['search'] ) && $_POST['search'] !== ""   ){
+            $s = $_POST['search'];
+            $b = $_POST['by'];
+            $ms = new MovieService();
+
+            if ($b === '1') {
+                $what = "title";
+                $data = $ms->searchMovieByTitle($_POST['search']);
+                $this->registry->template->show_movies = $data;
+            }
+            else if ($b === '2'){
+                $what = "year";
+                $data = $ms->searchMovieByYear($_POST['search']);
+                $this->registry->template->show_movies = $data;
+            }
+            else{
+                $what = "genre";
+                $data = $ms->searchMovieByGenre($_POST['search']);
+                $this->registry->template->show_movies = $data;
+            }
+            $title = "Search movies by " . $what . " : " . $_POST['search'];
+            $this->registry->template->title = $title;
+            $this->registry->template->show('movies');
+        }
+        else {
+            header( 'Location: ' . __SITE_URL . '/index.php');
+        }
+    }
+
+
+
 
 }
 ?>
