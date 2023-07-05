@@ -12,6 +12,7 @@ class moviesController extends BaseController {
         $ms = new MovieService();
         $data = $ms->getAllMovies();
         $this->registry->template->show_movies = $data;
+        $this->registry->template->title = 'Top movies';
         $this->registry->template->show('movies');
     }
 
