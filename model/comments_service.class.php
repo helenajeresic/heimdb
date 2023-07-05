@@ -43,24 +43,25 @@ class CommentService
 		return $arr;
     }
 
-    function getCommentsByMovieId( $id )
-    {
-        try
+    
+    function getMovieCommentsById( $id_movie )
+	{
+		try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare('SELECT * FROM comments WHERE id_movie = :id ORDER BY date DESC');
-			$st->execute( array( 'id' => $id ) );
+			$st = $db->prepare('SELECT * FROM comments
+								WHERE id_movie = :id_movie ORDER BY date DESC');
+			$st->execute(array( 'id_movie' => $id_movie ));
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			$arr[] = new Comment ( $row['id_comment'], $row['id_user'], $row['id_movie'], $row['content'], $row['date']);
+			$arr[] = new Comment ($row['id_comment'], $row['id_user'], $row['id_movie'],  $row['content'], $row['date'] );
 		}
-
 		return $arr;
-    }
+	}
 
     function addComment ( $id_user, $id_movie, $content )
     {

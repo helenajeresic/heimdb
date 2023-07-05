@@ -2,8 +2,9 @@
 
 require_once __SITE_PATH .  '/app/database/db.class.php';
 require_once __SITE_PATH .  '/model/movies.class.php';
+require_once __SITE_PATH .  '/model/comments.class.php';
 
-class MovieService 
+class MovieService
 {
 
     function getAllMovies()
@@ -19,7 +20,7 @@ class MovieService
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'], 
+			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'],
                                 $row['description'],  $row['image'],  $row['duration'] );
 		}
 		return $arr;
@@ -36,7 +37,7 @@ class MovieService
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 
 		$row = $st->fetch();
-		$param = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'], 
+		$param = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'],
                             $row['description'],  $row['image'],  $row['duration'] );
 
 		if( $row === false )
@@ -58,7 +59,7 @@ class MovieService
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'], 
+			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'],
                                 $row['description'],  $row['image'],  $row['duration'] );
 		}
 		return $arr;
@@ -77,7 +78,7 @@ class MovieService
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'], 
+			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'],
                                 $row['description'],  $row['image'],  $row['duration'] );
 		}
 		return $arr;
@@ -96,7 +97,7 @@ class MovieService
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'], 
+			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'],
                                 $row['description'],  $row['image'],  $row['duration'] );
 		}
 		return $arr;
@@ -107,7 +108,7 @@ class MovieService
 		try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare('INSERT INTO movies (id_movie, title, year, genre, description, image, duration) 
+			$st = $db->prepare('INSERT INTO movies (id_movie, title, year, genre, description, image, duration)
 								VALUES(:id_movie, :title, :year, :genre, :description, :image, :duration)');
 			$st->execute( array( 'year' =>  $year ) );
 		}
@@ -135,7 +136,7 @@ class MovieService
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'], 
+			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'],
                                 $row['description'],  $row['image'],  $row['duration'] );
 		}
 		return $arr;
@@ -160,7 +161,7 @@ class MovieService
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'], 
+			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'],
                                 $row['description'],  $row['image'],  $row['duration'] );
 		}
 		return $arr;
@@ -184,7 +185,30 @@ class MovieService
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'], 
+			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'],
+                                $row['description'],  $row['image'],  $row['duration'] );
+		}
+		return $arr;
+	}
+
+	
+
+	function getMovieRecommendations()
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare('SELECT * FROM movies
+								ORDER BY RAND()
+								LIMIT 5');
+			$st->execute();
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$arr = array();
+		while( $row = $st->fetch() )
+		{
+			$arr[] = new Movie ($row['id_movie'], $row['title'],$row['year'],  $row['genre'],
                                 $row['description'],  $row['image'],  $row['duration'] );
 		}
 		return $arr;

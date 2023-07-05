@@ -9,10 +9,30 @@ class RegisterController extends BaseController
 		$us = new UserService();
         if( !isset( $_POST['username'] ) || !isset( $_POST['password'] ) || !isset( $_POST['email']) )
         {
-            $this->registry->template->title = 'You need to enter username, password and e-mail.';
+            $this->registry->template->title = 'Sign up';
 			$this->registry->template->show( 'register' );
         }
-        else if( !filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL) )
+		else if( !preg_match('/^[A-Za-z]{3,50}$/', $_POST['name']))
+		{
+			$this->registry->template->title = 'Name must contain just letters and be at least 3 characters long.';
+			$this->registry->template->show( 'register' );
+		}
+		else if( !preg_match('/^[A-Za-z]{3,50}$/', $_POST['surname']))
+		{
+			$this->registry->template->title = 'Surname must contain just letters and be at least 3 characters long.';
+			$this->registry->template->show( 'register' );
+		}
+		else if( !preg_match('/^[A-Za-z0-9-_]{3,20}$/', $_POST['username']))
+		{
+			$this->registry->template->title = 'Username can contain only letters, numbers and special sign of -_ and must be at least 3 characters long.';
+			$this->registry->template->show( 'register' );
+		}
+		else if( !preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/',$_POST['password']))
+		{
+			$this->registry->template->title = 'Password must contain at least one lowercase char, one uppercase char, one digit and one special sign of @#-_$%^&+=§!? ';
+			$this->registry->template->show( 'register' );
+		}
+		else if( !filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL) )
         {
             $this->registry->template->title = 'E-mail is not valid.';
 			$this->registry->template->show( 'register' );
