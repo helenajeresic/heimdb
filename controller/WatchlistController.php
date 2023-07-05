@@ -2,6 +2,8 @@
 
 require_once __SITE_PATH . '/model/movies_service.class.php';
 require_once __SITE_PATH . '/model/watchlist_service.class.php';
+require_once __SITE_PATH .  '/model/movies.class.php';
+require_once __SITE_PATH . '/model/rates_service.class.php';
 
 class watchlistController extends BaseController
 {
@@ -16,8 +18,36 @@ class watchlistController extends BaseController
             $ms = new WatchlistService();
             $dataWatchlist = $ms -> getUsersWatchlistById( $_SESSION['id_user'] );
             $dataWatched = $ms -> getWatchedMoviesById( $_SESSION['id_user'] );
+
+            $rs = new RatesService();
+            $movieRatingsWatchlist = array();
+
+            foreach( $dataWatchlist as $movie) {
+                $id_movie = $movie->__get('id_movie');
+                $averageRatingWatchlist = $rs->getAverageRating( $id_movie );
+                if($averageRatingWatchlist !== null){
+                    $movieRatingsWatchlist[$id_movie] = $averageRatingWatchlist;
+                } else {
+                    $movieRatingsWatchlist[$id_movie] = 0;
+                }
+            }
+
+            $movieRatingsWatched = array();
+
+            foreach( $dataWatched as $movie) {
+                $id_movie = $movie->__get('id_movie');
+                $averageRatingWatched = $rs->getAverageRating( $id_movie );
+                if($averageRatingWatched !== null){
+                    $movieRatingsWatched[$id_movie] = $averageRatingWatched;
+                } else {
+                    $movieRatingsWatched[$id_movie] = 0;
+                }
+            }
+
             $this->registry->template->show_watchlist = $dataWatchlist;
             $this->registry->template->show_watched = $dataWatched;
+            $this->registry->template->ratings_watchlist = $movieRatingsWatchlist;
+            $this->registry->template->ratings_watched = $movieRatingsWatched;
             $this->registry->template->title = 'Watchlist';
             $this->registry->template->show('watchlist');
         }

@@ -1,16 +1,34 @@
 <?php
 
 require_once __SITE_PATH . '/model/movies_service.class.php';
+require_once __SITE_PATH .  '/model/movies.class.php';
 require_once __SITE_PATH . '/model/comments_service.class.php';
 require_once __SITE_PATH . '/model/users_service.class.php';
 require_once __SITE_PATH . '/model/persons_service.class.php';
 require_once __SITE_PATH . '/model/watchlist_service.class.php';
+require_once __SITE_PATH . '/model/rates_service.class.php';
 
 class moviesController extends BaseController {
     public function index()
     {
         $ms = new MovieService();
         $data = $ms->getAllMovies();
+
+        $rs = new RatesService();
+        $movieRatings = array();
+
+        foreach( $data as $movie) {
+            $id_movie = $movie->__get('id_movie');
+            $averageRating = $rs->getAverageRating( $id_movie );
+            if($averageRating !== null){
+                $movieRatings[$id_movie] = $averageRating;
+            } else {
+                $movieRatings[$id_movie] = 0;
+            }
+        }
+
+        
+        $this->registry->template->ratings = $movieRatings;
         $this->registry->template->show_movies = $data;
         $this->registry->template->title = 'Top movies';
         $this->registry->template->show('movies');
@@ -26,8 +44,20 @@ class moviesController extends BaseController {
         }
         else {
             $ms = new WatchlistService();
+            $rs = new RatesService();
             $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
+            $movieRatings = array();
+            foreach( $data as $movie) {
+                $id_movie = $movie->__get('id_movie');
+                $averageRating = $rs->getAverageRating( $id_movie );
+                if($averageRating !== null){
+                    $movieRatings[$id_movie] = $averageRating;
+                } else {
+                    $movieRatings[$id_movie] = 0;
+                }
+            }
             $this->registry->template->show_movies = $data;
+            $this->registry->template->ratings = $movieRatings;
             $this->registry->template->show('movies');
         }
     }
@@ -41,8 +71,21 @@ class moviesController extends BaseController {
         }
         else {
             $ms = new WatchlistService();
+            $rs = new RatesService();
             $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
+            $movieRatings = array();
+
+            foreach( $data as $movie) {
+                $id_movie = $movie->__get('id_movie');
+                $averageRating = $rs->getAverageRating( $id_movie );
+                if($averageRating !== null){
+                    $movieRatings[$id_movie] = $averageRating;
+                } else {
+                    $movieRatings[$id_movie] = 0;
+                }
+            }
             $this->registry->template->show_movies = $data;
+            $this->registry->template->ratings = $movieRatings;
             $this->registry->template->show('movies');
         }
     }
@@ -146,8 +189,24 @@ class moviesController extends BaseController {
     public function topRated()
     {
         $ms = new MovieService();
+        
         $data = $ms->getTopRated();
+        
+        $rs = new RatesService();
+        $movieRatings = array();
+
+        foreach( $data as $movie) {
+            $id_movie = $movie->__get('id_movie');
+            $averageRating = $rs->getAverageRating( $id_movie );
+            if($averageRating !== null){
+                $movieRatings[$id_movie] = $averageRating;
+            } else {
+                $movieRatings[$id_movie] = 0;
+            }
+        }
+
         $this->registry->template->show_movies = $data;
+        $this->registry->template->ratings = $movieRatings;
         $this->registry->template->title = 'Top rated';
         $this->registry->template->show('movies');
     }
@@ -156,7 +215,22 @@ class moviesController extends BaseController {
     {
         $ms = new MovieService();
         $data = $ms->getMostWatched();
+
+        $rs = new RatesService();
+        $movieRatings = array();
+
+        foreach( $data as $movie) {
+            $id_movie = $movie->__get('id_movie');
+            $averageRating = $rs->getAverageRating( $id_movie );
+            if($averageRating !== null){
+                $movieRatings[$id_movie] = $averageRating;
+            } else {
+                $movieRatings[$id_movie] = 0;
+            }
+        }
+
         $this->registry->template->show_movies = $data;
+        $this->registry->template->ratings = $movieRatings;
         $this->registry->template->title = 'Most watched';
         $this->registry->template->show('movies');
     }
@@ -165,7 +239,22 @@ class moviesController extends BaseController {
     {
         $ms = new MovieService();
         $data = $ms->getMostPopular();
+
+        $rs = new RatesService();
+        $movieRatings = array();
+
+        foreach( $data as $movie) {
+            $id_movie = $movie->__get('id_movie');
+            $averageRating = $rs->getAverageRating( $id_movie );
+            if($averageRating !== null){
+                $movieRatings[$id_movie] = $averageRating;
+            } else {
+                $movieRatings[$id_movie] = 0;
+            }
+        }
+
         $this->registry->template->show_movies = $data;
+        $this->registry->template->ratings = $movieRatings;
         $this->registry->template->title = 'Most popular';
         $this->registry->template->show('movies');
     }

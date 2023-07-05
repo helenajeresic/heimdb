@@ -6,7 +6,7 @@
             <h1>Watchlist</h1><br>
         </div >
         <div class="movie-content">
-            <?php foreach( $show_watchlist as $index => $m ) { 
+            <?php foreach( $show_watchlist as $m ) { 
             $src = "https://heimdb.s3.eu-north-1.amazonaws.com/" . $m->__get( 'image' );
             $mov = 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/index.php?rt=Movies/showMovie&id_movie=' . $m->__get( 'id_movie' );?>
             <div class="movie-box">
@@ -16,7 +16,7 @@
                     <a href="<?php echo $mov;?>"><?php echo $m->__get( 'title' );?></a>
                 </div>
                     <div class = "movie-buttons">
-                        <button class="rating-button">&#9733; 3.5</button>
+                        <button class="rating-button">&#9733; <?php echo $ratings_watchlist[$m->__get('id_movie')]; ?></button>
                         <button class="remove-watched-button" onclick="removeFromWatched(<?php echo $m->__get('id');?>)">&#x2764;</button>
                         <button class="remove-watchlist-button" onclick="removeFromWatchlist(<?php echo $m->__get('id');?>)">&#x1F4FA;</button>
                     </div>
@@ -49,7 +49,7 @@
                     <a href="<?php echo $mov;?>"><?php echo $m->__get( 'title' );?></a>
                 </div>
                     <div class = "movie-buttons">
-                        <button class="rating-button">&#9733; 3.5</button>
+                        <button class="rating-button">&#9733; <?php echo $ratings_watched[$m->__get('id_movie')]; ?></button>
                         <button class="remove-watched-button" onclick="removeFromWatched(<?php echo $m->__get('id');?>)">&#x2764;</button>
                         <button class="remove-watchlist-button" onclick="removeFromWatchlist(<?php echo $m->__get('id');?>)">&#x1F4FA;</button>
                     </div>
