@@ -651,12 +651,37 @@ div.comments-review{
   padding: 20px;
 }
 
-.container_user .userData {
-  margin-bottom: 20px;
+.userData {
+  display: flex;
+  flex-direction: column;
+}
+
+.userData label {
+  font-weight: bold;
+  text-align: right;
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+.userData div {
+  display: flex;
+  align-items: center;
+}
+
+.userData div label {
+  flex-basis: 150px; /* Prilagodite širinu labele prema potrebi */
+}
+
+.userData div span {
+  flex: 1;
 }
 
 .container_user h3 {
   margin-bottom: 10px;
+}
+
+.container_user h2 {
+  text-align: center;
 }
 
 .container_user input[type="text"],

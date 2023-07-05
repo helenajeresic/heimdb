@@ -5,10 +5,22 @@
         <h2><?php echo $title; ?></h2>
         <div class="userData">
             <h3>Your current data</h3>
-            Name: <?php echo $data->name; ?><br>
-            Surname: <?php echo $data->surname; ?><br>
-            Date of birth: <?php echo $data->date_of_birth; ?><br>
-            Email: <?php echo $data->email; ?><br>
+            <div>
+                <label for="name">Name:</label>
+                <span><?php echo $data->name; ?></span>
+            </div>
+            <div>
+                <label for="surname">Surname:</label>
+                <span><?php echo $data->surname; ?></span>
+            </div>
+            <div>
+                <label for="date_of_birth">Date of birth:</label>
+                <span><?php echo date('d.m.Y.', strtotime($data->date_of_birth)); ?></span>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <span><?php echo $data->email; ?></span>
+            </div>
         </div>
 
         <div class="dataChange">
