@@ -147,6 +147,7 @@ class moviesController extends BaseController {
         $ms = new MovieService();
         $data = $ms->getTopRated();
         $this->registry->template->show_movies = $data;
+        $this->registry->template->title = 'Top rated';
         $this->registry->template->show('movies');
     }
 
@@ -155,6 +156,7 @@ class moviesController extends BaseController {
         $ms = new MovieService();
         $data = $ms->getMostWatched();
         $this->registry->template->show_movies = $data;
+        $this->registry->template->title = 'Most watched';
         $this->registry->template->show('movies');
     }
 
@@ -163,6 +165,7 @@ class moviesController extends BaseController {
         $ms = new MovieService();
         $data = $ms->getMostPopular();
         $this->registry->template->show_movies = $data;
+        $this->registry->template->title = 'Most popular';
         $this->registry->template->show('movies');
     }
 
