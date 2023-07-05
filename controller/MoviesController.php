@@ -181,7 +181,7 @@ class moviesController extends BaseController {
                     $ms->addMovie($_POST['id_movie'], $_POST['title'], $_POST['year'], $_POST['genre'], $_POST['description'], $_POST['image'], $_POST['duration']);
                     header( 'Location: ' . __SITE_URL . '/index.php');
                 }
-                $this->registry->template->title = 'Login';
+                $this->registry->template->title = 'Add movie';
                 $this->registry->template->error = false;
                 $this->registry->template->show('upload_movie');
             } 
