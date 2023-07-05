@@ -11,7 +11,7 @@ class LoginController extends BaseController
 
 		if( !isset( $_POST['username'] ) || !isset( $_POST['password'] ) )
 		{
-			$this->registry->template->title = 'Enter your username and password.';
+			$this->registry->template->title = 'Login';
 			$this->registry->template->show( 'login' );
 		}
 		else

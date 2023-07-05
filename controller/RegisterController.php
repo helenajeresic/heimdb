@@ -9,7 +9,7 @@ class RegisterController extends BaseController
 		$us = new UserService();
         if( !isset( $_POST['username'] ) || !isset( $_POST['password'] ) || !isset( $_POST['email']) )
         {
-            $this->registry->template->title = 'You need to enter username, password and e-mail.';
+            $this->registry->template->title = 'Sign up';
 			$this->registry->template->show( 'register' );
         }
         else if( !filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL) )
