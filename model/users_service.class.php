@@ -25,6 +25,50 @@ class UserService {
              $row['is_admin'], $row['name'], $row['surname'], $row['date_of_birth'], $row['penalty'] );
 	}
 
+    function updateName($username, $name)
+    {
+        try
+        {
+            $db = DB::getConnection();
+            $st = $db->prepare('UPDATE users SET name = :name WHERE username = :username');
+            $st->execute( array( 'username' => $username , 'name' => $name ) );
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+    }
+
+    function updateSurname($username, $surname)
+    {
+        try
+        {
+            $db = DB::getConnection();
+            $st = $db->prepare('UPDATE users SET surname = :surname WHERE username = :username');
+            $st->execute( array( 'username' => $username , 'surname' => $surname ) );
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+    }
+
+    function updateEmail($username, $email)
+    {
+        try
+        {
+            $db = DB::getConnection();
+            $st = $db->prepare('UPDATE users SET email = :email WHERE username = :username');
+            $st->execute( array( 'username' => $username , 'email' => $email ) );
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+    }
+
+    function updateDate($username, $date)
+    {
+        try
+        {
+            $db = DB::getConnection();
+            $st = $db->prepare('UPDATE users SET date_of_birth = :date WHERE username = :username');
+            $st->execute( array( 'username' => $username , 'date' => $date ) );
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+    }
+
 
 	function makeNewUser( $username, $password, $email, $reg_seq, $name, $surname )
 	{
@@ -90,16 +134,16 @@ class UserService {
              $row['is_admin'], $row['name'], $row['surname'], $row['date_of_birth'], $row['penalty'] );
 	}
 
-	function deleteUsers($usersToDelete) 
+	function deleteUsers($usersToDelete)
 	{
 		try
 		{
 			$db = DB::getConnection();
 			$users = implode(',', array_fill(0, count($usersToDelete), '?'));
-			
+
 			$sql = "DELETE FROM users WHERE id_user IN ($users)";
 			$st = $db->prepare($sql);
-			foreach($usersToDelete as $index => $user) 
+			foreach($usersToDelete as $index => $user)
 			{
 				$st->bindValue(($index + 1), $user);
 			}
@@ -107,7 +151,7 @@ class UserService {
 
 			$sql = "DELETE FROM rates WHERE id_user IN ($users)";
 			$st = $db->prepare($sql);
-			foreach($usersToDelete as $index => $user) 
+			foreach($usersToDelete as $index => $user)
 			{
 				$st->bindValue(($index + 1), $user);
 			}
@@ -115,7 +159,7 @@ class UserService {
 
 			$sql = "DELETE FROM comments WHERE id_user IN ($users)";
 			$st = $db->prepare($sql);
-			foreach($usersToDelete as $index => $user) 
+			foreach($usersToDelete as $index => $user)
 			{
 				$st->bindValue(($index + 1), $user);
 			}
@@ -123,7 +167,7 @@ class UserService {
 
 			$sql = "DELETE FROM watchlist WHERE id_user IN ($users)";
 			$st = $db->prepare($sql);
-			foreach($usersToDelete as $index => $user) 
+			foreach($usersToDelete as $index => $user)
 			{
 				$st->bindValue(($index + 1), $user);
 			}
@@ -132,7 +176,7 @@ class UserService {
 		catch(PDOException $e) { exit('PDO error ' . $e->getMessage()); }
 	}
 
-	function getUsersToDelete() 
+	function getUsersToDelete()
 	{
 		try
 		{
@@ -144,15 +188,15 @@ class UserService {
 
 		$rows = $st->fetchAll();
 		$usersToDelete = array();
-		
+
 		foreach ($rows as $row) {
-			$user = new User( $row['id_user'], $row['username'], $row['password_hash'], $row['email'], $row['registration_sequence'], 
+			$user = new User( $row['id_user'], $row['username'], $row['password_hash'], $row['email'], $row['registration_sequence'],
 						$row['has_registered'], $row['is_admin'], $row['name'], $row['surname'], $row['date_of_birth'], $row['penalty']
 			);
-			
+
 			$usersToDelete[] = $user;
 		}
-		
+
 		return $usersToDelete;
 	}
 

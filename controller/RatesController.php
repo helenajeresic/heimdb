@@ -26,6 +26,7 @@ class ratesController extends BaseController {
             foreach ( $data as $rate ){
                 $arr[] = $ms->getMovieById( $rate->__get('id_movie'));
             }
+            $this->registry->template->title = 'All my rates';
             $this->registry->template->movie_names = $arr;
             $this->registry->template->current_user = $_SESSION['username'];
             $this->registry->template->show('myRates');

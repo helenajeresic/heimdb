@@ -5,7 +5,7 @@ require_once __SITE_PATH . '/model/watchlist_service.class.php';
 
 class watchlistController extends BaseController
 {
-    public function index() 
+    public function index()
     {
         if(!isset($_SESSION['username'])) {
             $this->registry->template->title = 'Login';
@@ -18,6 +18,7 @@ class watchlistController extends BaseController
             $dataWatched = $ms -> getWatchedMoviesById( $_SESSION['id_user'] );
             $this->registry->template->show_watchlist = $dataWatchlist;
             $this->registry->template->show_watched = $dataWatched;
+            $this->registry->template->title = 'Watchlist';
             $this->registry->template->show('watchlist');
         }
     }
@@ -36,14 +37,14 @@ class watchlistController extends BaseController
                 $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('watchlist');
-            } 
+            }
             else {
                 $ms = new WatchlistService();
                 $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('watchlist');
             }
-        }  
+        }
     }
 
     public function removeFromWatchlist()
@@ -60,14 +61,14 @@ class watchlistController extends BaseController
                 $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('watchlist');
-            } 
+            }
             else {
                 $ms = new WatchlistService();
                 $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('watchlist');
             }
-        }  
+        }
     }
 
     public function addToWatched()
@@ -84,14 +85,14 @@ class watchlistController extends BaseController
                 $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('watchlist');
-            } 
+            }
             else {
                 $ms = new WatchlistService();
                 $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('watchlist');
             }
-        }  
+        }
     }
 
     public function removeFromWatched()
@@ -108,14 +109,14 @@ class watchlistController extends BaseController
                 $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('watchlist');
-            } 
+            }
             else {
                 $ms = new WatchlistService();
                 $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('watchlist');
             }
-        }  
+        }
     }
 }
 
