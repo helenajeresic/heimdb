@@ -41,18 +41,22 @@ class RatesService
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
     }
 
-    function getAverageRating( $id_movie )
-    {
-        try
-		{
-			$db = DB::getConnection();
-			$st = $db->prepare('SELECT AVG(rate) AS average_rating
-                                FROM rates
-                                WHERE id_movie = :movie_id;');
-			$st->execute( array( 'id_movie' => $id_movie ));
-		}
-		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
-    }
+    function getAverageRating($id_movie)
+	{
+    	try {
+        	$db = DB::getConnection();
+        	$st = $db->prepare('SELECT AVG(rate) AS average_rating
+                            	FROM rates
+                            	WHERE id_movie = :id_movie;');
+        	$st->execute(array('id_movie' => $id_movie));
+    	} catch (PDOException $e) {
+        	exit('PDO error ' . $e->getMessage());
+    	}
+		$result = $st->fetch(); 
+        $average_rating = $result['average_rating'];
+        return round($average_rating,1);
+	}
+
 
     function updateRating( $id_movie, $id_user, $rate)
     {

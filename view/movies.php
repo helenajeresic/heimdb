@@ -25,7 +25,7 @@
                     <a href="<?php echo $mov;?>"><?php echo $m->__get( 'title' );?></a>
                 </div>
                     <div class = "movie-buttons">
-                        <button class="rating-button">&#9733; 3.5</button>
+                        <button class="rating-button">&#9733; <?php echo $ratings[$m->__get('id_movie')]; ?></button>
                         <button class="remove-watched-button" onclick="removeFromWatched(<?php echo $m->__get('id');?>)">&#x2764;</button>
                         <button class="remove-watchlist-button" onclick="removeFromWatchlist(<?php echo $m->__get('id');?>)">&#x1F4FA;</button>
                     </div>
