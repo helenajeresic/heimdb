@@ -30,7 +30,7 @@ class moviesController extends BaseController {
         
         $this->registry->template->ratings = $movieRatings;
         $this->registry->template->show_movies = $data;
-        $this->registry->template->title = 'Top movies';
+        $this->registry->template->title = 'All movies';
         $this->registry->template->show('movies');
     }
 
