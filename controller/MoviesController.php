@@ -343,8 +343,10 @@ class moviesController extends BaseController {
                 $this->registry->template->show_movies = $data;
             }
 
+
             $rs = new RatesService();
             $movieRatings = array();
+
             foreach( $data as $movie) {
                 $id_movie = $movie->__get('id_movie');
                 $averageRating = $rs->getAverageRating( $id_movie );
