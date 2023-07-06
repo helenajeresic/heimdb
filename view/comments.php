@@ -29,9 +29,10 @@
                     </div>
                     <?php /*dovrsi dodat action na button da obrise ako je admin taj komentar*/
                         if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) { ?>
-                    <div class="button_com">
-                        <button class="but_com">Delete</button>
-                    </div>
+                    <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=comments/deleteComment&id_comment=' . $c->__get( 'id_comment' ) ?>">
+                        <button type="submit" name="save">Delete</button>
+                    </form>
+
                     <?php } ?>
                 </div>
                 <br>

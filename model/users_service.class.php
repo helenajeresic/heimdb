@@ -200,5 +200,21 @@ class UserService {
 		return $usersToDelete;
 	}
 
+    function incresePenalty($id_user){
+
+        $user = $this->getUserById($id_user);
+        $new_penalty = $user->penalty;
+        $new_penalty += 1;
+
+        try
+        {
+            $db = DB::getConnection();
+            $st = $db->prepare('UPDATE users SET penalty = :new WHERE id_user = :id_user');
+            $st->execute( array( 'id_user' => $id_user , 'new' => $new_penalty ) );
+        }
+        catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+    }
+
 };
 ?>

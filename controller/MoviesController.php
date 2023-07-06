@@ -27,7 +27,7 @@ class moviesController extends BaseController {
             }
         }
 
-        
+
         $this->registry->template->ratings = $movieRatings;
         $this->registry->template->show_movies = $data;
         $this->registry->template->title = 'All movies';
@@ -189,9 +189,9 @@ class moviesController extends BaseController {
     public function topRated()
     {
         $ms = new MovieService();
-        
+
         $data = $ms->getTopRated();
-        
+
         $rs = new RatesService();
         $movieRatings = array();
 
@@ -342,7 +342,8 @@ class moviesController extends BaseController {
                 $data = $ms->searchMovieByGenre($_POST['search']);
                 $this->registry->template->show_movies = $data;
             }
-            
+
+
             $rs = new RatesService();
             $movieRatings = array();
 
@@ -355,6 +356,7 @@ class moviesController extends BaseController {
                     $movieRatings[$id_movie] = 0;
                 }
             }
+
 
             $this->registry->template->ratings = $movieRatings;
             $title = "Search movies by " . $what . " : " . $_POST['search'];
