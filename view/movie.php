@@ -12,11 +12,10 @@
     <div class='info-forth'><?php echo $show_movie->__get('description'); ?></div><br>
     <div class='info-fifth'>DIRECTORS <?php foreach( $show_directors as $index => $d ) { echo ' | ' . $d->__get('name') . ' ' .$d->__get('surname') ;}?></div><br>
     <div class='info-sixth'>ACTORS <?php foreach( $show_actors as $index => $a ) { echo ' | ' . $a->__get('name') . ' ' .$a->__get('surname');}?></div><br>
-    
+
 </div>
 </div>
 
 <?php require_once __SITE_PATH . '/view/comments.php';?>
 <?php require_once __SITE_PATH . '/view/recommendations.php';?>
-<?php require_once __SITE_PATH . '/view/_footer.php';?>
-
+<?php //require_once __SITE_PATH . '/view/_footer.php';?>
