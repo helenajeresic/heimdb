@@ -33,9 +33,9 @@ require_once __SITE_PATH . '/view/_header.php';?>
                     <?php echo $c->__get('content'); ?>
                 </div>
                 <br>
-                <div class="button_com">
-                    <button class="but_com">Delete</button>
-                </div>
+                <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=comments/deleteMyComment&id_comment=' . $c->__get( 'id_comment' ) ?>">
+                    <button type="submit" name="save">Delete</button>
+                </form>
             </div>
             <br>
         <?php
