@@ -342,7 +342,7 @@ class moviesController extends BaseController {
                 $data = $ms->searchMovieByGenre($_POST['search']);
                 $this->registry->template->show_movies = $data;
             }
-            //tu sam dodadala
+            
             $rs = new RatesService();
             $movieRatings = array();
 
@@ -356,10 +356,7 @@ class moviesController extends BaseController {
                 }
             }
 
-
-       
             $this->registry->template->ratings = $movieRatings;
-            //
             $title = "Search movies by " . $what . " : " . $_POST['search'];
             $this->registry->template->title = $title;
             $this->registry->template->show('movies');
