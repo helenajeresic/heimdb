@@ -2,9 +2,7 @@
 </main>
 <footer>
 Authors : <br>
-Helena Jerešić <br>
-Elena Kovaček <br>
-Ivana Križanec <br>
+Helena Jerešić | Elena Kovaček | Ivana Križanec 
 </footer>
 </body>
 </html>
