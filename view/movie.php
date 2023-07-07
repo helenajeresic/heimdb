@@ -18,4 +18,4 @@
 
 <?php require_once __SITE_PATH . '/view/comments.php';?>
 <?php require_once __SITE_PATH . '/view/recommendations.php';?>
-<?php //require_once __SITE_PATH . '/view/_footer.php';?>
+<?php require_once __SITE_PATH . '/view/_footer.php';?>
