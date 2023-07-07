@@ -106,6 +106,7 @@ class MovieService
 	function addMovie($title, $year, $genres, $description, $image, $duration, $directorNames, $directorSurnames, $actorNames, $actorSurnames)
 	{	
 		//$this->processImageUpload();
+		//promijeni image0.jpg u $image
 		try 
 		{
 			$db = DB::getConnection();
@@ -116,7 +117,7 @@ class MovieService
 				'year' => $year,
 				'genre' => $genres,
 				'description' => $description,
-				'image' => $image,
+				'image' => 'image0.jpg',
 				'duration' => $duration
 			));
 
@@ -129,11 +130,19 @@ class MovieService
 
 				$directorId = $this->findOrCreatePerson($db, $directorName, $directorSurname);
 
-				$stDirectedIn = $db->prepare('INSERT INTO directed_in (id_person, id_movie) VALUES (:id_person, :id_movie)');
-				$stDirectedIn->execute(array(
+				$stCheckDirectedIn = $db->prepare('SELECT * FROM directed_in WHERE id_person = :id_person AND id_movie = :id_movie');
+				$stCheckDirectedIn->execute(array(
 					'id_person' => $directorId,
 					'id_movie' => $movieId
 				));
+			
+				if ($stCheckDirectedIn->rowCount() === 0) {
+					$stDirectedIn = $db->prepare('INSERT INTO directed_in (id_person, id_movie) VALUES (:id_person, :id_movie)');
+					$stDirectedIn->execute(array(
+						'id_person' => $directorId,
+						'id_movie' => $movieId
+					));
+				}
 			}
 
 			for ($i = 0; $i < count($actorNames); $i++) 
@@ -143,11 +152,19 @@ class MovieService
 
 				$actorId = $this->findOrCreatePerson($db, $actorName, $actorSurname);
 
-				$stActedIn = $db->prepare('INSERT INTO acted_in (id_person, id_movie) VALUES (:id_person, :id_movie)');
-				$stActedIn->execute(array(
+				$stCheckActedIn = $db->prepare('SELECT * FROM acted_in WHERE id_person = :id_person AND id_movie = :id_movie');
+				$stCheckActedIn->execute(array(
 					'id_person' => $actorId,
 					'id_movie' => $movieId
 				));
+
+				if ($stCheckActedIn->rowCount() === 0) {
+					$stActedIn = $db->prepare('INSERT INTO acted_in (id_person, id_movie) VALUES (:id_person, :id_movie)');
+					$stActedIn->execute(array(
+						'id_person' => $actorId,
+						'id_movie' => $movieId
+					));
+				}
 			}
 		} catch (PDOException $e) {
 			exit('PDO error ' . $e->getMessage());

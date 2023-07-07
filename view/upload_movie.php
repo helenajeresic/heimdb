@@ -11,7 +11,7 @@
             <input type="number" min="1888" max="2023" name="year" step="1" value="2023" required><br><br>
 
             <label for="genre">Genre:</label><br>
-            <select name="genre" multiple required>
+            <select name="genre[]" multiple required>
                 <option value="crime">crime</option>
                 <option value="drama">drama</option>
                 <option value="action">action</option>

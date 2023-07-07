@@ -1,6 +1,6 @@
 <?php
 
-require_once __SITE_PATH .  '/app/database/db.class.php';
+require_once 'db.class.php';
 
 $db = DB::getConnection();
 
@@ -85,7 +85,7 @@ try
 		'id_movie int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
 		'title varchar(100) NOT NULL,' .
         'year int NOT NULL,' .
-        'genre varchar(50) NOT NULL,' .
+        'genre varchar(500) NOT NULL,' .
         'description varchar(500) NOT NULL,' .
         'image varchar(255) NOT NULL, ' .
 		'duration int NOT NULL )'

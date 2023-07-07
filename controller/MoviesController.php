@@ -273,19 +273,23 @@ class moviesController extends BaseController {
             {
                 $ms = new MovieService();
                 //trenutno bez uploada slike
-                if(isset($_POST['title']) && isset($_POST['year']) &&
+                if (isset($_POST['title']) && isset($_POST['year']) &&
                 isset($_POST['genre']) && isset($_POST['description']) && isset($_FILES['image']) && 
                 isset($_POST['duration']) && isset($_POST['dir-name-1']) && isset($_POST['dir-surname-1']) && 
-                isset($_POST['act-name-1']) && isset($_POST['act-surname-1']))
+                isset($_POST['act-name-1']) && isset($_POST['act-surname-1']) &&
+                !empty($_POST['title']) && !empty($_POST['year']) &&
+                !empty($_POST['description']) && !empty($_POST['duration']) &&
+                !empty($_POST['dir-name-1']) && !empty($_POST['dir-surname-1']) &&
+                !empty($_POST['act-name-1']) && !empty($_POST['act-surname-1']))
                 {   
                     //pokupi sve zanrove
                     $selectedGenres = $_POST['genre']; 
 
-                    if (is_array($selectedGenres)) 
-                    {
+                    if (is_array($selectedGenres))
                         $genreString = implode(' ', $selectedGenres); 
-                    }
-
+                    else
+                        $genreString = $selectedGenres;
+                     
                     //pokupi sve redatelje
                     $directorNames = array(); 
                     $directorSurnames = array(); 
@@ -293,13 +297,15 @@ class moviesController extends BaseController {
                     $directorNames[] = $_POST['dir-name-1']; 
                     $directorSurnames[] = $_POST['dir-surname-1'];
 
-                    if (isset($_POST['dir-name-2']) && isset($_POST['dir-surname-2'])) 
+                    if (isset($_POST['dir-name-2']) && isset($_POST['dir-surname-2']) &&
+                    !empty($_POST['dir-name-2']) && !empty($_POST['dir-surname-2'])) 
                     {
                         $directorNames[] = $_POST['dir-name-2']; 
                         $directorSurnames[] = $_POST['dir-surname-2'];
                     }
                 
-                    if (isset($_POST['dir-name-3']) && isset($_POST['dir-surname-3'])) 
+                    if (isset($_POST['dir-name-3']) && isset($_POST['dir-surname-3']) && 
+                    !empty($_POST['dir-name-3']) && !empty($_POST['dir-surname-3'])) 
                     {
                         $directorNames[] = $_POST['dir-name-3'];
                         $directorSurnames[] = $_POST['dir-surname-3']; 
@@ -312,13 +318,15 @@ class moviesController extends BaseController {
                     $actorNames[] = $_POST['act-name-1'];
                     $actorSurnames[] = $_POST['act-surname-1'];
 
-                    if (isset($_POST['act-name-2']) && isset($_POST['act-surname-2'])) 
+                    if (isset($_POST['act-name-2']) && isset($_POST['act-surname-2']) &&
+                    !empty($_POST['act-name-2']) && !empty($_POST['act-surname-2'])) 
                     {
                         $actorNames[] = $_POST['act-name-2'];
                         $actorSurnames[] = $_POST['act-surname-2'];
                     }
 
-                    if (isset($_POST['act-name-3']) && isset($_POST['act-surname-3'])) 
+                    if (isset($_POST['act-name-3']) && isset($_POST['act-surname-3']) &&
+                    !empty($_POST['act-name-3']) && !empty($_POST['act-surname-3'])) 
                     {
                         $actorNames[] = $_POST['act-name-3'];
                         $actorSurnames[] = $_POST['act-surname-3'];
