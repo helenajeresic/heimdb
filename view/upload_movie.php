@@ -6,10 +6,10 @@
         <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=movies/addMovie' ?>" onsubmit="return validateForm()" enctype="multipart/form-data">
             <label for="title">Title:</label><br>
             <input type="text" name="title" placeholder="Title..." required><br><br>
-            
+
             <label for="year">Year:</label><br>
             <input type="number" min="1888" max="2023" name="year" step="1" value="2023" required><br><br>
-        
+
             <label for="genre">Genre:</label><br>
             <select name="genre" multiple required>
                 <option value="crime">crime</option>
@@ -37,7 +37,7 @@
 
             <label for="duration">Duration:</label><br>
             <input type="number" min="10" max="300" name="duration" step="1" value="120" required><br><br>
-            
+
             <label for="dir-name-1">Directiors:</label><br>
             <div class="form-group">
             <label for="dir-name-1">Name:</label>
@@ -101,6 +101,7 @@
             <button type="submit" name="add">Add movie!</button>
         </form>
     </div>
+    <br>
 </div>
 
 <?php require_once __SITE_PATH . '/view/_footer.php'; ?>

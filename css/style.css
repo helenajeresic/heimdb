@@ -13,6 +13,9 @@ body {
   padding-top: 110px;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .icon_heimdb {
@@ -246,12 +249,13 @@ body {
   justify-content: center;
   align-items: center;
   padding: 0;
-  margin: 0;
+  margin bottom:  20px;
 }
 
 .movie-container {
   width: 60%;
   font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 20px;
 }
 
 .movie-list-name {
@@ -279,6 +283,7 @@ body {
   box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), 0 4px 6px rgba(0,0,0,0.45);
   border-radius: 10px;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .movie-list-name {
@@ -858,3 +863,18 @@ input[type="file"] {
 }
 
 /*kraj za add*/
+
+footer {
+    background-color: black;
+     color: white;
+     text-align: center;
+     padding: 20px;
+     position: relative;
+     bottom: 0;
+     width: 100%;
+     white-space: pre;
+     
+  }
+  main {
+     flex: 1;
+   }

@@ -15,7 +15,7 @@
             </div>
         </div >
         <div class="movie-content">
-            <?php foreach( $show_movies as $index => $m ) { 
+            <?php foreach( $show_movies as $index => $m ) {
             $src = "https://heimdb.s3.eu-north-1.amazonaws.com/" . $m->__get( 'image' );
             $mov = 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/index.php?rt=Movies/showMovie&id_movie=' . $m->__get( 'id_movie' );?>
             <div class="movie-box">
@@ -30,8 +30,8 @@
                         <button class="remove-watchlist-button" onclick="removeFromWatchlist(<?php echo $m->__get('id');?>)">&#x1F4FA;</button>
                     </div>
                     <div class="movie-atributes">
-                        <?php echo $m->__get('year'); ?> | 
-                        <?php echo $m->__get('duration'); ?> min | 
+                        <?php echo $m->__get('year'); ?> |
+                        <?php echo $m->__get('duration'); ?> min |
                         <?php echo $m->__get('genre'); ?>
                     </div>
                     <?php echo $m->__get('description'); ?><br>
