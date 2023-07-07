@@ -10,7 +10,9 @@
             $src = "https://heimdb.s3.eu-north-1.amazonaws.com/" . $m->__get( 'image' );
             $mov = 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/index.php?rt=Movies/showMovie&id_movie=' . $m->__get( 'id_movie' );?>
             <div class="movie-box">
-                <img src="<?php echo $src;?>" class="movie-image" alt="<?php echo $m->__get( 'title' );?>" >
+                <a href="<?php echo $mov; ?>">
+                    <img src="<?php echo $src;?>" class="movie-image" alt="<?php echo $m->__get( 'title' );?>" >
+                </a>
                 <div class="movie-data">
                 <div class="movie-title">
                     <a href="<?php echo $mov;?>"><?php echo $m->__get( 'title' );?></a>
@@ -43,7 +45,9 @@
             $src = "https://heimdb.s3.eu-north-1.amazonaws.com/" . $m->__get( 'image' );
             $mov = 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/index.php?rt=Movies/showMovie&id_movie=' . $m->__get( 'id_movie' );?>
             <div class="movie-box">
-                <img src="<?php echo $src;?>" class="movie-image" alt="<?php echo $m->__get( 'title' );?>" >
+                <a href="<?php echo $mov; ?>">
+                    <img src="<?php echo $src;?>" class="movie-image" alt="<?php echo $m->__get( 'title' );?>" >
+                </a>
                 <div class="movie-data">
                 <div class="movie-title">
                     <a href="<?php echo $mov;?>"><?php echo $m->__get( 'title' );?></a>

@@ -89,11 +89,15 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.topnav a:hover {
+.topnav a:not(#heimdb-link):hover {
   background-color: gray;
   color: black;
   border-radius: 10px;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+#heimdb-link {
+  height: 50px;
 }
 
 .topnav a.active {
