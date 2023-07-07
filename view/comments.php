@@ -41,9 +41,9 @@
 
     <div id="popup" class="popup">
                 <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=comments/addNewComment&id_movie=' . $show_movie->__get( 'id_movie' ) ?>">
-                    <div class="form-group">
+                    <div class="form-comment">
                         <label for="comment-input" style="font-weight: bold;">Write comment below</label><br><br>
-                        <textarea class="form-control" id="comment-input" name="comment-input" type="text" placeholder="Write comment.." required style="height: 200px; width: 600px"></textarea>
+                        <textarea class="form-control" name="comment-input" type="text" placeholder="Write comment.." required style="height: 200px; width: 600px"></textarea>
                     </div>
                     <br><br>
                     <div class="float-end">
