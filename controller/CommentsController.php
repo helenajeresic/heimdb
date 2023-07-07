@@ -81,7 +81,7 @@ class commentsController extends BaseController {
                     $cs->removeComment($id_comment);
                     if($id_user !== $id_comment_user){
                         //to znaci da brisem komentar nekog drugog usera, pa mu trebam povecati penalty
-                        $us->incresePenalty($id_comment_user);
+                        $us->increasePenalty($id_comment_user);
                     }
                     header( 'Location: ' . __SITE_URL . '/index.php?rt=movies/showMovie&id_movie=' . $comment->id_movie);
                 }
@@ -113,7 +113,7 @@ class commentsController extends BaseController {
                     $cs->removeComment($id_comment);
                     if($id_user !== $id_comment_user){
                         //to znaci da brisem komentar nekog drugog usera, pa mu trebam povecati penalty
-                        $us->incresePenalty($id_comment_user);
+                        $us->increasePenalty($id_comment_user);
                     }
                     header( 'Location: ' . __SITE_URL . '/index.php?rt=comments/myComments');
                 }

@@ -200,7 +200,7 @@ class UserService {
 		return $usersToDelete;
 	}
 
-    function incresePenalty($id_user){
+    function increasePenalty($id_user){
 
         $user = $this->getUserById($id_user);
         $new_penalty = $user->penalty;
