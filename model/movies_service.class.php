@@ -103,17 +103,126 @@ class MovieService
 		return $arr;
 	}
 
-	function addMovie( $id_movie, $title, $year, $genre, $description, $image, $duration )
-	{
-		try
+	function addMovie($title, $year, $genres, $description, $image, $duration, $directorNames, $directorSurnames, $actorNames, $actorSurnames)
+	{	
+		//$this->processImageUpload();
+		//promijeni image0.jpg u $image
+		try 
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare('INSERT INTO movies (id_movie, title, year, genre, description, image, duration)
-								VALUES(:id_movie, :title, :year, :genre, :description, :image, :duration)');
-			$st->execute( array( 'year' =>  $year ) );
+			$st = $db->prepare('INSERT INTO movies (title, year, genre, description, image, duration)
+								VALUES (:title, :year, :genre, :description, :image, :duration)');
+			$st->execute(array(
+				'title' => $title,
+				'year' => $year,
+				'genre' => $genres,
+				'description' => $description,
+				'image' => 'image0.jpg',
+				'duration' => $duration
+			));
+
+			$movieId = $db->lastInsertId();
+
+			for ($i = 0; $i < count($directorNames); $i++) 
+			{
+				$directorName = $directorNames[$i];
+				$directorSurname = $directorSurnames[$i];
+
+				$directorId = $this->findOrCreatePerson($db, $directorName, $directorSurname);
+
+				$stCheckDirectedIn = $db->prepare('SELECT * FROM directed_in WHERE id_person = :id_person AND id_movie = :id_movie');
+				$stCheckDirectedIn->execute(array(
+					'id_person' => $directorId,
+					'id_movie' => $movieId
+				));
+			
+				if ($stCheckDirectedIn->rowCount() === 0) {
+					$stDirectedIn = $db->prepare('INSERT INTO directed_in (id_person, id_movie) VALUES (:id_person, :id_movie)');
+					$stDirectedIn->execute(array(
+						'id_person' => $directorId,
+						'id_movie' => $movieId
+					));
+				}
+			}
+
+			for ($i = 0; $i < count($actorNames); $i++) 
+			{
+				$actorName = $actorNames[$i];
+				$actorSurname = $actorSurnames[$i];
+
+				$actorId = $this->findOrCreatePerson($db, $actorName, $actorSurname);
+
+				$stCheckActedIn = $db->prepare('SELECT * FROM acted_in WHERE id_person = :id_person AND id_movie = :id_movie');
+				$stCheckActedIn->execute(array(
+					'id_person' => $actorId,
+					'id_movie' => $movieId
+				));
+
+				if ($stCheckActedIn->rowCount() === 0) {
+					$stActedIn = $db->prepare('INSERT INTO acted_in (id_person, id_movie) VALUES (:id_person, :id_movie)');
+					$stActedIn->execute(array(
+						'id_person' => $actorId,
+						'id_movie' => $movieId
+					));
+				}
+			}
+		} catch (PDOException $e) {
+			exit('PDO error ' . $e->getMessage());
 		}
-		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 	}
+
+	function findOrCreatePerson($db, $name, $surname)
+	{
+		$stPerson = $db->prepare('SELECT id_person FROM persons WHERE name = :name AND surname = :surname');
+		$stPerson->execute(array(
+			'name' => $name,
+			'surname' => $surname
+		));
+
+		if ($stPerson->rowCount() > 0) 
+		{
+			$row = $stPerson->fetch();
+			return $row['id_person'];
+		} 
+		else 
+		{
+			$stInsertPerson = $db->prepare('INSERT INTO persons (name, surname) VALUES (:name, :surname)');
+			$stInsertPerson->execute(array(
+				'name' => $name,
+				'surname' => $surname
+			));
+			return $db->lastInsertId();
+		}
+	}
+
+	
+	function processImageUpload() {
+        require_once __SITE_PATH . '/app/start.php';
+        if(isset($_FILES['image'])) {
+            $file = $_FILES['image'];
+            $name = $file['name'];
+            $tmp_name = $file['tmp_name'];
+            $extension = explode('.',$name);
+            $extension = strtolower(end($extension));
+            $key = md5((uniqid()));
+            $tmp_file_name = "{$key}.{$extension}";
+            $tmp_file_path = __SITE_PATH . "/tmp_files/{$tmp_file_name}";
+            move_uploaded_file($tmp_name, $tmp_file_path);
+            try {
+                $s3->putObject([
+                    'Bucket' => $config['s3']['bucket'],
+                    'Key' => "{$name}",
+                    'Body' => fopen($tmp_file_path, 'rb')
+                ]);
+                unlink($tmp_file_path);
+            } catch(exception $e) {
+                die("There was an exception" . $e);
+            }
+        }
+        else{
+            error_log("Error nije dobro poslan file");
+        }
+    }
 
 	function getTopRated()
 	{
@@ -191,7 +300,6 @@ class MovieService
 		return $arr;
 	}
 
-	
 
 	function getMovieRecommendations()
 	{

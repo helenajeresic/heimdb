@@ -11,7 +11,7 @@
             <input type="number" min="1888" max="2023" name="year" step="1" value="2023" required><br><br>
 
             <label for="genre">Genre:</label><br>
-            <select name="genre" multiple required>
+            <select name="genre[]" multiple required>
                 <option value="crime">crime</option>
                 <option value="drama">drama</option>
                 <option value="action">action</option>
@@ -93,9 +93,10 @@
             <input type="text" name="act-surname-3" placeholder="Third actor...">
             </div>
 
-            <label for="slika">Slika:</label><br>
-            <input type="file" name="slika" id="slika-input" required>
-            <label for="slika-input" class="custom-file-upload">Choose File</label><br><br>
+            <label for="image">Slika:</label><br>
+            <input type="file" name="image" id="slika-input" required>
+            <label for="slika-input" class="custom-file-upload">Choose File</label>
+            <span id="file-name"></span><br><br>
 
 
             <button type="submit" name="add">Add movie!</button>
@@ -103,5 +104,7 @@
     </div>
     <br>
 </div>
+
+<script src="<?php echo __SITE_URL . '/util/uploadImage.js'; ?>"></script>
 
 <?php require_once __SITE_PATH . '/view/_footer.php'; ?>
