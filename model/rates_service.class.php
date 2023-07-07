@@ -52,7 +52,7 @@ class RatesService
     	} catch (PDOException $e) {
         	exit('PDO error ' . $e->getMessage());
     	}
-		$result = $st->fetch(); 
+		$result = $st->fetch();
         $average_rating = $result['average_rating'];
         return round($average_rating,1);
 	}
@@ -71,6 +71,18 @@ class RatesService
                                 'rate' => $rate, 'new_date' => $today_date ));
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+    }
+
+    function removeRate ( $id_movie, $id_user)
+    {
+        try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'DELETE FROM rates WHERE id_movie = :id_movie AND id_user = :id_user' );
+			$st->execute( array('id_movie' => $id_movie, 'id_user' => $id_user ) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
     }
 }
 
