@@ -52,10 +52,5 @@
                     </div>
     </div>
 
-    <script>
-        function toggle(popup){
-            var popup = document.getElementById(popup);
-            popup.classList.toggle('active');
-        }
-    </script>
+    <script src="<?php echo __SITE_URL . '/util/popup.js'; ?>"></script>
 </div>

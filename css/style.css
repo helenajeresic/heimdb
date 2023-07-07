@@ -249,7 +249,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 0;
-  margin bottom:  20px;
+  margin-bottom: 20px;
 }
 
 .movie-container {
@@ -732,7 +732,7 @@ div.comments-review{
 }
 
 .userData div label {
-  flex-basis: 150px; /* Prilagodite širinu labele prema potrebi */
+  flex-basis: 150px;
 }
 
 .userData div span {
@@ -821,6 +821,10 @@ div.comments-review{
 }
 
 input[type="file"] {
+  display: none;
+}
+
+#file-name {
   display: none;
 }
 

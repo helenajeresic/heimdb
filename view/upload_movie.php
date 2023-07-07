@@ -95,7 +95,8 @@
 
             <label for="image">Slika:</label><br>
             <input type="file" name="image" id="slika-input" required>
-            <label for="slika-input" class="custom-file-upload">Choose File</label><br><br>
+            <label for="slika-input" class="custom-file-upload">Choose File</label>
+            <span id="file-name"></span><br><br>
 
 
             <button type="submit" name="add">Add movie!</button>
@@ -103,5 +104,7 @@
     </div>
     <br>
 </div>
+
+<script src="<?php echo __SITE_URL . '/util/uploadImage.js'; ?>"></script>
 
 <?php require_once __SITE_PATH . '/view/_footer.php'; ?>
