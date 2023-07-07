@@ -261,17 +261,70 @@ class moviesController extends BaseController {
 
     public function addMovie()
     {
-        if(!isset($_SESSION['username'])) {
+        if(!isset($_SESSION['username'])) 
+        {
             $this->registry->template->title = 'Login';
             $this->registry->template->error = false;
             $this->registry->template->show('login');
         }
-        else {
-            if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+        else 
+        {
+            if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
+            {
                 $ms = new MovieService();
-                if( isset($_POST['id_movie']) && isset($_POST['title']) && isset($_POST['year']) &&
-                isset($_POST['genre']) && isset($_POST['description']) && isset($_POST['image']) && isset($_POST['duration'])){
-                    $ms->addMovie($_POST['id_movie'], $_POST['title'], $_POST['year'], $_POST['genre'], $_POST['description'], $_POST['image'], $_POST['duration']);
+                //trenutno bez uploada slike
+                if(isset($_POST['title']) && isset($_POST['year']) &&
+                isset($_POST['genre']) && isset($_POST['description']) && isset($_FILES['image']) && 
+                isset($_POST['duration']) && isset($_POST['dir-name-1']) && isset($_POST['dir-surname-1']) && 
+                isset($_POST['act-name-1']) && isset($_POST['act-surname-1']))
+                {   
+                    //pokupi sve zanrove
+                    $selectedGenres = $_POST['genre']; 
+
+                    if (is_array($selectedGenres)) 
+                    {
+                        $genreString = implode(' ', $selectedGenres); 
+                    }
+
+                    //pokupi sve redatelje
+                    $directorNames = array(); 
+                    $directorSurnames = array(); 
+
+                    $directorNames[] = $_POST['dir-name-1']; 
+                    $directorSurnames[] = $_POST['dir-surname-1'];
+
+                    if (isset($_POST['dir-name-2']) && isset($_POST['dir-surname-2'])) 
+                    {
+                        $directorNames[] = $_POST['dir-name-2']; 
+                        $directorSurnames[] = $_POST['dir-surname-2'];
+                    }
+                
+                    if (isset($_POST['dir-name-3']) && isset($_POST['dir-surname-3'])) 
+                    {
+                        $directorNames[] = $_POST['dir-name-3'];
+                        $directorSurnames[] = $_POST['dir-surname-3']; 
+                    }
+
+                    //pokupi sve glumce
+                    $actorNames = array();
+                    $actorSurnames = array();
+
+                    $actorNames[] = $_POST['act-name-1'];
+                    $actorSurnames[] = $_POST['act-surname-1'];
+
+                    if (isset($_POST['act-name-2']) && isset($_POST['act-surname-2'])) 
+                    {
+                        $actorNames[] = $_POST['act-name-2'];
+                        $actorSurnames[] = $_POST['act-surname-2'];
+                    }
+
+                    if (isset($_POST['act-name-3']) && isset($_POST['act-surname-3'])) 
+                    {
+                        $actorNames[] = $_POST['act-name-3'];
+                        $actorSurnames[] = $_POST['act-surname-3'];
+                    }
+
+                    $ms->addMovie( $_POST['title'], $_POST['year'], $genreString, $_POST['description'], $_FILES['image']['name'], $_POST['duration'], $directorNames, $directorSurnames, $actorNames, $actorSurnames);
                     header( 'Location: ' . __SITE_URL . '/index.php');
                 }
                 $this->registry->template->title = 'Add movie';
