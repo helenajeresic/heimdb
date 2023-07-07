@@ -272,7 +272,6 @@ class moviesController extends BaseController {
             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
             {
                 $ms = new MovieService();
-                //trenutno bez uploada slike
                 if (isset($_POST['title']) && isset($_POST['year']) &&
                 isset($_POST['genre']) && isset($_POST['description']) && isset($_FILES['image']) && 
                 isset($_POST['duration']) && isset($_POST['dir-name-1']) && isset($_POST['dir-surname-1']) && 
@@ -332,7 +331,7 @@ class moviesController extends BaseController {
                         $actorSurnames[] = $_POST['act-surname-3'];
                     }
 
-                    $ms->addMovie( $_POST['title'], $_POST['year'], $genreString, $_POST['description'], $_FILES['image']['name'], $_POST['duration'], $directorNames, $directorSurnames, $actorNames, $actorSurnames);
+                    $ms->addMovie( $_POST['title'], $_POST['year'], $genreString, $_POST['description'], $_FILES['image']['name'], $_FILES['image']['tmp_name'], $_POST['duration'], $directorNames, $directorSurnames, $actorNames, $actorSurnames);
                     header( 'Location: ' . __SITE_URL . '/index.php');
                 }
                 $this->registry->template->title = 'Add movie';
