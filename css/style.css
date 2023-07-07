@@ -462,7 +462,7 @@ body {
   color: black;
   display: flex;
   padding : 10px;
-  border-radius: 10px;
+  border-radius: 3px;
   font-weight: bold;
 }
 
@@ -591,19 +591,19 @@ div.comments-review{
   padding: 10px;
   color: 	#696969;
 }
+
 .bold_text{
     font-weight: bold;
 }
+
 .button_com{
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
-              0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     padding: 10px;
-    padding:10px;
-
 }
+
 .but_com {
-  background-color: light grey;
+  background-color: lightgrey;
   color: black;
   border: 1px solid grey;
   font-size: 20px;
@@ -628,6 +628,7 @@ div.comments-review{
   border-radius: 3px;
   cursor: pointer;
 }
+
 .all_comments button[type="submit"]:hover {
   background-color: rgb(211, 211, 211);
 }

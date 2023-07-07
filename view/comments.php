@@ -25,10 +25,10 @@
                         </div>
                     </div>
                     <div class="content">
-                        <?php echo $c->__get('content'); ?>
+                        <?php echo $c->__get('content'); ?> 
                     </div>
                     <?php /*dovrsi dodat action na button da obrise ako je admin taj komentar*/
-                        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) { ?>
+                        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) { ?><br>
                     <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=comments/deleteComment&id_comment=' . $c->__get( 'id_comment' ) ?>">
                         <button type="submit" name="save">Delete</button>
                     </form>
@@ -42,7 +42,7 @@
     <div id="popup" class="popup">
                 <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=comments/addNewComment&id_movie=' . $show_movie->__get( 'id_movie' ) ?>">
                     <div class="form-group">
-                        <label for="comment" style="font-weight: bold;">Write comment below</label><br><br>
+                        <label for="comment-input" style="font-weight: bold;">Write comment below</label><br><br>
                         <textarea class="form-control" id="comment-input" name="comment-input" type="text" placeholder="Write comment.." required style="height: 200px; width: 600px"></textarea>
                     </div>
                     <br><br>
