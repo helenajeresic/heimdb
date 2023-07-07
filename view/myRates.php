@@ -47,7 +47,10 @@
                     <?php echo " " . $r->__get('rate') . "  / 10  "; ?>
 
                 </div>
-
+                <br>
+                <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=rates/deleteMyRate&id_movie=' . $r->__get( 'id_movie' ) ?>">
+                    <button type="submit" name="save">Delete</button>
+                </form>
             </div>
             <br>
         <?php

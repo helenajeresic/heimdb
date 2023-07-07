@@ -32,6 +32,33 @@ class ratesController extends BaseController {
             $this->registry->template->show('myRates');
         }
     }
+
+    public function deleteMyRate(){
+        if(!isset($_SESSION['username'])) {
+            $this->registry->template->title = 'Login';
+            $this->registry->template->error = false;
+            $this->registry->template->show('login');
+        }
+        else {
+            $rs = new RatesService();
+            $ms = new MovieService();
+            if( isset( $_GET['id_movie'] )) {
+                $id_movie = $_GET['id_movie'];
+                $id_user = $_SESSION['id_user'];
+                $movie = $ms->getMovieById($id_movie);
+                if($movie == false)
+                    exit( 'Krivi id movie.' );
+                else
+                {
+                    $rs->removeRate($id_movie, $id_user);
+                    header( 'Location: ' . __SITE_URL . '/index.php?rt=rates/myRates');
+                }
+            }
+            else {
+                exit( 'Nesto ne valja sa id-em.' );
+            }
+        }
+    }
 }
 
 ?>
