@@ -12,7 +12,7 @@
                     <option value="byGenre">genre</option>
                     <option value="byRating">HEIMDB rating</option>
                 </select>
-                <button class="order-toggle" id="orderToggle" data-order="asc">Descending</button>
+                <button class="order-toggle" id="orderToggle" data-order="asc">&darr; Descending</button>
             </div>
         </div >
         <div class="movie-content">
@@ -87,7 +87,7 @@
     orderToggleBtn.addEventListener('click', function() {
         var currentOrder = orderToggleBtn.dataset.order;
         orderToggleBtn.dataset.order = currentOrder === 'asc' ? 'desc' : 'asc';
-        orderToggleBtn.textContent = currentOrder === 'asc' ? 'Ascending' : 'Descending';
+        orderToggleBtn.textContent = currentOrder === 'asc' ? '↑ Ascending' : '↓ Descending';
 
         // Ponovno pokreni sortiranje
         document.getElementById('selectSort').dispatchEvent(new Event('change'));
