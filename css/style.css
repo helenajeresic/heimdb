@@ -909,3 +909,56 @@ footer {
   main {
      flex: 1;
    }
+
+
+/*rating popup*/
+.rating-stars {
+  float: left;
+  padding-left: 25%;
+}
+
+.rating-stars input[type="radio"] {
+  display: none;
+}
+
+.rating-stars:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
+}
+.rating-stars:not(:checked) > label {
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+.rating-stars:not(:checked) > label:before {
+  content: '★ ';
+}
+.rating-stars > input:checked ~ label {
+  color: #ffc700;    
+}
+.rating-stars:not(:checked) > label:hover,
+.rating-stars:not(:checked) > label:hover ~ label {
+  color: #deb217;  
+}
+.rating-stars > input:checked + label:hover,
+.rating-stars > input:checked + label:hover ~ label,
+.rating-stars > input:checked ~ label:hover,
+.rating-stars > input:checked ~ label:hover ~ label,
+.rating-stars > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
+.comment-button{
+  float: left;
+}
+
+#close {
+  float: right;
+}
+
+
+/*rating popup*/
