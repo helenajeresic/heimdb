@@ -16,18 +16,25 @@ class commentsController extends BaseController {
         }
         else {
             $ms = new MovieService();
-            if( isset( $_GET['id_movie'] )) {
-                $content = $_POST['comment-input'];
-                $id_user = $_SESSION['id_user'];
-                $id_movie = $_GET['id_movie'];
-                $movie = $ms->getMovieById($id_movie);
-                if($movie == false)
-                    exit( 'Krivi id filma.' );
-                else
-                {
-                    $cs = new CommentService();
-                    $cs->addComment($id_user, $id_movie, $content);
-                    header( 'Location: ' . __SITE_URL . '/index.php?rt=movies/showMovie&id_movie=' . $id_movie);
+            if( isset( $_GET['id_movie'] ) ) {
+                if(preg_match('/^[0-9A-Za-z-_?!\'\.,\;\#\:\ ]{3,20000}$/', $_POST['comment-input'])){
+                    $content = $_POST['comment-input'];
+                    $id_user = $_SESSION['id_user'];
+                    $id_movie = $_GET['id_movie'];
+                    $movie = $ms->getMovieById($id_movie);
+                    if($movie == false)
+                        exit( 'Krivi id filma.' );
+                    else
+                    {
+                        $cs = new CommentService();
+                        $cs->addComment($id_user, $id_movie, $content);
+                        header( 'Location: ' . __SITE_URL . '/index.php?rt=movies/showMovie&id_movie=' . $id_movie);
+                    }
+                }
+                else {
+                    $title = 'Unallowed characters are used! try again';
+                    $this->registry->template->title = $title;
+                    $this->registry->template->show('wrong_search');
                 }
             }
             else {
