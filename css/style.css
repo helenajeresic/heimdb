@@ -318,6 +318,12 @@ body {
   padding: 5px 10px;
 }
 
+.order-toggle{
+  font-size: 16px;
+  padding: 5px 10px;
+  margin-left: 5px;
+}
+
 .movie-data {
   margin-right: 20px;
   margin-top: 15px;

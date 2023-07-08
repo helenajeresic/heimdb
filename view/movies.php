@@ -12,6 +12,7 @@
                     <option value="byGenre">genre</option>
                     <option value="byRating">HEIMDB rating</option>
                 </select>
+                <button class="order-toggle" id="orderToggle" data-order="asc">Descending</button>
             </div>
         </div >
         <div class="movie-content">
@@ -27,9 +28,9 @@
                     <a href="<?php echo $mov;?>"><?php echo $m->__get( 'title' );?></a>
                 </div>
                     <div class = "movie-buttons">
-                        <button class="rating-button">&#9733; <?php echo $ratings[$m->__get('id_movie')]; ?></button>
-                        <button class="remove-watched-button" onclick="removeFromWatched(<?php echo $m->__get('id');?>)">&#x2764;</button>
-                        <button class="remove-watchlist-button" onclick="removeFromWatchlist(<?php echo $m->__get('id');?>)">&#x1F4FA;</button>
+                        <button class="rating-button" >&#9733; <?php echo $ratings[$m->__get('id_movie')]; ?></button>
+                        <button class="remove-watchlist-button <?php echo $movieOnWatchlist[$m->__get('id_movie')] ? 'added' : 'not-added'; ?>" >&#x2764;</button>
+                        <button class="remove-watched-button <?php echo $movieOnWatched[$m->__get('id_movie')] ? 'watched' : 'not-watced'; ?>" >&#x1F4FA;</button>
                     </div>
                     <div class="movie-atributes">
                         <?php echo $m->__get('year'); ?> |
@@ -43,5 +44,64 @@
         </div>
     </div>
 </div>
+<script>
+    var orderToggleBtn = document.getElementById('orderToggle');
+
+    document.getElementById('selectSort').addEventListener('change', function() {
+        var selectedValue = this.value;
+        var movieContent = document.querySelector('.movie-content');
+        var movies = movieContent.getElementsByClassName('movie-box');
+        var moviesArray = Array.from(movies);
+
+        moviesArray.sort(function(a, b) {
+            var titleA = a.querySelector('.movie-title').textContent.trim().toLowerCase();
+            var titleB = b.querySelector('.movie-title').textContent.trim().toLowerCase();
+
+            if (selectedValue === 'byTitle') {
+                return compareValues(titleA, titleB);
+            } else if (selectedValue === 'byYear') {
+                var yearA = parseInt(a.querySelector('.movie-atributes').textContent.trim().split('|')[0]);
+                var yearB = parseInt(b.querySelector('.movie-atributes').textContent.trim().split('|')[0]);
+                return compareValues(yearA, yearB);
+            } else if (selectedValue === 'byGenre') {
+                var genreA = a.querySelector('.movie-atributes').textContent.trim().split('|')[2].trim().toLowerCase();
+                var genreB = b.querySelector('.movie-atributes').textContent.trim().split('|')[2].trim().toLowerCase();
+                return compareValues(genreA, genreB);
+            } else if (selectedValue === 'byRating') {
+                var ratingA = parseInt(a.querySelector('.rating-button').textContent.trim().split(' ')[1]);
+                var ratingB = parseInt(b.querySelector('.rating-button').textContent.trim().split(' ')[1]);
+                return compareValues(ratingB, ratingA);
+            }
+        });
+
+        if (orderToggleBtn.dataset.order === 'desc') {
+            moviesArray.reverse();
+        }
+
+        movieContent.innerHTML = '';
+        moviesArray.forEach(function(movie) {
+            movieContent.appendChild(movie);
+        });
+    });
+
+    orderToggleBtn.addEventListener('click', function() {
+        var currentOrder = orderToggleBtn.dataset.order;
+        orderToggleBtn.dataset.order = currentOrder === 'asc' ? 'desc' : 'asc';
+        orderToggleBtn.textContent = currentOrder === 'asc' ? 'Ascending' : 'Descending';
+
+        // Ponovno pokreni sortiranje
+        document.getElementById('selectSort').dispatchEvent(new Event('change'));
+    });
+
+    function compareValues(valueA, valueB) {
+        if (valueA < valueB) {
+            return -1;
+        } else if (valueA > valueB) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+</script>
 
 <?php require_once __SITE_PATH . '/view/_footer.php';?>
