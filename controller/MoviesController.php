@@ -261,53 +261,61 @@ class moviesController extends BaseController {
 
     public function addMovie()
     {
-        if(!isset($_SESSION['username'])) 
+        if(!isset($_SESSION['username']))
         {
             $this->registry->template->title = 'Login';
             $this->registry->template->error = false;
             $this->registry->template->show('login');
         }
-        else 
+        else
         {
-            if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
+            if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1)
             {
                 $ms = new MovieService();
-                if (isset($_POST['title']) && isset($_POST['year']) &&
-                isset($_POST['genre']) && isset($_POST['description']) && isset($_FILES['image']) && 
-                isset($_POST['duration']) && isset($_POST['dir-name-1']) && isset($_POST['dir-surname-1']) && 
-                isset($_POST['act-name-1']) && isset($_POST['act-surname-1']) &&
+                if (isset($_POST['title']) && preg_match('/^[0-9A-Za-z-_?!\'\: ]{3,100}$/', $_POST['title']) &&
+                isset($_POST['year']) && preg_match('/^[0-9]{4}$/', $_POST['year']) &&
+                isset($_POST['genre']) &&
+                isset($_POST['description']) && preg_match('/^[0-9A-Za-z-_?!\'\: ]{3,500}$/', $_POST['description']) &&
+                isset($_FILES['image']) &&
+                isset($_POST['duration']) && preg_match('/^[0-9]{1,4}$/', $_POST['duration']) &&
+                isset($_POST['dir-name-1']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['dir-name-1']) &&
+                isset($_POST['dir-surname-1']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['dir-surname-1']) &&
+                isset($_POST['act-name-1']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['act-name-1']) &&
+                isset($_POST['act-surname-1']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['act-surname-1']) &&
                 !empty($_POST['title']) && !empty($_POST['year']) &&
                 !empty($_POST['description']) && !empty($_POST['duration']) &&
                 !empty($_POST['dir-name-1']) && !empty($_POST['dir-surname-1']) &&
                 !empty($_POST['act-name-1']) && !empty($_POST['act-surname-1']))
-                {   
+                {
                     //pokupi sve zanrove
-                    $selectedGenres = $_POST['genre']; 
+                    $selectedGenres = $_POST['genre'];
 
                     if (is_array($selectedGenres))
-                        $genreString = implode(' ', $selectedGenres); 
+                        $genreString = implode(' ', $selectedGenres);
                     else
                         $genreString = $selectedGenres;
-                     
-                    //pokupi sve redatelje
-                    $directorNames = array(); 
-                    $directorSurnames = array(); 
 
-                    $directorNames[] = $_POST['dir-name-1']; 
+                    //pokupi sve redatelje
+                    $directorNames = array();
+                    $directorSurnames = array();
+
+                    $directorNames[] = $_POST['dir-name-1'];
                     $directorSurnames[] = $_POST['dir-surname-1'];
 
-                    if (isset($_POST['dir-name-2']) && isset($_POST['dir-surname-2']) &&
-                    !empty($_POST['dir-name-2']) && !empty($_POST['dir-surname-2'])) 
+                    if (isset($_POST['dir-name-2']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['dir-name-2']) &&
+                        isset($_POST['dir-surname-2']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['dir-surname-2']) &&
+                        !empty($_POST['dir-name-2']) && !empty($_POST['dir-surname-2']))
                     {
-                        $directorNames[] = $_POST['dir-name-2']; 
+                        $directorNames[] = $_POST['dir-name-2'];
                         $directorSurnames[] = $_POST['dir-surname-2'];
                     }
-                
-                    if (isset($_POST['dir-name-3']) && isset($_POST['dir-surname-3']) && 
-                    !empty($_POST['dir-name-3']) && !empty($_POST['dir-surname-3'])) 
+
+                    if (isset($_POST['dir-name-3']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['dir-name-3']) &&
+                        isset($_POST['dir-surname-3']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['dir-surname-3']) &&
+                        !empty($_POST['dir-name-3']) && !empty($_POST['dir-surname-3']))
                     {
                         $directorNames[] = $_POST['dir-name-3'];
-                        $directorSurnames[] = $_POST['dir-surname-3']; 
+                        $directorSurnames[] = $_POST['dir-surname-3'];
                     }
 
                     //pokupi sve glumce
@@ -317,15 +325,17 @@ class moviesController extends BaseController {
                     $actorNames[] = $_POST['act-name-1'];
                     $actorSurnames[] = $_POST['act-surname-1'];
 
-                    if (isset($_POST['act-name-2']) && isset($_POST['act-surname-2']) &&
-                    !empty($_POST['act-name-2']) && !empty($_POST['act-surname-2'])) 
+                    if (isset($_POST['act-name-2']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['act-name-2']) &&
+                    isset($_POST['act-surname-2']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['act-surname-2']) &&
+                    !empty($_POST['act-name-2']) && !empty($_POST['act-surname-2']))
                     {
                         $actorNames[] = $_POST['act-name-2'];
                         $actorSurnames[] = $_POST['act-surname-2'];
                     }
 
-                    if (isset($_POST['act-name-3']) && isset($_POST['act-surname-3']) &&
-                    !empty($_POST['act-name-3']) && !empty($_POST['act-surname-3'])) 
+                    if (isset($_POST['act-name-3']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['act-name-3']) &&
+                    isset($_POST['act-surname-3']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['act-surname-3']) &&
+                    !empty($_POST['act-name-3']) && !empty($_POST['act-surname-3']))
                     {
                         $actorNames[] = $_POST['act-name-3'];
                         $actorSurnames[] = $_POST['act-surname-3'];
@@ -382,46 +392,53 @@ class moviesController extends BaseController {
 
     public function search()
     {
-        if( isset($_POST['search'] ) && $_POST['search'] !== ""   ){
-            $s = $_POST['search'];
-            $b = $_POST['by'];
-            $ms = new MovieService();
+        if( isset($_POST['search'] ) && $_POST['search'] !== "" ){
+            if( preg_match('/^[0-9A-Za-z-_?!\'\: ]{3,100}$/', $_POST['search'])){
+                $s = $_POST['search'];
+                $b = $_POST['by'];
+                $ms = new MovieService();
 
-            if ($b === '1') {
-                $what = "title";
-                $data = $ms->searchMovieByTitle($_POST['search']);
-                $this->registry->template->show_movies = $data;
-            }
-            else if ($b === '2'){
-                $what = "year";
-                $data = $ms->searchMovieByYear($_POST['search']);
-                $this->registry->template->show_movies = $data;
-            }
-            else{
-                $what = "genre";
-                $data = $ms->searchMovieByGenre($_POST['search']);
-                $this->registry->template->show_movies = $data;
-            }
-
-
-            $rs = new RatesService();
-            $movieRatings = array();
-
-            foreach( $data as $movie) {
-                $id_movie = $movie->__get('id_movie');
-                $averageRating = $rs->getAverageRating( $id_movie );
-                if($averageRating !== null){
-                    $movieRatings[$id_movie] = $averageRating;
-                } else {
-                    $movieRatings[$id_movie] = 0;
+                if ($b === '1') {
+                    $what = "title";
+                    $data = $ms->searchMovieByTitle($_POST['search']);
+                    $this->registry->template->show_movies = $data;
                 }
+                else if ($b === '2'){
+                    $what = "year";
+                    $data = $ms->searchMovieByYear($_POST['search']);
+                    $this->registry->template->show_movies = $data;
+                }
+                else{
+                    $what = "genre";
+                    $data = $ms->searchMovieByGenre($_POST['search']);
+                    $this->registry->template->show_movies = $data;
+                }
+
+
+                $rs = new RatesService();
+                $movieRatings = array();
+
+                foreach( $data as $movie) {
+                    $id_movie = $movie->__get('id_movie');
+                    $averageRating = $rs->getAverageRating( $id_movie );
+                    if($averageRating !== null){
+                        $movieRatings[$id_movie] = $averageRating;
+                    } else {
+                        $movieRatings[$id_movie] = 0;
+                    }
+                }
+
+
+                $this->registry->template->ratings = $movieRatings;
+                $title = "Search movies by " . $what . " : " . $_POST['search'];
+                $this->registry->template->title = $title;
+                $this->registry->template->show('movies');
             }
-
-
-            $this->registry->template->ratings = $movieRatings;
-            $title = "Search movies by " . $what . " : " . $_POST['search'];
-            $this->registry->template->title = $title;
-            $this->registry->template->show('movies');
+            else {
+                $title = 'Unallowed characters are used! try again';
+                $this->registry->template->title = $title;
+                $this->registry->template->show('wrong_search');
+            }
         }
         else {
             header( 'Location: ' . __SITE_URL . '/index.php');
