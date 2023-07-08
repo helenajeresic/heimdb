@@ -146,6 +146,42 @@ class WatchlistService
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
     }
 
+	function checkWatchlist($id_movie, $id_user)
+	{
+    	try {
+        	$db = DB::getConnection();
+        	$st = $db->prepare('SELECT * FROM watchlist WHERE id_movie = :id_movie AND id_user = :id_user');
+        	$st->execute(array('id_movie' => $id_movie, 'id_user' => $id_user));
+        	$row = $st->fetch();
+
+        	if ($row !== false) {
+            	return true;
+        	} else {
+            	return false;
+        	}
+    	} catch (PDOException $e) {
+        	exit('PDO error ' . $e->getMessage());
+    	}
+	}
+
+	function checkWatched($id_movie, $id_user)
+	{
+    	try {
+        	$db = DB::getConnection();
+        	$st = $db->prepare('SELECT status FROM watchlist WHERE id_movie = :id_movie AND id_user = :id_user');
+        	$st->execute(array('id_movie' => $id_movie, 'id_user' => $id_user));
+        	$row = $st->fetch();
+
+        	if ($row !== false && $row['status'] == 1) {
+            	return true;
+        	} else {
+            	return false;
+        	}
+    	} catch (PDOException $e) {
+        	exit('PDO error ' . $e->getMessage());
+    	}
+	}
+
 }
 
 ?>

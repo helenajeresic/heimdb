@@ -1,8 +1,8 @@
 <?php
 
+require_once __SITE_PATH . '/model/movies.class.php';
 require_once __SITE_PATH . '/model/movies_service.class.php';
 require_once __SITE_PATH . '/model/watchlist_service.class.php';
-require_once __SITE_PATH .  '/model/movies.class.php';
 require_once __SITE_PATH . '/model/rates_service.class.php';
 
 class watchlistController extends BaseController
@@ -16,8 +16,8 @@ class watchlistController extends BaseController
         }
         else {
             $ms = new WatchlistService();
-            $dataWatchlist = $ms -> getUsersWatchlistById( $_SESSION['id_user'] );
-            $dataWatched = $ms -> getWatchedMoviesById( $_SESSION['id_user'] );
+            $dataWatchlist = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
+            $dataWatched = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
 
             $rs = new RatesService();
             $movieRatingsWatchlist = array();
@@ -53,54 +53,47 @@ class watchlistController extends BaseController
         }
     }
 
-    public function addToWatchlist()
+    public function updateWatchlist()
     {
-        if(!isset($_SESSION['username'])) {
-            $this->registry->template->title = 'Login';
-            $this->registry->template->error = false;
-            $this->registry->template->show('login');
-        }
-        else {
-            $ms = new WatchlistService();
-            if(isset($_POST['id_movie'])) {
-                $ms->addMovieToWatchlist( $_SESSION['id_user'], $_POST['id_movie'] );
-                $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
-                $this->registry->template->show_movies = $data;
-                $this->registry->template->show('watchlist');
+        if (isset($_POST['id_movie']) && isset($_POST['status'])) {
+            $movieId = $_POST['id_movie'];
+            $status = $_POST['status'];
+    
+            // Provjerite je li korisnik prijavljen
+            if (!isset($_SESSION['username'])) {
+                $response = ['status' => 'error', 'message' => 'User not logged in'];
+                echo json_encode($response);
+                return;
             }
-            else {
-                $ms = new WatchlistService();
-                $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
-                $this->registry->template->show_movies = $data;
-                $this->registry->template->show('watchlist');
+    
+            $userId = $_SESSION['id_user'];
+    
+            try {
+                $watchlistService = new WatchlistService();
+                if ($status == 1) {
+                    // Dodaj film na watchlist
+                    $watchlistService->addMovieToWatchlist($userId, $movieId);
+                } else {
+                    // Ukloni film s watchliste
+                    $watchlistService->removeMovieFromWatchlist($userId, $movieId);
+                }
+    
+                $response = ['status' => 'success', 'message' => 'Watchlist updated successfully'];
+                echo json_encode($response);
+            } catch (Exception $e) {
+                $response = ['status' => 'error', 'message' => 'Error updating watchlist'];
+                echo json_encode($response);
             }
+        } else {
+            $response = ['status' => 'error', 'message' => 'Invalid request'];
+            echo json_encode($response);
         }
     }
+    
+    
 
-    public function removeFromWatchlist()
-    {
-        if(!isset($_SESSION['username'])) {
-            $this->registry->template->title = 'Login';
-            $this->registry->template->error = false;
-            $this->registry->template->show('login');
-        }
-        else {
-            $ms = new WatchlistService();
-            if(isset($_POST['id_movie'])) {
-                $ms->removeMovieFromWatchlist( $_SESSION['id_user'], $_POST['id_movie'] );
-                $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
-                $this->registry->template->show_movies = $data;
-                $this->registry->template->show('watchlist');
-            }
-            else {
-                $ms = new WatchlistService();
-                $data = $ms->getWatchedMoviesById( $_SESSION['id_user'] );
-                $this->registry->template->show_movies = $data;
-                $this->registry->template->show('watchlist');
-            }
-        }
-    }
-
+    //Addsmovie to watched movies and removes it from watchlist list.
+    //kako updateati?
     public function addToWatched()
     {
         if(!isset($_SESSION['username'])) {
@@ -109,12 +102,18 @@ class watchlistController extends BaseController
             $this->registry->template->show('login');
         }
         else {
-            $ms = new WatchlistService();
             if(isset($_POST['id_movie'])) {
+                $ms = new WatchlistService();
                 $ms->addWatchedMovie( $_SESSION['id_user'], $_POST['id_movie'] );
+                $ms->removeFromWatchlist( $_SESSION['id_user'], $_POST['id_movie'] );
                 $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
+
+                $this->registry->template->show_movies = $data;
                 $this->registry->template->show_movies = $data;
                 $this->registry->template->show('watchlist');
+
+                $response = ['status' => 'success', 'message' => 'Movie added to watched'];
+                echo json_encode($response);
             }
             else {
                 $ms = new WatchlistService();
@@ -125,6 +124,7 @@ class watchlistController extends BaseController
         }
     }
 
+    //imapuno toga za updateati
     public function removeFromWatched()
     {
         if(!isset($_SESSION['username'])) {
@@ -133,12 +133,17 @@ class watchlistController extends BaseController
             $this->registry->template->show('login');
         }
         else {
-            $ms = new WatchlistService();
             if(isset($_POST['id_movie'])) {
+                $ms = new WatchlistService();
                 $ms->removeWatchedMovie( $_SESSION['id_user'], $_POST['id_movie'] );
+                $ms->addToWatchlist($_POST['id_movie'] );
+
                 $data = $ms->getUsersWatchlistById( $_SESSION['id_user'] );
-                $this->registry->template->show_movies = $data;
+                $this->registry->template->show_watchlist = $data;
                 $this->registry->template->show('watchlist');
+
+                $response = ['status' => 'success', 'message' => 'Movie removed from watched'];
+                echo json_encode($response);
             }
             else {
                 $ms = new WatchlistService();

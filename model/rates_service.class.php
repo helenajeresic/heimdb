@@ -58,20 +58,22 @@ class RatesService
 	}
 
 
-    function updateRating( $id_movie, $id_user, $rate)
-    {
-        $today_date = date_create()->format('Y-m-d');
-        try
-		{
+	function updateRating($id_movie, $id_user, $rate)
+	{
+		$today_date = date('Y-m-d');
+	
+		try {
 			$db = DB::getConnection();
 			$st = $db->prepare('UPDATE rates
-                                SET rate = :new_rate, date = :new_date
-                                WHERE id_movie = :id_movie AND id_user = :id_user;');
-			$st->execute( array('id_movie' => $id_movie, 'id_user' => $id_user,
-                                'rate' => $rate, 'new_date' => $today_date ));
+								SET rate = :new_rate, date = :new_date
+								WHERE id_movie = :movie_id AND id_user = :user_id');
+			$st->execute(array('new_rate' => $rate, 'new_date' => $today_date, 'movie_id' => $id_movie, 'user_id' => $id_user));
+		} catch (PDOException $e) {
+			exit('PDO error ' . $e->getMessage());
 		}
-		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
-    }
+	}
+	
+	
 
     function removeRate ( $id_movie, $id_user)
     {
@@ -84,6 +86,26 @@ class RatesService
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 
     }
+
+	function insertOrUpdateRating($id_movie, $id_user, $rate)
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare('SELECT COUNT(*) FROM rates WHERE id_movie = :id_movie AND id_user = :id_user;');
+			$st->execute(array('id_movie' => $id_movie, 'id_user' => $id_user));
+			$row_count = $st->fetchColumn();
+			
+			if ($row_count > 0) {
+				$this->updateRating($id_movie, $id_user, $rate);
+			} else {
+				$this->rateMovie($id_movie, $id_user, $rate);
+			}
+		}
+		catch (PDOException $e) {
+			exit('PDO error ' . $e->getMessage());
+		}
+	}
 }
 
 ?>
