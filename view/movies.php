@@ -4,16 +4,22 @@
     <div class="movie-container">
         <div class="movie-list-name">
             <h1><?php echo $title; ?></h1><br>
-            <div class="select-sort">
-                <label for="selectSort">Sort by:</label>
-                <select name="selectSort" id="selectSort">
-                    <option value="byTitle">title</option>
-                    <option value="byYear">year</option>
-                    <option value="byGenre">genre</option>
-                    <option value="byRating">HEIMDB rating</option>
-                </select>
-                <button class="order-toggle" id="orderToggle" data-order="asc">&darr; Descending</button>
-            </div>
+            <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=movies/sortMovie'; ?>" id="sortForm">
+                <div class="select-sort">
+                    <label for="selectSort">Sort by:</label>
+                        <select name="selectSort" id="selectSort">
+                            <option value="byTitle">title</option>
+                            <option value="byYear">year</option>
+                            <option value="byGenre">genre</option>
+                            <option value="byRating">HEIMDB rating</option>
+                        </select>
+                    <label for="orderSort"> order:</label>
+                        <select name="orderSort" id="orderSort">
+                            <option value="asc">ascending</option>
+                            <option value="desc">descending</option>
+                        </select>
+                </div>
+            </form>
         </div>
         <div class="movie-content">
             <?php foreach ($show_movies as $index => $m) {
@@ -31,8 +37,14 @@
                         </div>
                         <div class="movie-buttons">
                             <button class="rating-button" onclick="showRatingPopup('<?php echo $popupId; ?>')">&#9733; <?php echo $ratings[$m->__get('id_movie')]; ?></button>
-                            <button class="remove-watchlist-button removeWatchlist-button <?php echo $movieOnWatchlist[$m->__get('id_movie')] ? 'added' : 'not-added'; ?>">&#x2764;</button>
-                            <button class="remove-watched-button addWatched-button <?php echo $movieOnWatched[$m->__get('id_movie')] ? 'watched' : 'not-watched'; ?>">&#x1F4FA;</button>
+                            <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatchlist' ;?>" 
+                                onsubmit="return confirm('Are you sure you want to update this movie on the watchlist?');" id="watchlistForm">
+                                <button type="submit" class="remove-watched-button" name="id_movie" value="<?php echo $m->__get('id_movie'); ?>">&#x2764;</button>
+                             </form>
+                            <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatched'; ?>" 
+                                onsubmit="return confirm('Are you sure you want to update this movie on the watchlist?');" id="watchedForm">
+                                <button type="submit" class="remove-watched-button" name="id_movie" value="<?php echo $m->__get('id_movie'); ?>">&#x1F4FA;</button>
+                            </form>
                         </div>
                         <div class="movie-atributes">
                             <?php echo $m->__get('year'); ?> |
@@ -42,7 +54,7 @@
                         <?php echo $m->__get('description'); ?><br>
                     </div>
                 </div>
-                <div id="<?php echo $popupId; ?>" class="popup">
+                <div id="<?php echo $popupId; ?>" class="popup" data-state="closed">
                     <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=movies/rateMovie&id_movie=' . $m->__get('id_movie'); ?>">
                         <h2>Rate the Movie</h2>
                         <div class="rating-stars">
@@ -89,63 +101,17 @@
 </div>
 
 <script>
-    var orderToggleBtn = document.getElementById('orderToggle');
-
-    document.getElementById('selectSort').addEventListener('change', function() {
-        var selectedValue = this.value;
-        var movieContent = document.querySelector('.movie-content');
-        var movies = movieContent.getElementsByClassName('movie-box');
-        var moviesArray = Array.from(movies);
-
-        moviesArray.sort(function(a, b) {
-            var titleA = a.querySelector('.movie-title').textContent.trim().toLowerCase();
-            var titleB = b.querySelector('.movie-title').textContent.trim().toLowerCase();
-
-            if (selectedValue === 'byTitle') {
-                return compareValues(titleA, titleB);
-            } else if (selectedValue === 'byYear') {
-                var yearA = parseInt(a.querySelector('.movie-atributes').textContent.trim().split('|')[0]);
-                var yearB = parseInt(b.querySelector('.movie-atributes').textContent.trim().split('|')[0]);
-                return compareValues(yearA, yearB);
-            } else if (selectedValue === 'byGenre') {
-                var genreA = a.querySelector('.movie-atributes').textContent.trim().split('|')[2].trim().toLowerCase();
-                var genreB = b.querySelector('.movie-atributes').textContent.trim().split('|')[2].trim().toLowerCase();
-                return compareValues(genreA, genreB);
-            } else if (selectedValue === 'byRating') {
-                var ratingA = parseInt(a.querySelector('.rating-button').textContent.trim().split(' ')[1]);
-                var ratingB = parseInt(b.querySelector('.rating-button').textContent.trim().split(' ')[1]);
-                return compareValues(ratingB, ratingA);
-            }
-        });
-
-        if (orderToggleBtn.dataset.order === 'desc') {
-            moviesArray.reverse();
-        }
-
-        movieContent.innerHTML = '';
-        moviesArray.forEach(function(movie) {
-            movieContent.appendChild(movie);
-        });
+    document.getElementById('sortForm').addEventListener('change', function(){
+        document.getElementById('sortForm').submit();
     });
 
-    orderToggleBtn.addEventListener('click', function() {
-        var currentOrder = orderToggleBtn.dataset.order;
-        orderToggleBtn.dataset.order = currentOrder === 'asc' ? 'desc' : 'asc';
-        orderToggleBtn.textContent = currentOrder === 'asc' ? '↑ Ascending' : '↓ Descending';
-
-        // Ponovno pokreni sortiranje
-        document.getElementById('selectSort').dispatchEvent(new Event('change'));
+    document.getElementById('watchlistForm').addEventListener('click', function(){
+        document.getElementById('watchlistForm').submit();
     });
 
-    function compareValues(valueA, valueB) {
-        if (valueA < valueB) {
-            return -1;
-        } else if (valueA > valueB) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
+    document.getElementById('watchedForm').addEventListener('click', function(){
+        document.getElementById('watchedForm').submit();
+    });
 
     function showRatingPopup(popupId) {
         document.getElementById(popupId).classList.add('active');
@@ -153,7 +119,15 @@
 
     function togglePopup(popup) {
         var popupElement = document.getElementById(popup);
-        popupElement.classList.toggle('active');
+        var currentState = popupElement.getAttribute('data-state');
+
+        if (currentState === 'closed') {
+            popupElement.classList.add('active');
+            popupElement.setAttribute('data-state', 'open');
+        } else {
+            popupElement.classList.remove('active');
+            popupElement.setAttribute('data-state', 'closed');
+        }
     }
 </script>
 

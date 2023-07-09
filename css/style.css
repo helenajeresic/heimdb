@@ -311,6 +311,7 @@ body {
 .select-sort label {
   font-size: 16px;
   margin-right: 10px;
+  margin-left: 10px;
 }
 
 .select-sort select {

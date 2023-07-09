@@ -500,5 +500,79 @@ class moviesController extends BaseController {
         }
     }
 
+    public function sortMovie()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $selectedSort = $_POST['selectSort'];
+            $selectedOrder = $_POST['orderSort'];
+
+            $ms = new MovieService();
+            $data = $ms->getAllMovies();
+
+            $sortedMovies = $data;
+            switch ($selectedSort) {
+                case 'byTitle':
+                    usort($sortedMovies, function($a, $b) use ($selectedOrder) {
+                        if ($selectedOrder === 'asc') {
+                            return strcmp($a->__get('title'), $b->__get('title'));
+                        } else {
+                            return strcmp($b->__get('title'), $a->__get('title'));
+                        }
+                    });
+                    break;
+                case 'byYear':
+                    usort($sortedMovies, function($a, $b) use ($selectedOrder) {
+                        if ($selectedOrder === 'asc') {
+                            return $a->__get('year') - $b->__get('year');
+                        } else {
+                            return $b->__get('year') - $a->__get('year');
+                        }
+                    });
+                    break;
+                case 'byGenre':
+                    usort($sortedMovies, function($a, $b) use ($selectedOrder) {
+                        if ($selectedOrder === 'asc') {
+                            return strcmp($a->__get('genre'), $b->__get('genre'));
+                        } else {
+                            return strcmp($b->__get('genre'), $a->__get('genre'));
+                        }
+                    });
+                    break;
+                case 'byRating':
+                    $rs = new RatesService();
+                    usort($sortedMovies, function($a, $b) use ($selectedOrder, $rs) {
+                        $ratingA = $rs->getAverageRating($a->__get('id_movie'));
+                        $ratingB = $rs->getAverageRating($b->__get('id_movie'));
+                        if ($selectedOrder === 'asc') {
+                            return $ratingA - $ratingB;
+                        } else {
+                            return $ratingB - $ratingA;
+                        }
+                    });
+                    break;
+            }
+
+            $rs = new RatesService();
+            $movieRatings = array();
+    
+            foreach( $data as $movie) {
+                $id_movie = $movie->__get('id_movie');
+                $averageRating = $rs->getAverageRating( $id_movie );
+                if($averageRating !== null){
+                    $movieRatings[$id_movie] = $averageRating;
+                } else {
+                    $movieRatings[$id_movie] = 0;
+                }
+            }
+    
+            $this->registry->template->disabled = false;
+            $this->registry->template->show_movies = $sortedMovies;
+            $this->registry->template->ratings = $movieRatings;
+            $this->registry->template->title = 'Most popular';
+            $this->registry->template->show('movies');
+    
+        }
+    }
+
 }
 ?>
