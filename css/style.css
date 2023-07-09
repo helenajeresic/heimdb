@@ -394,6 +394,9 @@ body {
   color: rgb(47, 92, 47);
 }
 
+button:disabled {
+  cursor: not-allowed;
+}
 
 
 /*movies - top rated and wishlist - end*/

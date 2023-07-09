@@ -23,7 +23,7 @@
                     <button class="rating-button" onclick="showRatingPopup('<?php echo $popupId; ?>')">&#9733; <?php echo $ratings_watchlist[$m->__get('id_movie')]; ?></button>
                             <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatchlist' ;?>" 
                                 onsubmit="return confirm('Are you sure you want to update this movie on the watchlist?');" id="watchlistForm1">
-                                <button type="submit" class="remove-watched-button" name="id_movie" value="<?php echo $m->__get('id_movie'); ?>">&#x2764;</button>
+                                <button type="submit" class="remove-watchlist-button" name="id_movie" value="<?php echo $m->__get('id_movie'); ?>">&#x2764;</button>
                              </form>
                             <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatched'; ?>" 
                                 onsubmit="return confirm('Are you sure you want to update this movie on the watchlist?');" id="watchedForm1">
@@ -107,7 +107,7 @@
                     <button class="rating-button" onclick="showRatingPopup('<?php echo $popupId; ?>')">&#9733; <?php echo $ratings_watched[$m->__get('id_movie')]; ?></button>
                             <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatchlist' ;?>" 
                                 onsubmit="return confirm('Are you sure you want to update this movie on the watchlist?');" id="watchlistForm2">
-                                <button type="submit" class="remove-watched-button" name="id_movie" value="<?php echo $m->__get('id_movie'); ?>">&#x2764;</button>
+                                <button type="submit" class="remove-watched-button" name="id_movie" value="<?php echo $m->__get('id_movie'); ?>" disabled >&#x2764;</button>
                              </form>
                             <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatched'; ?>" 
                                 onsubmit="return confirm('Are you sure you want to update this movie on the watchlist?');" id="watchedForm2">

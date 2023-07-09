@@ -93,7 +93,7 @@
             <input type="text" name="act-surname-3" placeholder="Third actor...">
             </div>
 
-            <label for="image">Slika:</label><br>
+            <label for="image">Image:</label><br>
             <input type="file" name="image" id="slika-input" required>
             <label for="slika-input" class="custom-file-upload">Choose File</label>
             <span id="file-name"></span><br><br>
