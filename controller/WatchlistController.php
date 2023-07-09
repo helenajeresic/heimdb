@@ -187,7 +187,11 @@ class watchlistController extends BaseController
                 if( $ms->checkWatched($id_movie, $id_user) ){
                     $ms->removeWatchedMovie($id_user, $id_movie );
                 } else {
-                    $ms->addWatchedMovie( $id_user, $id_movie);
+                    if( $ms->checkWatchlist( $id_movie, $id_user ) ){
+                        $ms->updateWatchedMovie( $id_user, $id_movie);
+                    } else{
+                        $ms->addWatchedMovie( $id_user, $id_movie);
+                    }
                 }
             }
             

@@ -120,7 +120,7 @@ class WatchlistService
 		return $arr;
     }
 
-    function addWatchedMovie( $id_user, $id_movie )
+    function updateWatchedMovie( $id_user, $id_movie )
     {
 		try
 		{
@@ -132,6 +132,18 @@ class WatchlistService
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
     }
+
+	function addWatchedMovie( $id_user, $id_movie )
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare('INSERT INTO watchlist (id_user, id_movie, status)
+								VALUES (:id_user, :id_movie, 1); ');
+			$st->execute( array( 'id_user' => $id_user, 'id_movie' => $id_movie));
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+	}
 
     function removeWatchedMovie( $id_user, $id_movie)
     {
@@ -150,7 +162,8 @@ class WatchlistService
 	{
     	try {
         	$db = DB::getConnection();
-        	$st = $db->prepare('SELECT * FROM watchlist WHERE id_movie = :id_movie AND id_user = :id_user');
+        	$st = $db->prepare('SELECT * FROM watchlist 
+								WHERE id_movie = :id_movie AND id_user = :id_user');
         	$st->execute(array('id_movie' => $id_movie, 'id_user' => $id_user));
         	$row = $st->fetch();
 
@@ -168,7 +181,8 @@ class WatchlistService
 	{
     	try {
         	$db = DB::getConnection();
-        	$st = $db->prepare('SELECT status FROM watchlist WHERE id_movie = :id_movie AND id_user = :id_user');
+        	$st = $db->prepare('SELECT status FROM watchlist 
+								WHERE id_movie = :id_movie AND id_user = :id_user');
         	$st->execute(array('id_movie' => $id_movie, 'id_user' => $id_user));
         	$row = $st->fetch();
 

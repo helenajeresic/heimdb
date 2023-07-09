@@ -18,6 +18,7 @@
                             <option value="asc">ascending</option>
                             <option value="desc">descending</option>
                         </select>
+                        <input type="hidden" name="currentPage" value="<?php echo $title ?>">
                 </div>
             </form>
         </div>
