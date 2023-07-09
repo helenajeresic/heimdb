@@ -505,9 +505,25 @@ class moviesController extends BaseController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $selectedSort = $_POST['selectSort'];
             $selectedOrder = $_POST['orderSort'];
+            $uri_title = $_POST['currentPage'];
 
             $ms = new MovieService();
-            $data = $ms->getAllMovies();
+            if( $uri_title === 'Top rated' ){
+                $data = $ms->getTopRated();
+                $this->registry->template->title = 'Top rated';
+            } elseif( $uri_title === 'Most watched' ){
+                $data = $ms->getMostWatched();
+                $this->registry->template->title = 'Most watched';
+            } elseif( $uri_title === 'Most popular' ){
+                $data = $ms->getMostPopular();
+                $this->registry->template->title = 'Most popular';
+            } elseif( $uri_title === 'All movies' ) {
+                $data = $ms->getAllMovies();
+                $this->registry->template->title = 'All movies';
+            } else {
+                $data = $ms->getAllMovies();
+                $this->registry->template->title = 'Error';
+            }
 
             $sortedMovies = $data;
             switch ($selectedSort) {
@@ -568,7 +584,6 @@ class moviesController extends BaseController {
             $this->registry->template->disabled = false;
             $this->registry->template->show_movies = $sortedMovies;
             $this->registry->template->ratings = $movieRatings;
-            $this->registry->template->title = 'Most popular';
             $this->registry->template->show('movies');
     
         }
