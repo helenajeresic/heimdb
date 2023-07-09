@@ -463,9 +463,11 @@ class moviesController extends BaseController {
                 $this->registry->template->disabled = false;
             }
             $this->registry->template->ratings = $movieRatings;
-            $title = "Search movies by " . $what . " : " . $_POST['search'];
+            $title = "Search result: ";
+            $subtitle = "Search movies by " . $what . " : " . $_POST['search'];
             $this->registry->template->title = $title;
-            $this->registry->template->show('movies');
+            $this->registry->template->subtitle = $subtitle;
+            $this->registry->template->show('search');
         }
         else {
             header( 'Location: ' . __SITE_URL . '/index.php');
@@ -522,7 +524,7 @@ class moviesController extends BaseController {
                 $this->registry->template->title = 'All movies';
             } else {
                 $data = $ms->getAllMovies();
-                $this->registry->template->title = 'Error';
+                $this->registry->template->title = 'Error in sorting. All movies:';
             }
 
             $sortedMovies = $data;
