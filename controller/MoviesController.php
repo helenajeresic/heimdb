@@ -618,52 +618,29 @@ class moviesController extends BaseController {
         }
     }
 
-    public function sortData( $dataArray, $sortCondition, $orderCondition )
+    public function sortData($dataArray, $sortCondition, $orderCondition)
     {
-        switch ($sortCondition) {
-            case 'byTitle':
-                usort($dataArray, function($a, $b) use ($orderCondition) {
-                    if ($orderCondition === 'asc') {
-                        return strcmp($a->__get('title'), $b->__get('title'));
-                    } else {
-                        return strcmp($b->__get('title'), $a->__get('title'));
-                    }
-                });
-                break;
-            case 'byYear':
-                usort($dataArray, function($a, $b) use ($sortCondition) {
-                    if ($sortCondition === 'asc') {
-                        return $a->__get('year') - $b->__get('year');
-                    } else {
-                        return $b->__get('year') - $a->__get('year');
-                    }
-                });
-                break;
-            case 'byGenre':
-                usort($dataArray, function($a, $b) use ($sortCondition) {
-                    if ($sortCondition === 'asc') {
-                        return strcmp($a->__get('genre'), $b->__get('genre'));
-                    } else {
-                        return strcmp($b->__get('genre'), $a->__get('genre'));
-                    }
-                });
-                break;
-            case 'byRating':
-                $rs = new RatesService();
-                usort($dataArray, function($a, $b) use ($sortCondition, $rs) {
+    
+        usort($dataArray, function($a, $b) use ($sortCondition, $orderCondition) {
+            switch ($sortCondition) {
+                case 'TITLE':
+                    return (strcmp($a->__get('title'), $b->__get('title')) <=> 0) * ($orderCondition === 'asc' ? 1 : -1);
+                case 'YEAR':
+                    return ($a->__get('year') <=> $b->__get('year')) * ($orderCondition === 'asc' ? 1 : -1);
+                case 'GENRE':
+                    return (strcmp($a->__get('genre') , $b->__get('genre')) <=> 0) * ($orderCondition === 'asc' ? 1 : -1);
+                case 'RATING':
+                    $rs = new RatesService();
                     $ratingA = $rs->getAverageRating($a->__get('id_movie'));
                     $ratingB = $rs->getAverageRating($b->__get('id_movie'));
-                    if ($sortCondition === 'asc') {
-                        return $ratingA <=> $ratingB;
-                    } else {
-                        return $ratingB <=> $ratingA;
-                    }
-                });
-                break;
-        }
-
+                    return ($ratingA <=> $ratingB) * ($orderCondition === 'asc' ? 1 : -1);
+            }
+        });
+    
         return $dataArray;
     }
+    
+    
 
     public function sortMovie()
     {
@@ -694,19 +671,8 @@ class moviesController extends BaseController {
                     $this->registry->template->title = 'Error in sorting. All movies:';
                 }
 
-                //odaberi po cemu sortiras, moze biti samo jedno
-                if($selectedOrder !== $currentOrder && $selectedSort !== $currentSort){
-                    //sort po selectedSort
-                    //sort po current Order
-                    $sortedData = $this->sortData( $data, $currentSort, $selectedOrder );
-                } elseif( $selectedSort !== $currentSort && $selectedOrder === $currentOrder ) {
-                    //sort po currentOrder
-                    //sort po selectedOrder
-                    $sortedData = $this->sortData( $data, $selectedSort, $currentOrder );
-                } else {
-                    $sortedData = $this->sortData( $data, $selectedSort, $selectedOrder);
-                }
-
+                $sortedData = $this->sortData( $data, $selectedSort, $selectedOrder);
+                
                 $ms = new MovieService();
                 $rs = new RatesService();
                 $movieRatings = array();
@@ -765,18 +731,7 @@ class moviesController extends BaseController {
                     $this->registry->template->title = 'Error in sorting. All movies:';
                 }
 
-                //odaberi po cemu sortiras, moze biti samo jedno
-                if($selectedOrder !== $currentOrder && $selectedSort !== $currentSort){
-                    //sort po selectedSort
-                    //sort po current Order
-                    $sortedData = $this->sortData( $data, $currentSort, $selectedOrder );
-                } elseif( $selectedSort !== $currentSort && $selectedOrder === $currentOrder ) {
-                    //sort po currentOrder
-                    //sort po selectedOrder
-                    $sortedData = $this->sortData( $data, $selectedSort, $currentOrder );
-                } else {
-                    $sortedData = $this->sortData( $data, $selectedSort, $selectedOrder);
-                }
+                $sortedData = $this->sortData( $data, $selectedSort, $selectedOrder);
 
                 $ms = new MovieService();
                 $rs = new RatesService();

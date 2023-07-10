@@ -10,16 +10,22 @@
                 <div class="select-sort">
                     <label for="selectSort">Sort by:</label>
                         <select name="selectSort" id="selectSort">
-                            <option value="byTitle">title</option>
-                            <option value="byYear">year</option>
-                            <option value="byGenre">genre</option>
-                            <option value="byRating">HEIMDB rating</option>
+                            <option><?php if(isset($sort)) echo $sort; ?></option>
+                            <option value="TITLE">title</option>
+                            <option value="YEAR">year</option>
+                            <option value="GENRE">genre</option>
+                            <option value="RATING">HEIMDB rating</option>
                         </select>
                         <input type="hidden" name="currentSort" value="<?php if(isset($sort)) echo $sort; ?>">
                     <label for="orderSort"> order:</label>
                         <select name="orderSort" id="orderSort">
+                            <?php if(isset($order) && $order === 'desc'): ?>
+                            <option value="desc">descending</option>
+                            <option value="asc">ascending</option>
+                            <?php else: ?>
                             <option value="asc">ascending</option>
                             <option value="desc">descending</option>
+                            <?php endif; ?>
                         </select>
                         <input type="hidden" name="currentPage" value="<?php echo $title; ?>">
                         <input type="hidden" name="currentOrder" value="<?php if(isset($sort)) echo $order; ?>">
