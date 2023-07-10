@@ -10,22 +10,16 @@
                 <div class="select-sort">
                     <label for="selectSort">Sort by:</label>
                         <select name="selectSort" id="selectSort">
-                            <option><?php if(isset($sort)) echo $sort; ?></option>
-                            <option value="TITLE">title</option>
-                            <option value="YEAR">year</option>
-                            <option value="GENRE">genre</option>
-                            <option value="RATING">HEIMDB rating</option>
+                            <option value="byTitle">title</option>
+                            <option value="byYear">year</option>
+                            <option value="byGenre">genre</option>
+                            <option value="byRating">HEIMDB rating</option>
                         </select>
                         <input type="hidden" name="currentSort" value="<?php if(isset($sort)) echo $sort; ?>">
                     <label for="orderSort"> order:</label>
                         <select name="orderSort" id="orderSort">
-                            <?php if(isset($order) && $order === 'desc'): ?>
-                            <option value="desc">descending</option>
-                            <option value="asc">ascending</option>
-                            <?php else: ?>
                             <option value="asc">ascending</option>
                             <option value="desc">descending</option>
-                            <?php endif; ?>
                         </select>
                         <input type="hidden" name="currentPage" value="<?php echo $title; ?>">
                         <input type="hidden" name="currentOrder" value="<?php if(isset($sort)) echo $order; ?>">
@@ -49,7 +43,7 @@
                         <div class="movie-buttons">
                             <button class="rating-button" onclick="showRatingPopup('<?php echo $popupId; ?>')">&#9733; <?php echo $ratings[$m->__get('id_movie')]; ?></button>
                             <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatchlist' ;?>" id="watchlistForm">
-                                <button type="submit" <?php if(isset($_SESSION['id_user']) && $movieOnWatchlist[$m->__get('id_movie')]) { ?> class="remove-watched-button-colored" <?php } else { ?> class="remove-watched-button" <?php } ?> name="id_movie" value="<?php echo $m->__get('id_movie'); ?>" >&#x2764;</button>
+                                <button type="submit" <?php if(isset($_SESSION['id_user']) && $movieOnWatchlist[$m->__get('id_movie')]) { ?> class="remove-watched-button-colored" <?php } else { ?> class="remove-watched-button" <?php } ?> name="id_movie" value="<?php echo $m->__get('id_movie'); ?>" ><i class='fas fa-film' style="font-size: 20px;"></i></button>
                              </form>
                             <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatched'; ?>" id="watchedForm">
                                 <button type="submit" <?php if(isset($_SESSION['id_user']) && $movieOnWatched[$m->__get('id_movie')]) { ?> class="remove-watched-button-colored" <?php } else { ?> class="remove-watched-button" <?php } ?> name="id_movie" value="<?php echo $m->__get('id_movie'); ?>">&#x1F4FA;</button>
