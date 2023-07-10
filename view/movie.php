@@ -15,10 +15,10 @@ $popupId = 'ratingPopup_' . $show_movie->__get('id_movie');?>
     <div class='info-sixth'>ACTORS <?php foreach( $show_actors as $index => $a ) { echo ' | ' . $a->__get('name') . ' ' .$a->__get('surname');}?></div><br>
     <div class='info-seven'><button class="rating-button"  onclick="toggle('<?php echo $popupId; ?>')">&#9733; <?php echo $rating; ?></button>
                             <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatchlist' ;?>" id="watchlistForm">
-                            <button type="submit" <?php if($movieOnWatchlist[$show_movie->__get('id_movie')]) { ?> class="remove-watched-button-colored" <?php } else { ?> class="remove-watched-button" <?php } ?> name="id_movie" value="<?php echo $show_movie->__get('id_movie'); ?>" >&#x2764;</button>
+                            <button type="submit" <?php if(isset($_SESSION['id_user']) && $movieOnWatchlist[$show_movie->__get('id_movie')]) { ?> class="remove-watched-button-colored" <?php } else { ?> class="remove-watched-button" <?php } ?> name="id_movie" value="<?php echo $show_movie->__get('id_movie'); ?>" >&#x2764;</button>
                              </form>
                             <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatched'; ?>" id="watchedForm">
-                            <button type="submit" <?php if($movieOnWatched[$show_movie->__get('id_movie')]) { ?> class="remove-watched-button-colored" <?php } else { ?> class="remove-watched-button" <?php } ?> name="id_movie" value="<?php echo $show_movie->__get('id_movie'); ?>">&#x1F4FA;</button>
+                            <button type="submit" <?php if(isset($_SESSION['id_user']) && $movieOnWatched[$show_movie->__get('id_movie')]) { ?> class="remove-watched-button-colored" <?php } else { ?> class="remove-watched-button" <?php } ?> name="id_movie" value="<?php echo $show_movie->__get('id_movie'); ?>">&#x1F4FA;</button>
                             </form>
     </div><br>
 </div>
