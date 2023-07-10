@@ -244,119 +244,126 @@ class moviesController extends BaseController {
 
     public function topRated()
     {
-        $ms = new MovieService();
+        if( !isset($_SESSION['id_user']) ){
+            $this->registry->template->title = 'Login';
+            $this->registry->template->error = false;
+            $this->registry->template->show('login');
+        } else{
+            $ms = new MovieService();
 
-        $data = $ms->getTopRated();
+            $data = $ms->getTopRated();
 
-        $rs = new RatesService();
-        $movieRatings = array();
+            $rs = new RatesService();
+            $movieRatings = array();
 
-        $ws = new WatchlistService();
-        $watchlist = array();
-        $watched = array();
+            $ws = new WatchlistService();
+            $watchlist = array();
+            $watched = array();
 
-        foreach( $data as $movie) {
-            $id_movie = $movie->__get('id_movie');
-            $averageRating = $rs->getAverageRating( $id_movie );
-            if(isset($_SESSION['id_user'])) {
+            foreach( $data as $movie) {
+                $id_movie = $movie->__get('id_movie');
+                $averageRating = $rs->getAverageRating( $id_movie );
                 $isOnWatchlist = $ws->checkWatchlist( $id_movie, $_SESSION['id_user'] );
                 $isOnWatched = $ws->checkWatched( $id_movie, $_SESSION['id_user'] );
+                if($averageRating !== null){
+                    $movieRatings[$id_movie] = $averageRating;
+                } else {
+                    $movieRatings[$id_movie] = 0;
+                }
                 $watchlist[$id_movie] = $isOnWatchlist;
                 $watched[$id_movie] = $isOnWatched;
             }
-            if($averageRating !== null){
-                $movieRatings[$id_movie] = $averageRating;
-            } else {
-                $movieRatings[$id_movie] = 0;
-            }
-        }
 
-        $this->registry->template->disabled = false;
-        $this->registry->template->show_movies = $data;
-        $this->registry->template->ratings = $movieRatings;
-        $this->registry->template->movieOnWatchlist = $watchlist;
-        $this->registry->template->movieOnWatched = $watched;
-        $this->registry->template->title = 'Top rated';
-        $this->registry->template->show('movies');
-        
+            $this->registry->template->disabled = false;
+            $this->registry->template->show_movies = $data;
+            $this->registry->template->ratings = $movieRatings;
+            $this->registry->template->movieOnWatchlist = $watchlist;
+            $this->registry->template->movieOnWatched = $watched;
+            $this->registry->template->title = 'Top rated';
+            $this->registry->template->show('movies');
+        }
     }
 
     public function mostWatched()
     {
+        if( !isset($_SESSION['id_user']) ){
+            $this->registry->template->title = 'Login';
+            $this->registry->template->error = false;
+            $this->registry->template->show('login');
+        } else{
+            $ms = new MovieService();
+            $data = $ms->getMostWatched();
 
-        $ms = new MovieService();
-        $data = $ms->getMostWatched();
+            $rs = new RatesService();
+            $movieRatings = array();
 
-        $rs = new RatesService();
-        $movieRatings = array();
+            $ws = new WatchlistService();
+            $watchlist = array();
+            $watched = array();
 
-        $ws = new WatchlistService();
-        $watchlist = array();
-        $watched = array();
-
-        foreach( $data as $movie) {
-            $id_movie = $movie->__get('id_movie');
-            $averageRating = $rs->getAverageRating( $id_movie );
-            if(isset($_SESSION['id_user'])) {
+            foreach( $data as $movie) {
+                $id_movie = $movie->__get('id_movie');
+                $averageRating = $rs->getAverageRating( $id_movie );
                 $isOnWatchlist = $ws->checkWatchlist( $id_movie, $_SESSION['id_user'] );
                 $isOnWatched = $ws->checkWatched( $id_movie, $_SESSION['id_user'] );
+                if($averageRating !== null){
+                    $movieRatings[$id_movie] = $averageRating;
+                } else {
+                    $movieRatings[$id_movie] = 0;
+                }
                 $watchlist[$id_movie] = $isOnWatchlist;
                 $watched[$id_movie] = $isOnWatched;
             }
-            if($averageRating !== null){
-                $movieRatings[$id_movie] = $averageRating;
-            } else {
-                $movieRatings[$id_movie] = 0;
-            }
-        }
 
-        $this->registry->template->disabled = false;
-        $this->registry->template->show_movies = $data;
-        $this->registry->template->ratings = $movieRatings;
-        $this->registry->template->movieOnWatchlist = $watchlist;
-        $this->registry->template->movieOnWatched = $watched;
-        $this->registry->template->title = 'Most watched';
-        $this->registry->template->show('movies');
-        
+            $this->registry->template->disabled = false;
+            $this->registry->template->show_movies = $data;
+            $this->registry->template->ratings = $movieRatings;
+            $this->registry->template->movieOnWatchlist = $watchlist;
+            $this->registry->template->movieOnWatched = $watched;
+            $this->registry->template->title = 'Most watched';
+            $this->registry->template->show('movies');
+        }
     }
 
     public function mostPopular()
     {
+        if( !isset($_SESSION['id_user']) ){
+            $this->registry->template->title = 'Login';
+            $this->registry->template->error = false;
+            $this->registry->template->show('login');
+        } else{
+            $ms = new MovieService();
+            $data = $ms->getMostPopular();
 
-        $ms = new MovieService();
-        $data = $ms->getMostPopular();
+            $rs = new RatesService();
+            $movieRatings = array();
 
-        $rs = new RatesService();
-        $movieRatings = array();
+            $ws = new WatchlistService();
+            $watchlist = array();
+            $watched = array();
 
-        $ws = new WatchlistService();
-        $watchlist = array();
-        $watched = array();
-
-        foreach( $data as $movie) {
-            $id_movie = $movie->__get('id_movie');
-            $averageRating = $rs->getAverageRating( $id_movie );
-            if(isset($_SESSION['id_user'])) {
+            foreach( $data as $movie) {
+                $id_movie = $movie->__get('id_movie');
+                $averageRating = $rs->getAverageRating( $id_movie );
                 $isOnWatchlist = $ws->checkWatchlist( $id_movie, $_SESSION['id_user'] );
                 $isOnWatched = $ws->checkWatched( $id_movie, $_SESSION['id_user'] );
+                if($averageRating !== null){
+                    $movieRatings[$id_movie] = $averageRating;
+                } else {
+                    $movieRatings[$id_movie] = 0;
+                }
                 $watchlist[$id_movie] = $isOnWatchlist;
                 $watched[$id_movie] = $isOnWatched;
             }
-            if($averageRating !== null){
-                $movieRatings[$id_movie] = $averageRating;
-            } else {
-                $movieRatings[$id_movie] = 0;
-            }
-        }
 
-        $this->registry->template->disabled = false;
-        $this->registry->template->show_movies = $data;
-        $this->registry->template->ratings = $movieRatings;
-        $this->registry->template->movieOnWatchlist = $watchlist;
-        $this->registry->template->movieOnWatched = $watched;
-        $this->registry->template->title = 'Most popular';
-        $this->registry->template->show('movies');
-        
+            $this->registry->template->disabled = false;
+            $this->registry->template->show_movies = $data;
+            $this->registry->template->ratings = $movieRatings;
+            $this->registry->template->movieOnWatchlist = $watchlist;
+            $this->registry->template->movieOnWatched = $watched;
+            $this->registry->template->title = 'Most popular';
+            $this->registry->template->show('movies');
+        }
     }
 
     public function addMovie()
@@ -447,119 +454,126 @@ class moviesController extends BaseController {
 
     public function showMovie() 
     {
-        $ms = new MovieService();
-        $us = new UserService();
-        $ps = new PersonService();
-        $cs = new CommentService();
-        $rs = new RatesService();
-        $ws = new WatchlistService();
-        $watchlist = array();
-        $watched = array();
-        if( isset( $_GET['id_movie'] )) {
-            $id_movie = $_GET['id_movie'];
-            $movie = $ms->getMovieById($id_movie);
-            if(isset($_SESSION['id_user'])) {
+        if( !isset($_SESSION['id_user']) ){
+            $this->registry->template->title = 'Login';
+            $this->registry->template->error = false;
+            $this->registry->template->show('login');
+        } else{
+            $ms = new MovieService();
+            $us = new UserService();
+            $ps = new PersonService();
+            $cs = new CommentService();
+            $rs = new RatesService();
+            $ws = new WatchlistService();
+            $watchlist = array();
+            $watched = array();
+            if( isset( $_GET['id_movie'] )) {
+                $id_movie = $_GET['id_movie'];
+                $movie = $ms->getMovieById($id_movie);
                 $isOnWatchlist = $ws->checkWatchlist( $id_movie, $_SESSION['id_user'] );
                 $isOnWatched = $ws->checkWatched( $id_movie, $_SESSION['id_user'] );
                 $watchlist[$id_movie] = $isOnWatchlist;
                 $watched[$id_movie] = $isOnWatched;
-            }
-            if($movie == false)
-                exit( 'Krivi id filma.' );
-            else
-            {
-                $comments = $cs->getMovieCommentsById($id_movie);
-                $arr = [];
-                foreach($comments as $comment)
+                if($movie == false)
+                    exit( 'Krivi id filma.' );
+                else
                 {
-                    $arr[] = $us->getUserById($comment->__get('id_user'));
+                    $comments = $cs->getMovieCommentsById($id_movie);
+                    $arr = [];
+                    foreach($comments as $comment)
+                    {
+                        $arr[] = $us->getUserById($comment->__get('id_user'));
+                    }
+                    $recommendations = $ms->getMovieRecommendations();
+                    $actors = $ps->getActorsForMovie($id_movie);
+                    $directors = $ps->getDirectorsForMovie($id_movie);
+                    $rating = $rs->getAverageRating($id_movie);
+                    $this->registry->template->rating = $rating;
+                    $this->registry->template->show_actors = $actors;
+                    $this->registry->template->show_directors = $directors;
+                    $this->registry->template->user_names = $arr;
+                    $this->registry->template->show_movie = $movie;
+                    $this->registry->template->show_comments = $comments;
+                    $this->registry->template->movieOnWatchlist = $watchlist;
+                    $this->registry->template->movieOnWatched = $watched;
+                    $this->registry->template->show_recommendations = $recommendations;
+                    $this->registry->template->show('movie');
                 }
-                $recommendations = $ms->getMovieRecommendations();
-                $actors = $ps->getActorsForMovie($id_movie);
-                $directors = $ps->getDirectorsForMovie($id_movie);
-                $rating = $rs->getAverageRating($id_movie);
-                $this->registry->template->rating = $rating;
-                $this->registry->template->show_actors = $actors;
-                $this->registry->template->show_directors = $directors;
-                $this->registry->template->user_names = $arr;
-                $this->registry->template->show_movie = $movie;
-                $this->registry->template->show_comments = $comments;
-                $this->registry->template->movieOnWatchlist = $watchlist;
-                $this->registry->template->movieOnWatched = $watched;
-                $this->registry->template->show_recommendations = $recommendations;
-                $this->registry->template->show('movie');
             }
+            else {
+                exit( 'Nesto ne valja sa id-em.' );
+            }   
         }
-        else {
-            exit( 'Nesto ne valja sa id-em.' );
-        }   
-        
     }
 
     public function search()
     {
-        if( isset($_POST['search'] ) && $_POST['search'] !== ""   ){
-            $s = $_POST['search'];
-            $b = $_POST['by'];
-            $ms = new MovieService();
+        if( !isset($_SESSION['id_user']) ){
+            $this->registry->template->title = 'Login';
+            $this->registry->template->error = false;
+            $this->registry->template->show('login');
+        } else{
+            if( isset($_POST['search'] ) && $_POST['search'] !== ""   ){
+                $s = $_POST['search'];
+                $b = $_POST['by'];
+                $ms = new MovieService();
 
-            if ($b === '1') {
-                $what = "title";
-                $data = $ms->searchMovieByTitle($_POST['search']);
-                $this->registry->template->show_movies = $data;
-            }
-            else if ($b === '2'){
-                $what = "year";
-                $data = $ms->searchMovieByYear($_POST['search']);
-                $this->registry->template->show_movies = $data;
-            }
-            else{
-                $what = "genre";
-                $data = $ms->searchMovieByGenre($_POST['search']);
-                $this->registry->template->show_movies = $data;
-            }
+                if ($b === '1') {
+                    $what = "title";
+                    $data = $ms->searchMovieByTitle($_POST['search']);
+                    $this->registry->template->show_movies = $data;
+                }
+                else if ($b === '2'){
+                    $what = "year";
+                    $data = $ms->searchMovieByYear($_POST['search']);
+                    $this->registry->template->show_movies = $data;
+                }
+                else{
+                    $what = "genre";
+                    $data = $ms->searchMovieByGenre($_POST['search']);
+                    $this->registry->template->show_movies = $data;
+                }
 
 
-            $rs = new RatesService();
-            $movieRatings = array();
+                $rs = new RatesService();
+                $movieRatings = array();
 
-            $ws = new WatchlistService();
-            $watchlist = array();
-            $watched = array();
+                $ws = new WatchlistService();
+                $watchlist = array();
+                $watched = array();
 
-            foreach( $data as $movie) {
-                $id_movie = $movie->__get('id_movie');
-                $averageRating = $rs->getAverageRating( $id_movie );
-                if(isset($_SESSION['id_user'])) {
+                foreach( $data as $movie) {
+                    $id_movie = $movie->__get('id_movie');
+                    $averageRating = $rs->getAverageRating( $id_movie );
                     $isOnWatchlist = $ws->checkWatchlist( $id_movie, $_SESSION['id_user'] );
                     $isOnWatched = $ws->checkWatched( $id_movie, $_SESSION['id_user'] );
+                    if($averageRating !== null){
+                        $movieRatings[$id_movie] = $averageRating;
+                    } else {
+                        $movieRatings[$id_movie] = 0;
+                    }
                     $watchlist[$id_movie] = $isOnWatchlist;
                     $watched[$id_movie] = $isOnWatched;
                 }
-                if($averageRating !== null){
-                    $movieRatings[$id_movie] = $averageRating;
-                } else {
-                    $movieRatings[$id_movie] = 0;
-                }
-            }
 
-            //tu obrisati?
-            if(!isset($_SESSION['username'])){
-                $this->registry->template->disabled = true;
-            } else {
-                $this->registry->template->disabled = false;
+                //tu obrisati?
+                if(!isset($_SESSION['username'])){
+                    $this->registry->template->disabled = true;
+                } else {
+                    $this->registry->template->disabled = false;
+                }
+                $this->registry->template->ratings = $movieRatings;
+                $title = "Search result: ";
+                $subtitle = "Search movies by " . $what . " : " . $_POST['search'];
+                $this->registry->template->title = $title;
+                $this->registry->template->subtitle = $subtitle;
+                $this->registry->template->movieOnWatchlist = $watchlist;
+                $this->registry->template->movieOnWatched = $watched;
+                $this->registry->template->show('search');
             }
-            $this->registry->template->ratings = $movieRatings;
-            $title = "Search result: ";
-            $subtitle = "Search movies by " . $what . " : " . $_POST['search'];
-            $this->registry->template->title = $title;
-            $this->registry->template->subtitle = $subtitle;
-            $this->registry->template->movieOnWatchlist = $watchlist;
-            $this->registry->template->movieOnWatched = $watched;
-            $this->registry->template->show('search');
-        }
-        else {
-            header( 'Location: ' . __SITE_URL . '/index.php');
+            else {
+                header( 'Location: ' . __SITE_URL . '/index.php');
+            }
         }
     }
 
@@ -618,50 +632,29 @@ class moviesController extends BaseController {
         }
     }
 
-    public function sortData( $dataArray, $sortCondition, $orderCondition )
+    public function sortData($dataArray, $sortCondition, $orderCondition)
     {
-        switch ($sortCondition) {
-            case 'byTitle':
-                usort($dataArray, function($a, $b) use ($orderCondition) {
-                    if ($orderCondition === 'asc') {
-                        return strcmp($a->__get('title'), $b->__get('title'));
-                    } else {
-                        return strcmp($b->__get('title'), $a->__get('title'));
-                    }
-                });
-                break;
-            case 'byYear':
-                usort($dataArray, function($a, $b) use ($sortCondition) {
-                    if ($sortCondition === 'asc') {
-                        return $a->__get('year') > $b->__get('year')? 0 : 1;
-                    }
-                });
-                break;
-            case 'byGenre':
-                usort($dataArray, function($a, $b) use ($sortCondition) {
-                    if ($sortCondition === 'asc') {
-                        return strcmp($a->__get('genre'), $b->__get('genre'));
-                    } else {
-                        return strcmp($b->__get('genre'), $a->__get('genre'));
-                    }
-                });
-                break;
-            case 'byRating':
-                $rs = new RatesService();
-                usort($dataArray, function($a, $b) use ($sortCondition, $rs) {
+    
+        usort($dataArray, function($a, $b) use ($sortCondition, $orderCondition) {
+            switch ($sortCondition) {
+                case 'TITLE':
+                    return (strcmp($a->__get('title'), $b->__get('title')) <=> 0) * ($orderCondition === 'asc' ? 1 : -1);
+                case 'YEAR':
+                    return ($a->__get('year') <=> $b->__get('year')) * ($orderCondition === 'asc' ? 1 : -1);
+                case 'GENRE':
+                    return (strcmp($a->__get('genre') , $b->__get('genre')) <=> 0) * ($orderCondition === 'asc' ? 1 : -1);
+                case 'RATING':
+                    $rs = new RatesService();
                     $ratingA = $rs->getAverageRating($a->__get('id_movie'));
                     $ratingB = $rs->getAverageRating($b->__get('id_movie'));
-                    if ($sortCondition === 'asc') {
-                        return $ratingA <=> $ratingB;
-                    } else {
-                        return $ratingB <=> $ratingA;
-                    }
-                });
-                break;
-        }
-
+                    return ($ratingA <=> $ratingB) * ($orderCondition === 'asc' ? 1 : -1);
+            }
+        });
+    
         return $dataArray;
     }
+    
+    
 
     public function sortMovie()
     {
@@ -692,17 +685,8 @@ class moviesController extends BaseController {
                     $this->registry->template->title = 'Error in sorting. All movies:';
                 }
 
-
-                if($selectedOrder !== $currentOrder && $selectedSort !== $currentSort){
-
-                    $sortedData = $this->sortData( $data, $currentSort, $selectedOrder );
-                } elseif( $selectedSort !== $currentSort && $selectedOrder === $currentOrder ) {
-
-                    $sortedData = $this->sortData( $data, $selectedSort, $currentOrder );
-                } else {
-                    $sortedData = $this->sortData( $data, $selectedSort, $selectedOrder);
-                }
-
+                $sortedData = $this->sortData( $data, $selectedSort, $selectedOrder);
+                
                 $ms = new MovieService();
                 $rs = new RatesService();
                 $movieRatings = array();
@@ -761,14 +745,7 @@ class moviesController extends BaseController {
                     $this->registry->template->title = 'Error in sorting. All movies:';
                 }
 
-                
-                if($selectedOrder !== $currentOrder && $selectedSort !== $currentSort){
-                    $sortedData = $this->sortData( $data, $currentSort, $selectedOrder );
-                } elseif( $selectedSort !== $currentSort && $selectedOrder === $currentOrder ) {
-                    $sortedData = $this->sortData( $data, $selectedSort, $currentOrder );
-                } else {
-                    $sortedData = $this->sortData( $data, $selectedSort, $selectedOrder);
-                }
+                $sortedData = $this->sortData( $data, $selectedSort, $selectedOrder);
 
                 $ms = new MovieService();
                 $rs = new RatesService();
