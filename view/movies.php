@@ -43,7 +43,7 @@
                         <div class="movie-buttons">
                             <button class="rating-button" onclick="showRatingPopup('<?php echo $popupId; ?>')">&#9733; <?php echo $ratings[$m->__get('id_movie')]; ?></button>
                             <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatchlist' ;?>" id="watchlistForm">
-                                <button type="submit" <?php if(isset($_SESSION['id_user']) && $movieOnWatchlist[$m->__get('id_movie')]) { ?> class="remove-watched-button-colored" <?php } else { ?> class="remove-watched-button" <?php } ?> name="id_movie" value="<?php echo $m->__get('id_movie'); ?>" >&#x2764;</button>
+                                <button type="submit" <?php if(isset($_SESSION['id_user']) && $movieOnWatchlist[$m->__get('id_movie')]) { ?> class="remove-watched-button-colored" <?php } else { ?> class="remove-watched-button" <?php } ?> name="id_movie" value="<?php echo $m->__get('id_movie'); ?>" ><i class='fas fa-film' style="font-size: 20px;"></i></button>
                              </form>
                             <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatched'; ?>" id="watchedForm">
                                 <button type="submit" <?php if(isset($_SESSION['id_user']) && $movieOnWatched[$m->__get('id_movie')]) { ?> class="remove-watched-button-colored" <?php } else { ?> class="remove-watched-button" <?php } ?> name="id_movie" value="<?php echo $m->__get('id_movie'); ?>">&#x1F4FA;</button>
