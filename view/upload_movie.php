@@ -38,7 +38,7 @@
             <label for="duration">Duration:</label><br>
             <input type="number" min="10" max="300" name="duration" step="1" value="120" required><br><br>
 
-            <label for="dir-name-1">Directiors:</label><br>
+            <label for="dir-name-1">Directors:</label><br>
             <div class="form-group">
             <label for="dir-name-1">Name:</label>
             <input type="text" name="dir-name-1" placeholder="First director..." required>
