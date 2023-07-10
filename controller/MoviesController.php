@@ -572,7 +572,7 @@ class moviesController extends BaseController {
         else {
             header( 'Location: ' . __SITE_URL . '/index.php');
         }
-    }
+    }}
 
 
     public function rateMovie() {
