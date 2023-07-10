@@ -1,26 +1,26 @@
 <?php require_once __SITE_PATH . '/view/_header.php'; ?>
 
-<script>
-        var birthday_mess = "<?php echo $birthday; ?>";
-        if (birthday_mess !== "") {
-            var balloonCount = 5; // Number of balloons to display
-            var spacing = (window.innerWidth - balloonCount * 50) / (balloonCount + 1); // Calculate spacing between balloons
-            for (var i = 1; i <= balloonCount; i++) {
-                var balloon = document.createElement("div");
-                balloon.className = "balloon";
-                balloon.style.left = (spacing * i + 50 * (i - 1)) + "px"; // Calculate horizontal position
-                document.body.appendChild(balloon);
-            }
-
-            // Remove balloons after animation ends
-            var balloons = document.querySelectorAll(".balloon");
-            setTimeout(function() {
-                for (var i = 0; i < balloons.length; i++) {
-                    balloons[i].remove();
+<div class="balloon-container">
+        <script>
+            var birthday_mess = "<?php echo $birthday; ?>";
+            if (birthday_mess !== "") {
+                var balloonCount = 5;
+                var spacing = (window.innerWidth - balloonCount * 50) / (balloonCount + 1);
+                for (var i = 1; i <= balloonCount; i++) {
+                    var balloon = document.createElement("div");
+                    balloon.className = "balloon";
+                    balloon.style.left = (spacing * i + 50 * (i - 1)) + "px";
+                    document.body.appendChild(balloon);
                 }
-            }, 6000); // 6000ms = 6s (animation duration)
-        }
-</script>
+                var balloons = document.querySelectorAll(".balloon");
+                setTimeout(function() {
+                    for (var i = 0; i < balloons.length; i++) {
+                        balloons[i].remove();
+                    }
+                }, 6000);
+            }
+        </script>
+</div>
 
 <?php if($birthday !== "") { ?>
 

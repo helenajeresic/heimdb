@@ -997,20 +997,24 @@ footer {
 /*rating popup*/
 
 /*birthday mess*/
-.balloon {
-            position: absolute;
-            width: 70px;
-            height: 70px;
-            background-image: url(../images/ballon.png);
-            background-size: cover;
-            animation: balloon-fall 6s ease-in-out forwards;
-        }
+.balloon-container {
+    overflow: hidden;
+}
 
-        @keyframes balloon-fall {
-            0% {
-                transform: translateY(-100%);
-            }
-            100% {
-                transform: translateY(calc(100vh - 70px));
-            }
-        }
+.balloon {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background-image: url(../images/ballon.png);
+    background-size: cover;
+    animation: balloon-fall 6s ease-in-out forwards;
+}
+
+@keyframes balloon-fall {
+    0% {
+        transform: translateY(-85%);
+    }
+    100% {
+        transform: translateY(calc(85vh - 70px));
+    }
+}
