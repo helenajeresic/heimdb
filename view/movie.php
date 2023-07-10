@@ -13,8 +13,14 @@ $popupId = 'ratingPopup_' . $show_movie->__get('id_movie');?>
     <div class='info-forth'><?php echo $show_movie->__get('description'); ?></div><br>
     <div class='info-fifth'>DIRECTORS <?php foreach( $show_directors as $index => $d ) { echo ' | ' . $d->__get('name') . ' ' .$d->__get('surname') ;}?></div><br>
     <div class='info-sixth'>ACTORS <?php foreach( $show_actors as $index => $a ) { echo ' | ' . $a->__get('name') . ' ' .$a->__get('surname');}?></div><br>
-    <div class='info-seven'><button class="rating-button"  onclick="toggle('<?php echo $popupId; ?>')">&#9733; <?php echo $rating; ?></button></div><br>
-
+    <div class='info-seven'><button class="rating-button"  onclick="toggle('<?php echo $popupId; ?>')">&#9733; <?php echo $rating; ?></button>
+                            <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatchlist' ;?>" id="watchlistForm">
+                                <button type="submit" class="remove-watched-button" name="id_movie" value="<?php echo $show_movie->__get('id_movie'); ?>">&#x2764;</button>
+                             </form>
+                            <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatched'; ?>" id="watchedForm">
+                                <button type="submit" class="remove-watched-button" name="id_movie" value="<?php echo $show_movie->__get('id_movie'); ?>">&#x1F4FA;</button>
+                            </form>
+    </div><br>
 </div>
 </div>
 

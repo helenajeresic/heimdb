@@ -474,6 +474,22 @@ button:disabled {
   text-align: left;
   font-size: 25px;
 }
+
+.info-seven {
+  display: flex;
+  align-items: center;
+}
+
+.info-seven button {
+  margin-left: 7px;
+  margin-right: 7px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1px;
+}
+
 /*movie site - top part about movie -end*/
 
 
