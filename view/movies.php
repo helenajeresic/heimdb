@@ -1,5 +1,6 @@
 <?php require_once __SITE_PATH . '/view/_header.php'; ?>
 
+
 <div class="container">
     <div class="movie-container">
         <div class="movie-list-name">
@@ -59,7 +60,7 @@
                     <label for="rating-stars" style="font-weight: bold;">Rate movie below</label><br><br>
                         <div class="rating-stars">
                             <input type="radio" name="rating" id="<?php echo $popupId . '_star10'; ?>" value="10">
-                            <label for="<?php echo $popupId . '_star10'; ?>">10 stars</label>  
+                            <label for="<?php echo $popupId . '_star10'; ?>">10 stars</label>
 
                             <input type="radio" name="rating" id="<?php echo $popupId . '_star9'; ?>" value="9">
                             <label for="<?php echo $popupId . '_star9'; ?>">9 stars</label>
@@ -87,7 +88,7 @@
 
                             <input type="radio" class="rating-stars" name="rating" id="<?php echo $popupId . '_star1'; ?>" value="1">
                             <label for="<?php echo $popupId . '_star1'; ?>">1 stars</label>
-                                   
+
                         </div><br><br>
                         <input type="hidden" name="movieId" id="<?php echo $popupId . '_ratingMovieId'; ?>" value="<?php echo $m->__get('id_movie'); ?>">
                         <br>

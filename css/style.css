@@ -16,6 +16,8 @@ body {
   min-height: 90vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  overflow: hidden;
 }
 
 .icon_heimdb {
@@ -935,7 +937,7 @@ footer {
      bottom: 0;
      width: 100%;
      white-space: pre;
-     
+
   }
   main {
      flex: 1;
@@ -969,11 +971,11 @@ footer {
   content: '★ ';
 }
 .rating-stars > input:checked ~ label {
-  color: #ffc700;    
+  color: #ffc700;
 }
 .rating-stars:not(:checked) > label:hover,
 .rating-stars:not(:checked) > label:hover ~ label {
-  color: #deb217;  
+  color: #deb217;
 }
 .rating-stars > input:checked + label:hover,
 .rating-stars > input:checked + label:hover ~ label,
@@ -993,3 +995,22 @@ footer {
 
 
 /*rating popup*/
+
+/*birthday mess*/
+.balloon {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background-image: url(../images/ballon.png);
+            background-size: cover;
+            animation: balloon-fall 6s ease-in-out forwards;
+        }
+
+        @keyframes balloon-fall {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(calc(100vh - 70px));
+            }
+        }

@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo __SITE_URL . '/css/style.css';?>">
     <link rel="shortcut icon" href="<?php echo __SITE_URL . '/images/heimdb.ico';?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <div class="fixed">

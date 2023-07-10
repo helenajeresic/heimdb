@@ -40,6 +40,7 @@ class LoginController extends BaseController
 				$_SESSION['name'] = $user -> name;
 				$_SESSION['surname'] = $user -> surname;
 				$_SESSION['admin'] = $user -> is_admin;
+				$_SESSION['date_of_birth'] = $user -> date_of_birth;
 
 
 				header( 'Location: ' . __SITE_URL . '/index.php?rt=movies' );

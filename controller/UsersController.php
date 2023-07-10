@@ -26,8 +26,19 @@ class usersController extends BaseController {
     		}
     		if( isset($_POST['date']) && $_POST['date'] !== ''){
     			$us->updateDate($_SESSION['username'], $_POST['date']);
+                $_SESSION['date_of_birth'] = $_POST['date'];
     		}
 
+            $today_date = date("m-d");
+
+            if (date("m-d", strtotime($_SESSION['date_of_birth'])) === $today_date) {
+                $birthday = "Happy birthday " . $_SESSION['username'] . "!";
+            }
+            else {
+                $birthday = "";
+            }
+
+            $this->registry->template->birthday = $birthday;
             $userData = $us->getUserByUsername($_SESSION['username']);
             $this->registry->template->data = $userData;
             $this->registry->template->title = 'Update profile';

@@ -29,7 +29,7 @@ class moviesController extends BaseController {
             }
 
             $this->registry->template->disabled = true;
-            //sto sa watchlist i watched? 
+            //sto sa watchlist i watched?
             $this->registry->template->ratings = $movieRatings;
             $this->registry->template->show_movies = $data;
             $this->registry->template->title = 'All movies';
@@ -59,6 +59,8 @@ class moviesController extends BaseController {
                 $watchlist[$id_movie] = $isOnWatchlist;
                 $watched[$id_movie] = $isOnWatched;
             }
+
+
 
             $this->registry->template->disabled = false;
             $this->registry->template->movieOnWatchlist = $watchlist;
@@ -301,53 +303,53 @@ class moviesController extends BaseController {
 
     public function addMovie()
     {
-        if(!isset($_SESSION['username'])) 
+        if(!isset($_SESSION['username']))
         {
             $this->registry->template->title = 'Login';
             $this->registry->template->error = false;
             $this->registry->template->show('login');
         }
-        else 
+        else
         {
-            if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
+            if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1)
             {
                 $ms = new MovieService();
                 if (isset($_POST['title']) && isset($_POST['year']) &&
-                isset($_POST['genre']) && isset($_POST['description']) && isset($_FILES['image']) && 
-                isset($_POST['duration']) && isset($_POST['dir-name-1']) && isset($_POST['dir-surname-1']) && 
+                isset($_POST['genre']) && isset($_POST['description']) && isset($_FILES['image']) &&
+                isset($_POST['duration']) && isset($_POST['dir-name-1']) && isset($_POST['dir-surname-1']) &&
                 isset($_POST['act-name-1']) && isset($_POST['act-surname-1']) &&
                 !empty($_POST['title']) && !empty($_POST['year']) &&
                 !empty($_POST['description']) && !empty($_POST['duration']) &&
                 !empty($_POST['dir-name-1']) && !empty($_POST['dir-surname-1']) &&
                 !empty($_POST['act-name-1']) && !empty($_POST['act-surname-1']))
-                {   
+                {
                     //pokupi sve zanrove
-                    $selectedGenres = $_POST['genre']; 
+                    $selectedGenres = $_POST['genre'];
 
                     if (is_array($selectedGenres))
-                        $genreString = implode(' ', $selectedGenres); 
+                        $genreString = implode(' ', $selectedGenres);
                     else
                         $genreString = $selectedGenres;
-                     
-                    //pokupi sve redatelje
-                    $directorNames = array(); 
-                    $directorSurnames = array(); 
 
-                    $directorNames[] = $_POST['dir-name-1']; 
+                    //pokupi sve redatelje
+                    $directorNames = array();
+                    $directorSurnames = array();
+
+                    $directorNames[] = $_POST['dir-name-1'];
                     $directorSurnames[] = $_POST['dir-surname-1'];
 
                     if (isset($_POST['dir-name-2']) && isset($_POST['dir-surname-2']) &&
-                    !empty($_POST['dir-name-2']) && !empty($_POST['dir-surname-2'])) 
+                    !empty($_POST['dir-name-2']) && !empty($_POST['dir-surname-2']))
                     {
-                        $directorNames[] = $_POST['dir-name-2']; 
+                        $directorNames[] = $_POST['dir-name-2'];
                         $directorSurnames[] = $_POST['dir-surname-2'];
                     }
-                
-                    if (isset($_POST['dir-name-3']) && isset($_POST['dir-surname-3']) && 
-                    !empty($_POST['dir-name-3']) && !empty($_POST['dir-surname-3'])) 
+
+                    if (isset($_POST['dir-name-3']) && isset($_POST['dir-surname-3']) &&
+                    !empty($_POST['dir-name-3']) && !empty($_POST['dir-surname-3']))
                     {
                         $directorNames[] = $_POST['dir-name-3'];
-                        $directorSurnames[] = $_POST['dir-surname-3']; 
+                        $directorSurnames[] = $_POST['dir-surname-3'];
                     }
 
                     //pokupi sve glumce
@@ -358,14 +360,14 @@ class moviesController extends BaseController {
                     $actorSurnames[] = $_POST['act-surname-1'];
 
                     if (isset($_POST['act-name-2']) && isset($_POST['act-surname-2']) &&
-                    !empty($_POST['act-name-2']) && !empty($_POST['act-surname-2'])) 
+                    !empty($_POST['act-name-2']) && !empty($_POST['act-surname-2']))
                     {
                         $actorNames[] = $_POST['act-name-2'];
                         $actorSurnames[] = $_POST['act-surname-2'];
                     }
 
                     if (isset($_POST['act-name-3']) && isset($_POST['act-surname-3']) &&
-                    !empty($_POST['act-name-3']) && !empty($_POST['act-surname-3'])) 
+                    !empty($_POST['act-name-3']) && !empty($_POST['act-surname-3']))
                     {
                         $actorNames[] = $_POST['act-name-3'];
                         $actorSurnames[] = $_POST['act-surname-3'];
@@ -602,7 +604,7 @@ class moviesController extends BaseController {
 
             $rs = new RatesService();
             $movieRatings = array();
-    
+
             foreach( $data as $movie) {
                 $id_movie = $movie->__get('id_movie');
                 $averageRating = $rs->getAverageRating( $id_movie );
@@ -612,12 +614,12 @@ class moviesController extends BaseController {
                     $movieRatings[$id_movie] = 0;
                 }
             }
-    
+
             $this->registry->template->disabled = false;
             $this->registry->template->show_movies = $sortedMovies;
             $this->registry->template->ratings = $movieRatings;
             $this->registry->template->show('movies');
-    
+
         }
     }
 
