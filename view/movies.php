@@ -5,7 +5,6 @@
     <div class="movie-container">
         <div class="movie-list-name">
             <h1><?php echo $title; ?></h1><br>
-            <h2><?php if(isset($subtitle)) echo $subtitle; ?></h2><br>
             <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=movies/sortMovie'; ?>" id="sortForm">
                 <div class="select-sort">
                     <label for="selectSort">Sort by:</label>

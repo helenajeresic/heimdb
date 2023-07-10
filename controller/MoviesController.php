@@ -633,9 +633,7 @@ class moviesController extends BaseController {
             case 'byYear':
                 usort($dataArray, function($a, $b) use ($sortCondition) {
                     if ($sortCondition === 'asc') {
-                        return $a->__get('year') - $b->__get('year');
-                    } else {
-                        return $b->__get('year') - $a->__get('year');
+                        return $a->__get('year') > $b->__get('year')? 0 : 1;
                     }
                 });
                 break;
@@ -694,14 +692,12 @@ class moviesController extends BaseController {
                     $this->registry->template->title = 'Error in sorting. All movies:';
                 }
 
-                //odaberi po cemu sortiras, moze biti samo jedno
+
                 if($selectedOrder !== $currentOrder && $selectedSort !== $currentSort){
-                    //sort po selectedSort
-                    //sort po current Order
+
                     $sortedData = $this->sortData( $data, $currentSort, $selectedOrder );
                 } elseif( $selectedSort !== $currentSort && $selectedOrder === $currentOrder ) {
-                    //sort po currentOrder
-                    //sort po selectedOrder
+
                     $sortedData = $this->sortData( $data, $selectedSort, $currentOrder );
                 } else {
                     $sortedData = $this->sortData( $data, $selectedSort, $selectedOrder);
@@ -765,14 +761,10 @@ class moviesController extends BaseController {
                     $this->registry->template->title = 'Error in sorting. All movies:';
                 }
 
-                //odaberi po cemu sortiras, moze biti samo jedno
+                
                 if($selectedOrder !== $currentOrder && $selectedSort !== $currentSort){
-                    //sort po selectedSort
-                    //sort po current Order
                     $sortedData = $this->sortData( $data, $currentSort, $selectedOrder );
                 } elseif( $selectedSort !== $currentSort && $selectedOrder === $currentOrder ) {
-                    //sort po currentOrder
-                    //sort po selectedOrder
                     $sortedData = $this->sortData( $data, $selectedSort, $currentOrder );
                 } else {
                     $sortedData = $this->sortData( $data, $selectedSort, $selectedOrder);
