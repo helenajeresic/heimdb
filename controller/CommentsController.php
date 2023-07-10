@@ -85,8 +85,9 @@ class commentsController extends BaseController {
                 else
                 {
                     $id_comment_user = $comment->id_user;
+                    $comment_user = $us->getUserById($comment->id_user);
                     $cs->removeComment($id_comment);
-                    if($id_user !== $id_comment_user){
+                    if($id_user !== $id_comment_user && $comment_user->is_admin === 0){
                         //to znaci da brisem komentar nekog drugog usera, pa mu trebam povecati penalty
                         $us->increasePenalty($id_comment_user);
                     }
