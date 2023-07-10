@@ -393,6 +393,11 @@ body {
   color: black;
 }
 
+.remove-watched-button-colored:hover {
+  background-color: #e3c112;
+  color: black;
+}
+
 .remove-watchlist-button {
   color: black;
 }
