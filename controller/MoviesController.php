@@ -697,7 +697,6 @@ class moviesController extends BaseController {
                 $this->registry->template->movieOnWatched = $watched;
                 $this->registry->template->ratings = $movieRatings;
                 $this->registry->template->show_movies = $sortedData;
-                $this->registry->template->title = 'All movies';
                 $this->registry->template->show('movies');
 
             } else{
@@ -760,7 +759,6 @@ class moviesController extends BaseController {
                 $this->registry->template->movieOnWatched = $watched;
                 $this->registry->template->ratings = $movieRatings;
                 $this->registry->template->show_movies = $sortedData;
-                $this->registry->template->title = 'All movies';
                 $this->registry->template->show('movies');
 
             } else{
