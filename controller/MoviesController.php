@@ -278,7 +278,7 @@ class moviesController extends BaseController {
         $this->registry->template->movieOnWatched = $watched;
         $this->registry->template->title = 'Top rated';
         $this->registry->template->show('movies');
-        
+
     }
 
     public function mostWatched()
@@ -317,7 +317,7 @@ class moviesController extends BaseController {
         $this->registry->template->movieOnWatched = $watched;
         $this->registry->template->title = 'Most watched';
         $this->registry->template->show('movies');
-        
+
     }
 
     public function mostPopular()
@@ -356,7 +356,7 @@ class moviesController extends BaseController {
         $this->registry->template->movieOnWatched = $watched;
         $this->registry->template->title = 'Most popular';
         $this->registry->template->show('movies');
-        
+
     }
 
     public function addMovie()
@@ -372,10 +372,16 @@ class moviesController extends BaseController {
             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1)
             {
                 $ms = new MovieService();
-                if (isset($_POST['title']) && isset($_POST['year']) &&
-                isset($_POST['genre']) && isset($_POST['description']) && isset($_FILES['image']) &&
-                isset($_POST['duration']) && isset($_POST['dir-name-1']) && isset($_POST['dir-surname-1']) &&
-                isset($_POST['act-name-1']) && isset($_POST['act-surname-1']) &&
+                if (isset($_POST['title']) && preg_match('/^[0-9A-Za-z-_?!\'\: ]{3,100}$/', $_POST['title']) &&
+                isset($_POST['year']) && preg_match('/^[0-9]{4}$/', $_POST['year']) &&
+                isset($_POST['genre']) &&
+                isset($_POST['description']) && preg_match('/^[0-9A-Za-z-_?!\'\: ]{3,500}$/', $_POST['description']) &&
+                isset($_FILES['image']) &&
+                isset($_POST['duration']) && preg_match('/^[0-9]{1,4}$/', $_POST['duration']) &&
+                isset($_POST['dir-name-1']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['dir-name-1']) &&
+                isset($_POST['dir-surname-1']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['dir-surname-1']) &&
+                isset($_POST['act-name-1']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['act-name-1']) &&
+                isset($_POST['act-surname-1']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['act-surname-1']) &&
                 !empty($_POST['title']) && !empty($_POST['year']) &&
                 !empty($_POST['description']) && !empty($_POST['duration']) &&
                 !empty($_POST['dir-name-1']) && !empty($_POST['dir-surname-1']) &&
@@ -396,15 +402,17 @@ class moviesController extends BaseController {
                     $directorNames[] = $_POST['dir-name-1'];
                     $directorSurnames[] = $_POST['dir-surname-1'];
 
-                    if (isset($_POST['dir-name-2']) && isset($_POST['dir-surname-2']) &&
-                    !empty($_POST['dir-name-2']) && !empty($_POST['dir-surname-2']))
+                    if (isset($_POST['dir-name-2']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['dir-name-2']) &&
+                        isset($_POST['dir-surname-2']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['dir-surname-2']) &&
+                        !empty($_POST['dir-name-2']) && !empty($_POST['dir-surname-2']))
                     {
                         $directorNames[] = $_POST['dir-name-2'];
                         $directorSurnames[] = $_POST['dir-surname-2'];
                     }
 
-                    if (isset($_POST['dir-name-3']) && isset($_POST['dir-surname-3']) &&
-                    !empty($_POST['dir-name-3']) && !empty($_POST['dir-surname-3']))
+                    if (isset($_POST['dir-name-3']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['dir-name-3']) &&
+                        isset($_POST['dir-surname-3']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['dir-surname-3']) &&
+                        !empty($_POST['dir-name-3']) && !empty($_POST['dir-surname-3']))
                     {
                         $directorNames[] = $_POST['dir-name-3'];
                         $directorSurnames[] = $_POST['dir-surname-3'];
@@ -417,14 +425,16 @@ class moviesController extends BaseController {
                     $actorNames[] = $_POST['act-name-1'];
                     $actorSurnames[] = $_POST['act-surname-1'];
 
-                    if (isset($_POST['act-name-2']) && isset($_POST['act-surname-2']) &&
+                    if (isset($_POST['act-name-2']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['act-name-2']) &&
+                    isset($_POST['act-surname-2']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['act-surname-2']) &&
                     !empty($_POST['act-name-2']) && !empty($_POST['act-surname-2']))
                     {
                         $actorNames[] = $_POST['act-name-2'];
                         $actorSurnames[] = $_POST['act-surname-2'];
                     }
 
-                    if (isset($_POST['act-name-3']) && isset($_POST['act-surname-3']) &&
+                    if (isset($_POST['act-name-3']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['act-name-3']) &&
+                    isset($_POST['act-surname-3']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['act-surname-3']) &&
                     !empty($_POST['act-name-3']) && !empty($_POST['act-surname-3']))
                     {
                         $actorNames[] = $_POST['act-name-3'];
@@ -445,7 +455,7 @@ class moviesController extends BaseController {
 
     }
 
-    public function showMovie() 
+    public function showMovie()
     {
         $ms = new MovieService();
         $us = new UserService();
@@ -492,16 +502,17 @@ class moviesController extends BaseController {
         }
         else {
             exit( 'Nesto ne valja sa id-em.' );
-        }   
-        
+        }
+
     }
 
     public function search()
     {
-        if( isset($_POST['search'] ) && $_POST['search'] !== ""   ){
-            $s = $_POST['search'];
-            $b = $_POST['by'];
-            $ms = new MovieService();
+        if( isset($_POST['search'] ) && $_POST['search'] !== "" ){
+            if( preg_match('/^[0-9A-Za-z-_?!\'\: ]{3,100}$/', $_POST['search'])){
+                $s = $_POST['search'];
+                $b = $_POST['by'];
+                $ms = new MovieService();
 
             if ($b === '1') {
                 $what = "title";
@@ -620,7 +631,7 @@ class moviesController extends BaseController {
 
     public function sortData($dataArray, $sortCondition, $orderCondition)
     {
-    
+
         usort($dataArray, function($a, $b) use ($sortCondition, $orderCondition) {
             switch ($sortCondition) {
                 case 'TITLE':
@@ -636,16 +647,16 @@ class moviesController extends BaseController {
                     return ($ratingA <=> $ratingB) * ($orderCondition === 'asc' ? 1 : -1);
             }
         });
-    
+
         return $dataArray;
     }
-    
-    
+
+
 
     public function sortMovie()
     {
         if( !isset($_SESSION['username']) ) {
-            
+
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $selectedSort = $_POST['selectSort'];
                 $selectedOrder = $_POST['orderSort'];
@@ -672,13 +683,13 @@ class moviesController extends BaseController {
                 }
 
                 $sortedData = $this->sortData( $data, $selectedSort, $selectedOrder);
-                
+
                 $ms = new MovieService();
                 $rs = new RatesService();
                 $movieRatings = array();
                 $watchlist = array();
                 $watched = array();
-    
+
                 foreach( $sortedData as $movie) {
                     $id_movie = $movie->__get('id_movie');
                     $averageRating = $rs->getAverageRating( $id_movie );
@@ -690,7 +701,7 @@ class moviesController extends BaseController {
                     $watchlist[$id_movie] = false;
                     $watched[$id_movie] = false;
                 }
-    
+
                 $this->registry->template->order = $selectedOrder;
                 $this->registry->template->sort = $selectedSort;
                 $this->registry->template->movieOnWatchlist = $watchlist;
@@ -704,7 +715,7 @@ class moviesController extends BaseController {
             }
 
         } else {
-        
+
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $selectedSort = $_POST['selectSort'];
                 $selectedOrder = $_POST['orderSort'];
@@ -738,7 +749,7 @@ class moviesController extends BaseController {
                 $movieRatings = array();
                 $watchlist = array();
                 $watched = array();
-    
+
                 foreach( $sortedData as $movie) {
                     $id_movie = $movie->__get('id_movie');
                     $averageRating = $rs->getAverageRating( $id_movie );
@@ -752,7 +763,7 @@ class moviesController extends BaseController {
                     $watchlist[$id_movie] = $isOnWatchlist;
                     $watched[$id_movie] = $isOnWatched;
                 }
-    
+
                 $this->registry->template->order = $selectedOrder;
                 $this->registry->template->sort = $selectedSort;
                 $this->registry->template->movieOnWatchlist = $watchlist;
