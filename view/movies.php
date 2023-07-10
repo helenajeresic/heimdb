@@ -58,7 +58,7 @@
                 </div>
                 <div id="<?php echo $popupId; ?>" class="popup" data-state="closed">
                     <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=movies/rateMovie&id_movie=' . $m->__get('id_movie'); ?>">
-                        <h2>Rate the Movie</h2>
+                    <label for="rating-stars" style="font-weight: bold;">Rate movie below</label><br><br>
                         <div class="rating-stars">
                             <input type="radio" name="rating" id="<?php echo $popupId . '_star10'; ?>" value="10">
                             <label for="<?php echo $popupId . '_star10'; ?>">10 stars</label>  

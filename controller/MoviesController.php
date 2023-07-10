@@ -390,6 +390,7 @@ class moviesController extends BaseController {
         $us = new UserService();
         $ps = new PersonService();
         $cs = new CommentService();
+        $rs = new RatesService();
         if( isset( $_GET['id_movie'] )) {
             $id_movie = $_GET['id_movie'];
             $movie = $ms->getMovieById($id_movie);
@@ -406,6 +407,8 @@ class moviesController extends BaseController {
                 $recommendations = $ms->getMovieRecommendations();
                 $actors = $ps->getActorsForMovie($id_movie);
                 $directors = $ps->getDirectorsForMovie($id_movie);
+                $rating = $rs->getAverageRating($id_movie);
+                $this->registry->template->rating = $rating;
                 $this->registry->template->show_actors = $actors;
                 $this->registry->template->show_directors = $directors;
                 $this->registry->template->user_names = $arr;
@@ -494,6 +497,33 @@ class moviesController extends BaseController {
                     $rs = new RatesService();
                     $rs->insertOrUpdateRating( $id_movie, $id_user, $_POST['rating']);
                     header( 'Location: ' . __SITE_URL . '/index.php');
+                }
+            }
+            else {
+                exit( 'Nesto ne valja sa id-em.' );
+            }
+        }
+    }
+
+    public function rateMovieOnMovie() {
+        if(!isset($_SESSION['username'])) {
+            $this->registry->template->title = 'Login';
+            $this->registry->template->error = false;
+            $this->registry->template->show('login');
+        }
+        else {
+            $ms = new MovieService();
+            if( isset( $_POST['rating'] ) && isset( $_GET['id_movie'] )) {
+                $id_user = $_SESSION['id_user'];
+                $id_movie = $_GET['id_movie'];
+                $movie = $ms->getMovieById($id_movie);
+                if($movie == false)
+                    exit( 'Krivi id filma.' );
+                else
+                {
+                    $rs = new RatesService();
+                    $rs->insertOrUpdateRating( $id_movie, $id_user, $_POST['rating']);
+                    header( 'Location: ' . __SITE_URL . '/index.php?rt=movies/showMovie&id_movie=' . $id_movie);
                 }
             }
             else {

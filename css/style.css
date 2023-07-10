@@ -398,6 +398,13 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.rating-button:hover {
+  background-color: rgb(211, 211, 211);
+}
+
+.remove-watched-button:hover {
+  background-color: rgb(211, 211, 211);
+}
 
 /*movies - top rated and wishlist - end*/
 /*movie site - top part about movie*/
@@ -483,6 +490,10 @@ button:disabled {
   padding : 10px;
   border-radius: 3px;
   font-weight: bold;
+}
+
+.comment-button:hover {
+  background-color: rgb(211, 211, 211);
 }
 
 .form-comment label {
