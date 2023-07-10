@@ -372,16 +372,16 @@ class moviesController extends BaseController {
             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1)
             {
                 $ms = new MovieService();
-                if (isset($_POST['title']) && preg_match('/^[0-9A-Za-z-_?!\'\: ]{3,100}$/', $_POST['title']) &&
-                isset($_POST['year']) && preg_match('/^[0-9]{4}$/', $_POST['year']) &&
+                if (isset($_POST['title']) &&
+                isset($_POST['year'])  &&
                 isset($_POST['genre']) &&
-                isset($_POST['description']) && preg_match('/^[0-9A-Za-z-_?!\'\: ]{3,500}$/', $_POST['description']) &&
+                isset($_POST['description']) &&
                 isset($_FILES['image']) &&
-                isset($_POST['duration']) && preg_match('/^[0-9]{1,4}$/', $_POST['duration']) &&
-                isset($_POST['dir-name-1']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['dir-name-1']) &&
-                isset($_POST['dir-surname-1']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['dir-surname-1']) &&
-                isset($_POST['act-name-1']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['act-name-1']) &&
-                isset($_POST['act-surname-1']) && preg_match('/^[A-Za-z ]{3,50}$/', $_POST['act-surname-1']) &&
+                isset($_POST['duration']) &&
+                isset($_POST['dir-name-1']) &&
+                isset($_POST['dir-surname-1']) &&
+                isset($_POST['act-name-1']) &&
+                isset($_POST['act-surname-1']) &&
                 !empty($_POST['title']) && !empty($_POST['year']) &&
                 !empty($_POST['description']) && !empty($_POST['duration']) &&
                 !empty($_POST['dir-name-1']) && !empty($_POST['dir-surname-1']) &&
