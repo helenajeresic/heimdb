@@ -105,8 +105,7 @@ class MovieService
 
 	function addMovie($title, $year, $genres, $description, $imageName, $imagePath, $duration, $directorNames, $directorSurnames, $actorNames, $actorSurnames)
 	{	
-		//$this->processImageUpload($imageName, $imagePath);
-		//promijeni image0.jpg u $imageName
+		$this->processImageUpload($imageName, $imagePath);
 		try 
 		{
 			$db = DB::getConnection();
@@ -117,7 +116,7 @@ class MovieService
 				'year' => $year,
 				'genre' => $genres,
 				'description' => $description,
-				'image' => 'image0.jpg',
+				'image' => $imageName,
 				'duration' => $duration
 			));
 
