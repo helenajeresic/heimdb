@@ -370,7 +370,7 @@ body {
   gap: 2px;
 }
 
-.remove-watched-button, .remove-watchlist-button, .rating-button {
+.remove-watched-button, .remove-watchlist-button, .rating-button, .remove-watched-button-colored {
   display: inline-block;
   padding: 10px 20px;
   background-color: #e0e0e0;
@@ -385,7 +385,12 @@ body {
 }
 
 .remove-watched-button {
-  color: red;
+  color: black;
+}
+
+.remove-watched-button-colored {
+  background-color: #F3CE13;
+  color: black;
 }
 
 .remove-watchlist-button {

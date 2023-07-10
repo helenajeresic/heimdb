@@ -15,12 +15,14 @@
                             <option value="byGenre">genre</option>
                             <option value="byRating">HEIMDB rating</option>
                         </select>
+                        <input type="hidden" name="currentSort" value="<?php if(isset($sort)) echo $sort; ?>">
                     <label for="orderSort"> order:</label>
                         <select name="orderSort" id="orderSort">
                             <option value="asc">ascending</option>
                             <option value="desc">descending</option>
                         </select>
                         <input type="hidden" name="currentPage" value="<?php echo $title; ?>">
+                        <input type="hidden" name="currentOrder" value="<?php if(isset($sort)) echo $order; ?>">
                 </div>
             </form>
         </div>
@@ -41,10 +43,10 @@
                         <div class="movie-buttons">
                             <button class="rating-button" onclick="showRatingPopup('<?php echo $popupId; ?>')">&#9733; <?php echo $ratings[$m->__get('id_movie')]; ?></button>
                             <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatchlist' ;?>" id="watchlistForm">
-                                <button type="submit" class="remove-watched-button" name="id_movie" value="<?php echo $m->__get('id_movie'); ?>">&#x2764;</button>
+                                <button type="submit" <?php if($movieOnWatchlist[$m->__get('id_movie')]) { ?> class="remove-watched-button-colored" <?php } else { ?> class="remove-watched-button" <?php } ?> name="id_movie" value="<?php echo $m->__get('id_movie'); ?>" >&#x2764;</button>
                              </form>
                             <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=watchlist/updateWatched'; ?>" id="watchedForm">
-                                <button type="submit" class="remove-watched-button" name="id_movie" value="<?php echo $m->__get('id_movie'); ?>">&#x1F4FA;</button>
+                                <button type="submit" <?php if($movieOnWatched[$m->__get('id_movie')]) { ?> class="remove-watched-button-colored" <?php } else { ?> class="remove-watched-button" <?php } ?> name="id_movie" value="<?php echo $m->__get('id_movie'); ?>">&#x1F4FA;</button>
                             </form>
                         </div>
                         <div class="movie-atributes">
