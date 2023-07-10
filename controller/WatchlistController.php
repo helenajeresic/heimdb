@@ -27,15 +27,14 @@ class watchlistController extends BaseController
             foreach( $dataWatchlist as $movie) {
                 $id_movie = $movie->__get('id_movie');
                 $averageRatingWatchlist = $rs->getAverageRating( $id_movie );
-                $isOnWatchlist = $ms->checkWatchlist( $id_movie, $_SESSION['id_user'] );
-                $isOnWatched = $ms->checkWatched( $id_movie, $_SESSION['id_user'] );
+
                 if($averageRatingWatchlist !== null){
                     $movieRatingsWatchlist[$id_movie] = $averageRatingWatchlist;
                 } else {
                     $movieRatingsWatchlist[$id_movie] = 0;
                 }
-                $watchlist[$id_movie] = $isOnWatchlist;
-                $watched[$id_movie] = $isOnWatched;
+                $watchlist[$id_movie] = $ms->checkWatchlist( $id_movie, $_SESSION['id_user'] );
+                $watched[$id_movie] = $ms->checkWatched( $id_movie, $_SESSION['id_user'] );
             }
 
             $movieRatingsWatched = array();
@@ -43,15 +42,13 @@ class watchlistController extends BaseController
             foreach( $dataWatched as $movie) {
                 $id_movie = $movie->__get('id_movie');
                 $averageRatingWatched = $rs->getAverageRating( $id_movie );
-                $isOnWatchlist = $ms->checkWatchlist( $id_movie, $_SESSION['id_user'] );
-                $isOnWatched = $ms->checkWatched( $id_movie, $_SESSION['id_user'] );
                 if($averageRatingWatched !== null){
                     $movieRatingsWatched[$id_movie] = $averageRatingWatched;
                 } else {
                     $movieRatingsWatched[$id_movie] = 0;
                 }
-                $watchlist[$id_movie] = $isOnWatchlist;
-                $watched[$id_movie] = $isOnWatched;
+                $watchlist[$id_movie] = $ms->checkWatchlist( $id_movie, $_SESSION['id_user'] );
+                $watched[$id_movie] = $ms->checkWatched( $id_movie, $_SESSION['id_user'] );
             }
 
             $this->registry->template->movieOnWatchlist = $watchlist;
@@ -101,15 +98,14 @@ class watchlistController extends BaseController
             foreach( $dataWatchlist as $movie) {
                 $id_movie = $movie->__get('id_movie');
                 $averageRatingWatchlist = $rs->getAverageRating( $id_movie );
-                $isOnWatchlist = $ms->checkWatchlist( $id_movie, $_SESSION['id_user'] );
-                $isOnWatched = $ms->checkWatched( $id_movie, $_SESSION['id_user'] );
+
                 if($averageRatingWatchlist !== null){
                     $movieRatingsWatchlist[$id_movie] = $averageRatingWatchlist;
                 } else {
                     $movieRatingsWatchlist[$id_movie] = 0;
                 }
-                $watchlist[$id_movie] = $isOnWatchlist;
-                $watched[$id_movie] = $isOnWatched;
+                $watchlist[$id_movie] = $ms->checkWatchlist( $id_movie, $_SESSION['id_user'] );
+                $watched[$id_movie] = $ms->checkWatched( $id_movie, $_SESSION['id_user'] );
             }
 
             $movieRatingsWatched = array();
@@ -117,15 +113,13 @@ class watchlistController extends BaseController
             foreach( $dataWatched as $movie) {
                 $id_movie = $movie->__get('id_movie');
                 $averageRatingWatched = $rs->getAverageRating( $id_movie );
-                $isOnWatchlist = $ms->checkWatchlist( $id_movie, $_SESSION['id_user'] );
-                $isOnWatched = $ms->checkWatched( $id_movie, $_SESSION['id_user'] );
                 if($averageRatingWatched !== null){
                     $movieRatingsWatched[$id_movie] = $averageRatingWatched;
                 } else {
                     $movieRatingsWatched[$id_movie] = 0;
                 }
-                $watchlist[$id_movie] = $isOnWatchlist;
-                $watched[$id_movie] = $isOnWatched;
+                $watchlist[$id_movie] = $ms->checkWatchlist( $id_movie, $_SESSION['id_user'] );
+                $watched[$id_movie] = $ms->checkWatched( $id_movie, $_SESSION['id_user'] );
             }
 
             $this->registry->template->movieOnWatchlist = $watchlist;
@@ -186,15 +180,14 @@ class watchlistController extends BaseController
             foreach( $dataWatchlist as $movie) {
                 $id_movie = $movie->__get('id_movie');
                 $averageRatingWatchlist = $rs->getAverageRating( $id_movie );
-                $isOnWatchlist = $ms->checkWatchlist( $id_movie, $_SESSION['id_user'] );
-                $isOnWatched = $ms->checkWatched( $id_movie, $_SESSION['id_user'] );
+
                 if($averageRatingWatchlist !== null){
                     $movieRatingsWatchlist[$id_movie] = $averageRatingWatchlist;
                 } else {
                     $movieRatingsWatchlist[$id_movie] = 0;
                 }
-                $watchlist[$id_movie] = $isOnWatchlist;
-                $watched[$id_movie] = $isOnWatched;
+                $watchlist[$id_movie] = $ms->checkWatchlist( $id_movie, $_SESSION['id_user'] );
+                $watched[$id_movie] = $ms->checkWatched( $id_movie, $_SESSION['id_user'] );
             }
 
             $movieRatingsWatched = array();
@@ -202,15 +195,14 @@ class watchlistController extends BaseController
             foreach( $dataWatched as $movie) {
                 $id_movie = $movie->__get('id_movie');
                 $averageRatingWatched = $rs->getAverageRating( $id_movie );
-                $isOnWatchlist = $ms->checkWatchlist( $id_movie, $_SESSION['id_user'] );
-                $isOnWatched = $ms->checkWatched( $id_movie, $_SESSION['id_user'] );
+                
                 if($averageRatingWatched !== null){
                     $movieRatingsWatched[$id_movie] = $averageRatingWatched;
                 } else {
                     $movieRatingsWatched[$id_movie] = 0;
                 }
-                $watchlist[$id_movie] = $isOnWatchlist;
-                $watched[$id_movie] = $isOnWatched;
+                $watchlist[$id_movie] = $ms->checkWatchlist( $id_movie, $_SESSION['id_user'] );
+                $watched[$id_movie] = $ms->checkWatched( $id_movie, $_SESSION['id_user'] );
             }
 
             $this->registry->template->movieOnWatchlist = $watchlist;
